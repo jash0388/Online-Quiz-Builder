@@ -2,7 +2,9 @@ modules = ["nodejs-24"]
 
 [deployment]
 router = "application"
-deploymentTarget = "autoscale"
+deploymentTarget = "static"
+build = ["bash", "-c", "BASE_PATH=/ PORT=5000 pnpm --filter @workspace/exam run build"]
+publicDir = "artifacts/exam/dist/public"
 
 [deployment.postBuild]
 args = ["pnpm", "store", "prune"]

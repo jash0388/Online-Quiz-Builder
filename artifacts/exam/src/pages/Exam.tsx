@@ -6,7 +6,7 @@ import Timer from "@/components/Timer";
 import QuestionPalette from "@/components/QuestionPalette";
 import SphnWatermark from "@/components/SphnWatermark";
 import { Button } from "@/components/ui/button";
-import sphnLogo from "@assets/Screenshot_2026-04-25_at_11.51.22_AM_1777098099787.png";
+import sphnLogo from "@assets/image_1777100399723.png";
 import {
   AlertDialog,
   AlertDialogAction,

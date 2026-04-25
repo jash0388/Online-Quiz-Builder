@@ -163,12 +163,12 @@ export default function Instructions() {
               />
             </div>
             <div>
-              <Label htmlFor="roll">Roll Number *</Label>
+              <Label htmlFor="roll">Username *</Label>
               <Input
                 id="roll"
                 value={rollNumber}
                 onChange={(e) => setRollNumber(e.target.value)}
-                data-testid="input-roll-number"
+                data-testid="input-username"
               />
             </div>
             <div>

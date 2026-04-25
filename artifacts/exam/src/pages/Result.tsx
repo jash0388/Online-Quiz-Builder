@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import type { ExamSubmissionRow, ExamQuestion } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import sphnLogo from "@assets/image_1777100399723.png";
 
 export default function Result() {
   const params = useParams<{ submissionId: string }>();
@@ -103,11 +104,6 @@ export default function Result() {
             <Stat label="Score" value={`${score} / ${total}`} accent="primary" />
             <Stat label="Percentage" value={`${percentage.toFixed(2)}%`} />
             <Stat label="Attempted" value={String(attempted)} />
-            <Stat
-              label="Violations"
-              value={String(sub.violations ?? 0)}
-              accent={sub.violations && sub.violations > 0 ? "red" : undefined}
-            />
             <Stat label="Time Used" value={`${timeMin}m ${timeSec}s`} small />
             <Stat
               label="Submitted At"
@@ -129,8 +125,15 @@ export default function Result() {
                 {showAnswers ? "Hide Correct Answers" : "View Correct Answers"}
               </Button>
             )}
-            <Button onClick={() => navigate("/")} variant="outline">
-              Back to Tests
+            <Button
+              onClick={() => {
+                sessionStorage.removeItem("exam:auth");
+                sessionStorage.removeItem("exam:session");
+                navigate("/");
+              }}
+              variant="outline"
+            >
+              Logout
             </Button>
           </div>
         </Card>
@@ -243,6 +246,17 @@ export default function Result() {
 
         <div className="mt-4 text-xs text-center text-muted-foreground">
           Submission ID: <span className="font-mono">{sub.id}</span>
+        </div>
+
+        <div className="mt-10 mb-6 flex flex-col items-center gap-2">
+          <img
+            src={sphnLogo}
+            alt="Sphoorthy Engineering College"
+            className="h-32 w-auto object-contain"
+          />
+          <div className="text-xs text-muted-foreground text-center">
+            Sphoorthy Engineering College &middot; Online Examination Portal
+          </div>
         </div>
       </main>
     </div>

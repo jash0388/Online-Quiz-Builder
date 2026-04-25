@@ -79,13 +79,13 @@ export default function Login() {
           <div className="p-6 space-y-4">
             <div>
               <Label htmlFor="username" className="text-xs">
-                Username (Roll Number)
+                Username
               </Label>
               <Input
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter your roll number"
+                placeholder="Enter your username"
                 autoComplete="username"
                 data-testid="input-username"
               />
@@ -120,8 +120,7 @@ export default function Login() {
             </Button>
 
             <p className="text-[11px] text-muted-foreground text-center pt-1">
-              Use your assigned roll number and password provided by the
-              invigilator.
+              Use the username and password provided by the invigilator.
             </p>
           </div>
         </form>

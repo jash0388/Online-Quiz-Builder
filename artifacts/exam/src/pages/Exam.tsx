@@ -359,7 +359,7 @@ export default function Exam() {
                 Sphoorthy Engineering College
               </div>
               <div className="text-[11px] text-white/80 truncate">
-                {session.examTitle} · {session.candidate.student_name} · Roll{" "}
+                {session.examTitle} · {session.candidate.student_name} ·{" "}
                 {session.candidate.roll_number}
               </div>
             </div>

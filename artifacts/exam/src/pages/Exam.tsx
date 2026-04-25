@@ -91,20 +91,23 @@ export default function Exam() {
     })();
   }, [navigate]);
 
-  // Persist state
+  // Persist state (debounced to avoid hammering localStorage with every state change)
   useEffect(() => {
     if (!session || !endsAt) return;
-    localStorage.setItem(
-      `exam:state:${session.examId}:${session.userId}`,
-      JSON.stringify({
-        answers,
-        statusMap,
-        endsAt,
-        currentQId,
-        startedAt,
-        violations,
-      }),
-    );
+    const t = setTimeout(() => {
+      localStorage.setItem(
+        `exam:state:${session.examId}:${session.userId}`,
+        JSON.stringify({
+          answers,
+          statusMap,
+          endsAt,
+          currentQId,
+          startedAt,
+          violations,
+        }),
+      );
+    }, 300);
+    return () => clearTimeout(t);
   }, [answers, statusMap, endsAt, currentQId, startedAt, violations, session]);
 
   // Violation tracking - tab switches & visibility changes

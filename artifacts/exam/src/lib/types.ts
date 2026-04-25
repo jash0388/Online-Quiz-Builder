@@ -46,7 +46,7 @@ export interface ExamSession {
 
 export interface ExamSubmissionRow {
   id: string;
-  exam_id: string;
+  exam_id: string | null;
   user_id: string;
   student_name: string | null;
   roll_number: string | null;

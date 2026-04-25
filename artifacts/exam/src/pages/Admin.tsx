@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "wouter";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,9 +14,107 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSlot,
+} from "@/components/ui/input-otp";
 import type { Exam, ExamQuestion, ExamSubmissionRow } from "@/lib/types";
 
+const ADMIN_CODE = "729184";
+const ADMIN_KEY = "exam_admin_unlocked_v1";
+
 export default function Admin() {
+  const [unlocked, setUnlocked] = useState<boolean>(
+    () => sessionStorage.getItem(ADMIN_KEY) === "1",
+  );
+  const [code, setCode] = useState("");
+  const [codeError, setCodeError] = useState("");
+
+  function tryUnlock(value: string) {
+    if (value === ADMIN_CODE) {
+      sessionStorage.setItem(ADMIN_KEY, "1");
+      setUnlocked(true);
+      setCodeError("");
+    } else {
+      setCodeError("Incorrect code. Try again.");
+      setCode("");
+    }
+  }
+
+  if (!unlocked) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#e8eef5] p-6">
+        <Card className="p-8 w-full max-w-sm shadow-sm">
+          <div className="text-center mb-6">
+            <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-3">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="text-primary"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+            </div>
+            <h1 className="text-lg font-semibold">Admin Access</h1>
+            <p className="text-xs text-muted-foreground mt-1">
+              Enter the 6-digit access code to continue.
+            </p>
+          </div>
+
+          <div className="flex justify-center mb-3">
+            <InputOTP
+              maxLength={6}
+              value={code}
+              onChange={(v) => {
+                setCode(v);
+                setCodeError("");
+                if (v.length === 6) tryUnlock(v);
+              }}
+            >
+              <InputOTPGroup>
+                <InputOTPSlot index={0} />
+                <InputOTPSlot index={1} />
+                <InputOTPSlot index={2} />
+                <InputOTPSlot index={3} />
+                <InputOTPSlot index={4} />
+                <InputOTPSlot index={5} />
+              </InputOTPGroup>
+            </InputOTP>
+          </div>
+
+          {codeError && (
+            <div className="text-xs text-red-600 text-center mb-2">
+              {codeError}
+            </div>
+          )}
+
+          <Button
+            className="w-full bg-primary hover:bg-primary/90"
+            disabled={code.length !== 6}
+            onClick={() => tryUnlock(code)}
+          >
+            Unlock Admin
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  return <AdminPanel onLock={() => {
+    sessionStorage.removeItem(ADMIN_KEY);
+    setUnlocked(false);
+    setCode("");
+  }} />;
+}
+
+function AdminPanel({ onLock }: { onLock: () => void }) {
+  const [, navigate] = useLocation();
   const [tab, setTab] = useState<"questions" | "submissions">("questions");
   const [exams, setExams] = useState<Exam[]>([]);
   const [selectedExam, setSelectedExam] = useState<string | null>(null);
@@ -145,13 +244,175 @@ export default function Admin() {
     if (selectedExam) loadQuestions(selectedExam);
   }
 
+  function csvEscape(v: unknown): string {
+    if (v == null) return "";
+    const s = String(v);
+    if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+    return s;
+  }
+
+  function downloadCSV() {
+    if (!selectedExam) return;
+    const exam = exams.find((e) => e.id === selectedExam);
+    if (subs.length === 0) {
+      alert("No submissions to download for this exam.");
+      return;
+    }
+
+    const baseHeaders = [
+      "Submission ID",
+      "Student Name",
+      "Roll Number",
+      "Student Phone",
+      "Father Name",
+      "Father Phone",
+      "College",
+      "Score",
+      "Total Marks",
+      "Percentage",
+      "Attempted",
+      "Violations",
+      "Time Used (sec)",
+      "Status",
+      "Submitted At",
+    ];
+
+    const qHeaders: string[] = [];
+    questions.forEach((_, i) => {
+      qHeaders.push(`Q${i + 1} Answer`);
+      qHeaders.push(`Q${i + 1} Correct`);
+    });
+
+    const headers = [...baseHeaders, ...qHeaders];
+    const rows: string[] = [headers.map(csvEscape).join(",")];
+
+    for (const s of subs) {
+      const candidate =
+        (s.student_answers as Record<string, unknown> | null)?.__candidate__ as
+          | Record<string, string>
+          | undefined;
+      const answersObj = (s.answers ?? {}) as Record<string, string>;
+      const total = s.total_marks ?? 0;
+      const score = s.score ?? 0;
+      const pct = total > 0 ? ((score / total) * 100).toFixed(2) : "0";
+      const attempted = Object.keys(answersObj).filter(
+        (k) =>
+          k !== "__candidate__" &&
+          answersObj[k] != null &&
+          String(answersObj[k]) !== "",
+      ).length;
+
+      const row: unknown[] = [
+        s.id,
+        s.student_name ?? candidate?.student_name ?? "",
+        s.roll_number ?? candidate?.roll_number ?? "",
+        candidate?.student_phone ?? "",
+        candidate?.father_name ?? "",
+        candidate?.father_phone ?? "",
+        candidate?.college ?? "",
+        score,
+        total,
+        pct,
+        attempted,
+        s.violations ?? 0,
+        s.time_used_seconds ?? 0,
+        s.status ?? "",
+        s.submitted_at ?? "",
+      ];
+
+      questions.forEach((q) => {
+        const ans = answersObj[q.id] ?? "";
+        row.push(ans);
+        row.push(q.correct_answer ?? "");
+      });
+
+      rows.push(row.map(csvEscape).join(","));
+    }
+
+    const blob = new Blob([rows.join("\n")], {
+      type: "text/csv;charset=utf-8;",
+    });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    const safeTitle = (exam?.title ?? "submissions")
+      .replace(/[^a-z0-9_-]+/gi, "_")
+      .toLowerCase();
+    const stamp = new Date().toISOString().slice(0, 19).replace(/[:T]/g, "-");
+    a.download = `${safeTitle}_submissions_${stamp}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  async function deleteSubmission(id: string) {
+    if (!confirm("Delete this submission? This cannot be undone.")) return;
+    const { error } = await supabase
+      .from("exam_submissions")
+      .delete()
+      .eq("id", id);
+    if (error) return alert(error.message);
+    if (selectedExam) loadSubmissions(selectedExam);
+  }
+
+  async function deleteAllSubmissions() {
+    if (!selectedExam) return;
+    const exam = exams.find((e) => e.id === selectedExam);
+    if (subs.length === 0) {
+      alert("No submissions to delete.");
+      return;
+    }
+    if (
+      !confirm(
+        `Delete ALL ${subs.length} submission(s) for "${exam?.title ?? "this exam"}"? This cannot be undone.`,
+      )
+    )
+      return;
+    setBusy(true);
+    const { error } = await supabase
+      .from("exam_submissions")
+      .delete()
+      .eq("exam_id", selectedExam);
+    setBusy(false);
+    if (error) return alert(error.message);
+    loadSubmissions(selectedExam);
+  }
+
   return (
     <div className="min-h-screen bg-[#e8eef5]">
       <header className="bg-white border-b border-border px-6 py-3 flex items-center justify-between">
         <div className="font-semibold">Online Assessment · Admin</div>
-        <a href="" className="text-xs text-muted-foreground hover:text-primary">
-          Back to Tests
-        </a>
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => navigate("/")}
+            className="h-8 text-xs gap-1.5"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1h-5v-7h-6v7H4a1 1 0 0 1-1-1V9.5Z" />
+            </svg>
+            Home
+          </Button>
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={onLock}
+            className="h-8 text-xs"
+          >
+            Lock
+          </Button>
+        </div>
       </header>
 
       <div className="max-w-7xl mx-auto p-6 grid grid-cols-12 gap-6">
@@ -373,7 +634,30 @@ export default function Admin() {
 
               {tab === "submissions" && (
                 <Card className="p-4">
-                  <h3 className="font-semibold mb-3">Submissions</h3>
+                  <div className="flex items-center justify-between mb-3 gap-2 flex-wrap">
+                    <h3 className="font-semibold">
+                      Submissions ({subs.length})
+                    </h3>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        size="sm"
+                        onClick={downloadCSV}
+                        disabled={subs.length === 0}
+                        className="bg-primary hover:bg-primary/90"
+                      >
+                        Download CSV
+                      </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        onClick={deleteAllSubmissions}
+                        disabled={busy || subs.length === 0}
+                        className="text-destructive border-destructive/30"
+                      >
+                        Delete All
+                      </Button>
+                    </div>
+                  </div>
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
@@ -384,6 +668,7 @@ export default function Admin() {
                           <th className="py-2 pr-3">Violations</th>
                           <th className="py-2 pr-3">Time</th>
                           <th className="py-2 pr-3">Submitted</th>
+                          <th className="py-2 pr-3"></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -394,7 +679,9 @@ export default function Admin() {
                             <td className="py-2 pr-3 font-semibold">
                               {s.score ?? 0} / {s.total_marks ?? 0}
                             </td>
-                            <td className={`py-2 pr-3 ${s.violations && s.violations > 0 ? "text-red-700" : ""}`}>
+                            <td
+                              className={`py-2 pr-3 ${s.violations && s.violations > 0 ? "text-red-700" : ""}`}
+                            >
                               {s.violations ?? 0}
                             </td>
                             <td className="py-2 pr-3">
@@ -406,11 +693,21 @@ export default function Admin() {
                                 ? new Date(s.submitted_at).toLocaleString()
                                 : "—"}
                             </td>
+                            <td className="py-2 pr-3">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => deleteSubmission(s.id)}
+                                className="text-destructive border-destructive/30 h-7 text-xs"
+                              >
+                                Delete
+                              </Button>
+                            </td>
                           </tr>
                         ))}
                         {subs.length === 0 && (
                           <tr>
-                            <td colSpan={6} className="py-4 text-center text-xs text-muted-foreground">
+                            <td colSpan={7} className="py-4 text-center text-xs text-muted-foreground">
                               No submissions yet.
                             </td>
                           </tr>

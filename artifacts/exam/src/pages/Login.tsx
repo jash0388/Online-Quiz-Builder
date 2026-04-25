@@ -42,32 +42,6 @@ export default function Login() {
         }
       />
 
-      {/* Candidate banner strip */}
-      <div className="bg-slate-700 text-white border-b border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
-          <div className="min-w-0">
-            <div className="text-[11px] text-white/70 uppercase tracking-wide">
-              System Name
-            </div>
-            <div className="text-yellow-300 font-bold text-2xl leading-tight">
-              C001
-            </div>
-            <div className="text-[11px] text-white/70 mt-1 hidden sm:block">
-              Kindly contact the invigilator if there are any discrepancies in
-              the displayed details.
-            </div>
-          </div>
-          <div className="text-right shrink-0">
-            <div className="text-[11px] text-white/70 uppercase tracking-wide">
-              Subject
-            </div>
-            <div className="text-yellow-300 font-semibold text-base">
-              EAPCET Mock Test
-            </div>
-          </div>
-        </div>
-      </div>
-
       <main className="flex-1 flex items-start justify-center px-4 py-10">
         <form
           onSubmit={handleSubmit}

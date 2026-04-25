@@ -195,6 +195,41 @@ export default function Exam() {
     };
   }, []);
 
+  // Fullscreen: enter on exam start, exit on finish
+  useEffect(() => {
+    if (!session || isFinished) return;
+
+    const enterFullscreen = () => {
+      const el = document.documentElement;
+      if (!document.fullscreenElement) {
+        el.requestFullscreen?.().catch(() => {/* user gesture required or denied */});
+      }
+    };
+
+    // Enter fullscreen on mount
+    enterFullscreen();
+
+    // Re-enter fullscreen if user exits it during exam
+    const onFsChange = () => {
+      if (!document.fullscreenElement && !submitGuard.current) {
+        // Small delay to avoid browser blocking rapid re-requests
+        setTimeout(enterFullscreen, 300);
+      }
+    };
+    document.addEventListener("fullscreenchange", onFsChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", onFsChange);
+    };
+  }, [session, isFinished]);
+
+  // Exit fullscreen when exam is finished
+  useEffect(() => {
+    if (isFinished && document.fullscreenElement) {
+      document.exitFullscreen?.().catch(() => {});
+    }
+  }, [isFinished]);
+
   const currentQuestion = useMemo(
     () => questions.find((q) => q.id === currentQId) ?? null,
     [questions, currentQId],

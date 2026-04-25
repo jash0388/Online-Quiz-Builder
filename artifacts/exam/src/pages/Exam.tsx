@@ -6,6 +6,7 @@ import Timer from "@/components/Timer";
 import QuestionPalette from "@/components/QuestionPalette";
 import SphnWatermark from "@/components/SphnWatermark";
 import { Button } from "@/components/ui/button";
+import sphnLogo from "@assets/Screenshot_2026-04-25_at_11.51.22_AM_1777098099787.png";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -30,10 +31,8 @@ export default function Exam() {
   const [statusMap, setStatusMap] = useState<Record<string, QStatus>>({});
   const [endsAt, setEndsAt] = useState<number | null>(null);
   const [startedAt, setStartedAt] = useState<number>(Date.now());
-  const [violations, setViolations] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
-  const [showViolationDialog, setShowViolationDialog] = useState(false);
   const submitGuard = useRef(false);
   const sessionRef = useRef<ExamSession | null>(null);
 
@@ -74,8 +73,6 @@ export default function Exam() {
           if (parsed.endsAt) setEndsAt(parsed.endsAt);
           if (parsed.currentQId) setCurrentQId(parsed.currentQId);
           if (parsed.startedAt) setStartedAt(parsed.startedAt);
-          if (typeof parsed.violations === "number")
-            setViolations(parsed.violations);
           restored = true;
         } catch {
           /* fall through */
@@ -104,34 +101,11 @@ export default function Exam() {
           endsAt,
           currentQId,
           startedAt,
-          violations,
         }),
       );
     }, 300);
     return () => clearTimeout(t);
-  }, [answers, statusMap, endsAt, currentQId, startedAt, violations, session]);
-
-  // Violation tracking - tab switches & visibility changes
-  const handleSubmitRef = useRef<() => void>(() => {});
-
-  useEffect(() => {
-    function onVisibility() {
-      if (document.visibilityState === "hidden" && sessionRef.current) {
-        setViolations((v) => {
-          const next = v + 1;
-          if (next > sessionRef.current!.maxViolations) {
-            // auto-submit
-            handleSubmitRef.current();
-          } else {
-            setShowViolationDialog(true);
-          }
-          return next;
-        });
-      }
-    }
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
-  }, []);
+  }, [answers, statusMap, endsAt, currentQId, startedAt, session]);
 
   // Block right-click and copy on the test page
   useEffect(() => {
@@ -307,7 +281,7 @@ export default function Exam() {
           student_answers: studentAnswers,
           score,
           total_marks: total,
-          violations,
+          violations: 0,
           time_used_seconds: timeUsed,
           status: "completed",
           submitted_at: new Date().toISOString(),
@@ -337,11 +311,7 @@ export default function Exam() {
       submitGuard.current = false;
       setSubmitting(false);
     }
-  }, [answers, questions, startedAt, violations, navigate]);
-
-  useEffect(() => {
-    handleSubmitRef.current = handleSubmit;
-  }, [handleSubmit]);
+  }, [answers, questions, startedAt, navigate]);
 
   // Counts for the legend / palette — scoped to the active subject when one is selected,
   // otherwise across all questions.
@@ -377,8 +347,12 @@ export default function Exam() {
       <header className="bg-[#1e3a8a] text-white border-b-4 border-[#0ea5e9]">
         <div className="px-4 py-2 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 rounded-md bg-white text-[#1e3a8a] flex items-center justify-center font-extrabold text-sm shrink-0 shadow">
-              SPHN
+            <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center shrink-0 shadow overflow-hidden p-0.5">
+              <img
+                src={sphnLogo}
+                alt="Sphoorthy Engineering College"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div className="min-w-0">
               <div className="font-bold text-sm sm:text-base leading-tight truncate">
@@ -391,18 +365,6 @@ export default function Exam() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="text-[11px] text-white/80">
-              Violations:{" "}
-              <span
-                className={
-                  violations > 0
-                    ? "font-semibold text-yellow-300"
-                    : "font-semibold text-white"
-                }
-              >
-                {violations}/{session.maxViolations}
-              </span>
-            </div>
             <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />
           </div>
         </div>
@@ -624,22 +586,6 @@ export default function Exam() {
             >
               Yes, Submit
             </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-
-      <AlertDialog open={showViolationDialog} onOpenChange={setShowViolationDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Warning: Violation Detected</AlertDialogTitle>
-            <AlertDialogDescription>
-              You have switched away from the test window. This is recorded as
-              a violation ({violations}/{session.maxViolations}). If you exceed
-              the maximum allowed violations, your test will be auto-submitted.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogAction>I Understand</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

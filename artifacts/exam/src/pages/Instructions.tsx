@@ -140,16 +140,6 @@ export default function Instructions() {
     <div className="min-h-screen flex flex-col bg-[#e8eef5]">
       <SphnHeader
         subtitle={`${exam.title} · ${exam.duration_minutes} minutes · ${questionCount} questions`}
-        rightSlot={
-          <button
-            type="button"
-            onClick={() => navigate("/exams")}
-            className="text-[11px] text-white/80 hover:text-white underline"
-            data-testid="button-back-to-exams"
-          >
-            ← Back
-          </button>
-        }
       />
 
       {/* Section title bar */}

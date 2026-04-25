@@ -126,12 +126,13 @@ export default function Instructions() {
             </div>
           </div>
         </div>
-        <a
-          href=""
+        <button
+          type="button"
+          onClick={() => navigate("/")}
           className="text-xs text-muted-foreground hover:text-primary"
         >
-          Back
-        </a>
+          ← Back to Tests
+        </button>
       </header>
 
       <main className="flex-1 max-w-5xl w-full mx-auto p-6 grid md:grid-cols-5 gap-4">

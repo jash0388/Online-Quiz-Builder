@@ -17,6 +17,7 @@ export interface ExamQuestion {
   correct_answer: string;
   marks: number;
   sort_order: number;
+  subject: string | null;
 }
 
 export type QStatus =

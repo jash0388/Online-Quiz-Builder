@@ -1,0 +1,1129 @@
+cat > /mnt/user-data/outputs/questions.json << 'ENDJSON'
+[
+  {
+    "id": 1,
+    "subject": "Mathematics",
+    "question": "Let f : ℝ → ℝ be defined by f(x) = 5^(−|x|) + sgn(5^(−x)), where sgn x denotes signum function of x. Then f is",
+    "options": [
+      "one-one but not onto",
+      "onto but not one-one",
+      "both one-one and onto",
+      "neither one-one nor onto"
+    ],
+    "answer": 3
+  },
+  {
+    "id": 2,
+    "subject": "Mathematics",
+    "question": "If the range of the real valued function f(x) = (x² + x + k) / (x² − x + k) is [1/3, 3], then k =",
+    "options": ["-2", "-1", "1", "2"],
+    "answer": 2
+  },
+  {
+    "id": 3,
+    "subject": "Mathematics",
+    "question": "The value of the greatest integer k satisfying the inequation 2^(n+4) + 12 ≥ k(n+4) for all n ∈ N is",
+    "options": ["7", "8", "9", "10"],
+    "answer": 1
+  },
+  {
+    "id": 4,
+    "subject": "Mathematics",
+    "question": "If the system of simultaneous linear equations x − 2y + z = 0, 2x + 3y + z = 6 and x + 2y + pz = q has infinitely many solutions, then",
+    "options": ["p + q = 4", "pq = 48/49", "q − p = 3", "p/q = 4"],
+    "answer": 2
+  },
+  {
+    "id": 5,
+    "subject": "Mathematics",
+    "question": "If the system of linear equations (sinθ)x − y + z = 0, x − (cosθ)y + z = 0, x + y + (sinθ)z = 0 has non-trivial solution, then the least positive value of θ is",
+    "options": ["π/6", "π/4", "π/3", "π/2"],
+    "answer": 3
+  },
+  {
+    "id": 6,
+    "subject": "Mathematics",
+    "question": "If A = [[1,2,3],[2,1,1],[1,3,1]] and B = [[2,3,4],[3,2,2],[2,4,2]], then √|Adj(AB)| =",
+    "options": ["176", "208", "198", "234"],
+    "answer": 2
+  },
+  {
+    "id": 7,
+    "subject": "Mathematics",
+    "question": "If A = [[1,5,2],[4,1,3],[2,6,3]], then |(Adj A)⁻¹| =",
+    "options": ["-1", "1", "4", "-4"],
+    "answer": 1
+  },
+  {
+    "id": 8,
+    "subject": "Mathematics",
+    "question": "The amplitude of the complex number (√3 + i)(1 − √3i) / ((−1 + i)(−1 − i)) is",
+    "options": ["π/2", "π/3", "−5π/12", "−π/6"],
+    "answer": 3
+  },
+  {
+    "id": 9,
+    "subject": "Mathematics",
+    "question": "If a complex number z = x + iy represents a point P(x, y) in the Argand plane and z satisfies the condition that the imaginary part of (z − 3)/(z + 3i) is zero, then the locus of the point P is",
+    "options": ["x² + y² − 3x + 3y = 0, (x,y) ≠ (0,−3)", "2xy − 3x + 3y + 9 = 0, (x,y) ≠ (0,−3)", "x − y − 3 = 0, (x,y) ≠ (0,−3)", "x + y + 3 = 0, (x,y) ≠ (0,−3)"],
+    "answer": 2
+  },
+  {
+    "id": 10,
+    "subject": "Mathematics",
+    "question": "(√3 + i)¹⁰ + (√3 − i)¹⁰ =",
+    "options": ["1024√3", "1024", "2048", "512√3"],
+    "answer": 1
+  },
+  {
+    "id": 11,
+    "subject": "Mathematics",
+    "question": "Number of real values of (−1 − √3i)^(3/4) is",
+    "options": ["0", "1", "2", "3"],
+    "answer": 2
+  },
+  {
+    "id": 12,
+    "subject": "Mathematics",
+    "question": "If tan θ and cot θ are two distinct roots of the equation ax² + bx + c = 0, a ≠ 0, b ≠ 0, then",
+    "options": ["cos 2θ = −2b/c", "sin 2θ = −2c/b", "tan 2θ = 2b/c", "cot 2θ = 2c/a"],
+    "answer": 1
+  },
+  {
+    "id": 13,
+    "subject": "Mathematics",
+    "question": "Sum of all the roots of the equation ||2x − 3| − 4| = 2 is",
+    "options": ["8", "0", "6", "9"],
+    "answer": 2
+  },
+  {
+    "id": 14,
+    "subject": "Mathematics",
+    "question": "If the quotient and remainder obtained when the expression 3x⁵ − 6x⁴ + 2x³ + 4x² − 5x + 8 is divided by x² − 2x + 3 are ax³ + bx² + cx + d and px + q respectively, then ab + cd =",
+    "options": ["p + 2q", "p + 2q − 2", "2p + q", "2p + q − 2"],
+    "answer": 1
+  },
+  {
+    "id": 15,
+    "subject": "Mathematics",
+    "question": "If α, β, γ, δ are the roots of the equation 12x⁴ − 56x³ + 89x² − 56x + 12 = 0 such that αβ = γδ = 1 and (α+β)/(γ+δ) > 1, then (α+β)/(γ+δ) =",
+    "options": ["65/6", "13/2", "17/15", "15/13"],
+    "answer": 3
+  },
+  {
+    "id": 16,
+    "subject": "Mathematics",
+    "question": "If all the letters of the word ACADEMICIAN are permuted in all possible ways then the number of permutations in which no two A's are together and all the consonants are together is",
+    "options": ["7200", "14400", "3600", "1800"],
+    "answer": 0
+  },
+  {
+    "id": 17,
+    "subject": "Mathematics",
+    "question": "The number of all possible three letter words that can be formed by choosing three letters from the letters of the word FEBRUARY so that a vowel always occupies the middle place is",
+    "options": ["90", "93", "126", "129"],
+    "answer": 1
+  },
+  {
+    "id": 18,
+    "subject": "Mathematics",
+    "question": "The number of ways in which 6 boys and 4 girls can be arranged in a row such that between any two girls there must be exactly 2 boys is",
+    "options": ["6!5!", "(72)6!", "(144)5!", "4!7!"],
+    "answer": 2
+  },
+  {
+    "id": 19,
+    "subject": "Mathematics",
+    "question": "If C₀, C₁, C₂, ..., Cₙ are the binomial coefficients in the expansion of (1+x)ⁿ then the value of Σr³·Cᵣ when n = 5 is",
+    "options": ["320", "560", "720", "800"],
+    "answer": 3
+  },
+  {
+    "id": 20,
+    "subject": "Mathematics",
+    "question": "The coefficient of x¹² in the expansion of (x² + 2x + 2)⁸ is",
+    "options": ["1120", "2240", "2576", "4152"],
+    "answer": 2
+  },
+  {
+    "id": 21,
+    "subject": "Mathematics",
+    "question": "If (x² + 1)/((x² + 2)(x² + 3)) = (Ax + B)/(x² + 2) + (Cx + D)/(x² + 3), then A + B + C + D =",
+    "options": ["0", "1", "-1", "6"],
+    "answer": 1
+  },
+  {
+    "id": 22,
+    "subject": "Mathematics",
+    "question": "If 2sinθ + 3cosθ = 2 and θ ≠ (2n+1)π/2 then sinθ + cosθ =",
+    "options": ["5/13", "3/5", "7/13", "4/5"],
+    "answer": 2
+  },
+  {
+    "id": 23,
+    "subject": "Mathematics",
+    "question": "If sinA = −24/25, cosB = 15/17, A does not belong to 4th quadrant and B does not belong to 1st quadrant then (A + B) lies in the quadrant",
+    "options": ["1st quadrant", "2nd quadrant", "3rd quadrant", "4th quadrant"],
+    "answer": 2
+  },
+  {
+    "id": 24,
+    "subject": "Mathematics",
+    "question": "4cos(7θ/2)cos(3θ/2)sin5θ =",
+    "options": ["sin10θ + sin7θ − sin3θ", "sin10θ + sin7θ − sin5θ", "sin10θ + sin7θ + sin3θ", "sin10θ + sin7θ + sin5θ"],
+    "answer": 2
+  },
+  {
+    "id": 25,
+    "subject": "Mathematics",
+    "question": "If x ∈ (−π, π) then the number of solutions of the equation 2sinx·sin3x·sin5x + sin5x·cos4x = 0 is",
+    "options": ["14", "12", "13", "9"],
+    "answer": 2
+  },
+  {
+    "id": 26,
+    "subject": "Mathematics",
+    "question": "The number of values of x satisfying the equation Tan⁻¹(x + √2/x) + Tan⁻¹(x − √2/x) = Tan⁻¹(x) is",
+    "options": ["0", "1", "2", "3"],
+    "answer": 2
+  },
+  {
+    "id": 27,
+    "subject": "Mathematics",
+    "question": "coth²x − tanh²x =",
+    "options": ["4cosech2x·tanh2x", "4sech2x·coth2x", "4sech2x·tanh2x", "4cosh2x·(cosech2x)²"],
+    "answer": 3
+  },
+  {
+    "id": 28,
+    "subject": "Mathematics",
+    "question": "If a = 3, b = 5, c = 7 are the sides of a triangle ABC, then its circumradius is",
+    "options": ["7/√3", "15/2", "15√3/4", "√3/2"],
+    "answer": 0
+  },
+  {
+    "id": 29,
+    "subject": "Mathematics",
+    "question": "Two ships leave a port at the same time. One moves in the direction of E50°N with speed 8 kmph and the other moves in direction S20°E with speed 12 kmph. Then the distance between the ships at the end of 2 hours (in km) is",
+    "options": ["8√7", "34", "8√19", "32"],
+    "answer": 2
+  },
+  {
+    "id": 30,
+    "subject": "Mathematics",
+    "question": "In a triangle ABC, if BC⃗ = i⃗ − 2j⃗ + 2k⃗ and CA⃗ = 6i⃗ + 3j⃗ − 2k⃗, then the perimeter of the triangle is",
+    "options": ["5(2+√3)", "5(2+√2)", "√10(3+√10)", "10(2+√5)"],
+    "answer": 1
+  },
+  {
+    "id": 31,
+    "subject": "Mathematics",
+    "question": "i⃗ + j⃗ + k⃗, a₁i⃗ + b₁j⃗ + c₁k⃗, a₂i⃗ + b₂j⃗ + c₂k⃗, a₃i⃗ + b₃j⃗ + c₃k⃗ are position vectors of points A, B, C, D. (2/3)(i⃗ + j⃗ + k⃗) is the position vector of the centroid of face BCD of tetrahedron ABCD. If αi⃗ + βj⃗ + γk⃗ is the position vector of centroid of tetrahedron, then 2α + β + γ =",
+    "options": ["3", "2", "2/3", "3/4"],
+    "answer": 0
+  },
+  {
+    "id": 32,
+    "subject": "Mathematics",
+    "question": "If a⃗ = i⃗ − 2j⃗ + 2k⃗ and b⃗ = 9i⃗ + 6j⃗ − 18k⃗ are two vectors, then (Projection of b⃗ on a⃗) / (Projection of a⃗ on b⃗) =",
+    "options": ["21", "7", "7/3", "3"],
+    "answer": 1
+  },
+  {
+    "id": 33,
+    "subject": "Mathematics",
+    "question": "Let a⃗ = i⃗ + 2j⃗ + 3k⃗, b⃗ = 2i⃗ − 3j⃗ + k⃗ and c⃗ = 3i⃗ + j⃗ − 2k⃗. If r⃗ is a vector such that r⃗·a⃗ = 0, r⃗·b⃗ = −2 and r⃗·c⃗ = 6 then r⃗·(3i⃗ + j⃗ + k⃗) =",
+    "options": ["0", "1", "2", "3"],
+    "answer": 3
+  },
+  {
+    "id": 34,
+    "subject": "Mathematics",
+    "question": "Let a⃗ = i⃗ − j⃗ + k⃗, b⃗ = i⃗ − 2j⃗ − 2k⃗, c⃗ = 6i⃗ + 3j⃗ − 2k⃗. If d⃗ is a vector perpendicular to both a⃗, b⃗ and |d⃗ × c⃗| = 14, then |d⃗·c⃗| =",
+    "options": ["35", "70", "140", "105"],
+    "answer": 1
+  },
+  {
+    "id": 35,
+    "subject": "Mathematics",
+    "question": "The mean deviation from the mean of the discrete data 2, 3, 5, 7, 11, 13, 17, 19, 22 is",
+    "options": ["8", "7.5", "5.5", "6"],
+    "answer": 3
+  },
+  {
+    "id": 36,
+    "subject": "Mathematics",
+    "question": "Out of the given 25 consecutive positive integers, three integers are drawn. If the least integer among the given 25 integers is an odd number, then the probability that the sum of the three integers drawn is an even number is",
+    "options": ["289/575", "286/575", "288/575", "287/575"],
+    "answer": 0
+  },
+  {
+    "id": 37,
+    "subject": "Mathematics",
+    "question": "If three dice are thrown at a time, then the probability of getting the sum of the numbers on them as a prime number is",
+    "options": ["3/8", "73/216", "4/27", "5/54"],
+    "answer": 1
+  },
+  {
+    "id": 38,
+    "subject": "Mathematics",
+    "question": "Three companies C1, C2, C3 produce car tyres. A car manufacturing company buys 40% from C1, 35% from C2 and 25% from C3. 2% of tyres supplied by C1, 3% by C2 and 4% by C3 are defective. If a tyre chosen at random from the consignment is found defective then the probability that it was supplied by C2 is",
+    "options": ["7/19", "12/19", "10/57", "26/57"],
+    "answer": 0
+  },
+  {
+    "id": 39,
+    "subject": "Mathematics",
+    "question": "The probability distribution of a random variable X is given: X = 2,3,5,7,12 with P(X=xᵢ) = 3k,k,k,2k,k. Then the standard deviation of X is",
+    "options": ["5", "11", "√11", "√5"],
+    "answer": 2
+  },
+  {
+    "id": 40,
+    "subject": "Mathematics",
+    "question": "If the mean and variance of a binomial distribution are 4/3 and 10/9 respectively, then P(X ≥ 6) =",
+    "options": ["41/6⁸", "741/6⁸", "1 − 741/6⁸", "1 − 41/6⁸"],
+    "answer": 1
+  },
+  {
+    "id": 41,
+    "subject": "Mathematics",
+    "question": "A straight line passing through a point (3,2) cuts X and Y-axes at the points A and B respectively. If a point P divides AB in the ratio 2:3, then the equation of the locus of point P is",
+    "options": ["9/x + 4/y = 1", "9x + 4y = 5xy", "4x + 9y = 5xy", "4/x + 9/y = 1"],
+    "answer": 2
+  },
+  {
+    "id": 42,
+    "subject": "Mathematics",
+    "question": "By shifting the origin to the point (−1, 2) through translation of axes, if ax² + 2hxy + by² + 2gx + 2fy + c = 0 is the transformed equation of 2x² − xy + y² − 3x + 4y − 5 = 0, then 2(f + g + h) =",
+    "options": ["a + b + c", "a − 5(b+c)", "3(a+b+c)", "c − 5(a+b)"],
+    "answer": 3
+  },
+  {
+    "id": 43,
+    "subject": "Mathematics",
+    "question": "If a line L passing through the point A(−2, 4) makes an angle of 60° with the positive direction of X-axis in anti-clockwise direction and B(p, q) lying in the 3rd quadrant is a point on L at the distance of 6 units from point A, then √(p² + q² − 8q) =",
+    "options": ["6", "7", "8", "9"],
+    "answer": 0
+  },
+  {
+    "id": 44,
+    "subject": "Mathematics",
+    "question": "If the perpendicular drawn from the point (2, −3) to the straight line 4x − 3y + 8 = 0 meets it at M(a, b) and a³ − b³ = k³, then k =",
+    "options": ["1", "-1", "2", "-2"],
+    "answer": 3
+  },
+  {
+    "id": 45,
+    "subject": "Mathematics",
+    "question": "Let Q be the image of a point P(1, 2) with respect to the line x + y + 1 = 0 and R be the image of Q with respect to the line x − y − 1 = 0. If M and N are the midpoints of PQ and QR respectively, then MN =",
+    "options": ["√10", "4", "√22", "5"],
+    "answer": 0
+  },
+  {
+    "id": 46,
+    "subject": "Mathematics",
+    "question": "If the slopes of the lines represented by the equation 6x² + 2hxy + 4y² = 0 are in the ratio 2:3, then the value of h such that both the lines make acute angles with the positive X-axis measured in positive direction is",
+    "options": ["5", "5/2", "-5", "-5/2"],
+    "answer": 2
+  },
+  {
+    "id": 47,
+    "subject": "Mathematics",
+    "question": "If (3, −2) is the centre of the circle S ≡ x² + y² + 2gx + 2fy − 23 = 0 and A is a point on the circle S = 0 such that its distance from point P(−1, −5) is least, then A =",
+    "options": ["(3, −2)", "(9/5, 28/5)", "(3/5, −2/5)", "(−9/5, −28/5)"],
+    "answer": 3
+  },
+  {
+    "id": 48,
+    "subject": "Mathematics",
+    "question": "Two circles which touch both the coordinate axes intersect at the points A and B. If A = (1, 2), then AB =",
+    "options": ["5", "13", "2√2", "√2"],
+    "answer": 3
+  },
+  {
+    "id": 49,
+    "subject": "Mathematics",
+    "question": "The line 4x − 3y + 2 = 0 intersects the circle x² + y² − 2x + 6y + c = 0 at two points A, B and AB = 8. If (1, k) is a point on the given circle and k > 0, then k =",
+    "options": ["8", "4", "2", "1"],
+    "answer": 2
+  },
+  {
+    "id": 50,
+    "subject": "Mathematics",
+    "question": "If 2x − 3y + 5 = 0 and 4x − 5y + 7 = 0 are the equations of the normals drawn to a circle and (2, 5) is a point on the given circle, then the radius of the circle is",
+    "options": ["1", "2", "3", "4"],
+    "answer": 1
+  },
+  {
+    "id": 51,
+    "subject": "Mathematics",
+    "question": "If (α, β) is the centre of the circle which passes through the point (1, −1) and cuts the circles x² + y² + 2x − 3y − 5 = 0, x² + y² − 3x + 2y + 1 = 0 orthogonally, then α − 5β =",
+    "options": ["-10", "5", "-11", "10"],
+    "answer": 3
+  },
+  {
+    "id": 52,
+    "subject": "Mathematics",
+    "question": "The centre of the circle touching the circles x² + y² − 4x − 6y − 12 = 0, x² + y² + 6x + 18y + 26 = 0 at their point of contact and passing through the point (1, −1) is",
+    "options": ["(1/3, −1)", "(1/5, 6/5)", "(1/2, 1)", "(−1/4, −1/2)"],
+    "answer": 0
+  },
+  {
+    "id": 53,
+    "subject": "Mathematics",
+    "question": "The number of normals that can be drawn through the point (2, 0) to the parabola y² = 7x is",
+    "options": ["0", "1", "2", "3"],
+    "answer": 1
+  },
+  {
+    "id": 54,
+    "subject": "Mathematics",
+    "question": "If m₁ and m₂ are the slopes of the tangents drawn from the point (1, 4) to the parabola y² = 11x then 2(m₁² + m₂²) =",
+    "options": ["24", "22", "21", "18"],
+    "answer": 2
+  },
+  {
+    "id": 55,
+    "subject": "Mathematics",
+    "question": "If the perpendicular distance from the focus of an ellipse x²/9 + y²/b² = 1 (b < 3) to its corresponding directrix is 4/√5, then the slope of the tangent to this ellipse drawn at (3/√2, b/√2) is",
+    "options": ["-2/3", "2/3", "3/2", "-3/2"],
+    "answer": 0
+  },
+  {
+    "id": 56,
+    "subject": "Mathematics",
+    "question": "The length of the chord of the ellipse x²/4 + y² = 1 formed on the line y = x + 1 is",
+    "options": ["2√2", "4√2/5", "4√2", "8√2/5"],
+    "answer": 3
+  },
+  {
+    "id": 57,
+    "subject": "Mathematics",
+    "question": "Let P, Q, R, S be the points of intersection of the circle x² + y² = 4 and the hyperbola xy = √3. If P = (α, β) and α > β > 0, then the equation of the tangent drawn at P to the hyperbola is",
+    "options": ["x + y = 2", "x + √3y = 2√3", "√3x + y = √3", "x − y = 0"],
+    "answer": 1
+  },
+  {
+    "id": 58,
+    "subject": "Mathematics",
+    "question": "The number of values of 'k' for which the points (−4, 9, k), (−1, 6, k), (0, 7, 10) form a right-angled isosceles triangle is",
+    "options": ["0", "1", "2", "4"],
+    "answer": 2
+  },
+  {
+    "id": 59,
+    "subject": "Mathematics",
+    "question": "A line makes angles 60°, 45°, θ with positive X, Y, Z-axes respectively. If θ is an acute angle, then tanθ =",
+    "options": ["√3", "1/√3", "1", "2"],
+    "answer": 0
+  },
+  {
+    "id": 60,
+    "subject": "Mathematics",
+    "question": "If the foot of the perpendicular drawn from the point (2, 0, −3) to the plane π is (1, −2, 0) and the equation of the plane π is ax + by − 3z + d = 0 then a + b + d =",
+    "options": ["0", "1", "6", "2"],
+    "answer": 2
+  },
+  {
+    "id": 61,
+    "subject": "Mathematics",
+    "question": "If [t] represents the greatest integer ≤ t then the value of lim(x→3) (11 − [2 − x]) / [x + 10] is",
+    "options": ["1", "8", "5", "does not exist"],
+    "answer": 0
+  },
+  {
+    "id": 62,
+    "subject": "Mathematics",
+    "question": "If the real valued function f(x) = {(cos3x − cosx)/(xsinx) if x < 0; p if x = 0; log(1 + qsinx)/x if x > 0} is continuous at x = 0 then p + q =",
+    "options": ["4", "-4", "8", "-8"],
+    "answer": 3
+  },
+  {
+    "id": 63,
+    "subject": "Mathematics",
+    "question": "If y = √(log(x²+1) + √(log(x²+1) + √(log(x²+1) + ...∞))), |x| < 1, then dy/dx =",
+    "options": ["(x²+1)/(2y−1)", "2x/(2y−1)", "1/((x²+1)(2y−1))", "2x/((x²+1)(2y−1))"],
+    "answer": 3
+  },
+  {
+    "id": 64,
+    "subject": "Mathematics",
+    "question": "If x = √(1 − tany), then dy/dx =",
+    "options": ["2x/(x⁴ + 2x² + 2)", "−2x/(x⁴ − 2x² + 2)", "2x/(x⁴ − 2x² + 2)", "−2x/(x⁴ + 2x² + 2)"],
+    "answer": 1
+  },
+  {
+    "id": 65,
+    "subject": "Mathematics",
+    "question": "If y = Sec⁻¹x, then d²y/dx² =",
+    "options": ["(1 − 2x²)/(x|x|(x²−1)^(3/2))", "(1 − x²)/(x²(x²−1)^(3/2))", "(1 − x²)/(−x²(x²−1)^(3/2))", "(1 + 2x²)/(x|x|(x²−1)^(3/2))"],
+    "answer": 0
+  },
+  {
+    "id": 66,
+    "subject": "Mathematics",
+    "question": "If x = sin2θcos3θ, y = sin3θcos2θ, then dy/dx =",
+    "options": ["(2cos5θ + sin3θsin2θ)/(2cos5θ − cos3θcos2θ)", "(2cos5θ − sin3θsin2θ)/(2cos5θ + cos3θcos2θ)", "(2cos5θ + cos3θcos2θ)/(2cos5θ − sin3θsin2θ)", "(2cos5θ − sin3θsin2θ)/(2cos5θ − cos3θcos2θ)"],
+    "answer": 2
+  },
+  {
+    "id": 67,
+    "subject": "Mathematics",
+    "question": "If the tangent and the normal drawn to the curve xy² + x²y = 12 at the point (1, 3) meet the X-axis in T and N respectively, then TN =",
+    "options": ["7/5", "45/7", "3√274/7", "274/35"],
+    "answer": 3
+  },
+  {
+    "id": 68,
+    "subject": "Mathematics",
+    "question": "A man of 5 feet height is walking away from a light fixed at a height of 15 feet at the rate of K miles/hour. If the rate of increase of his shadow is 11/5 feet/sec, then K = (Take 1 mile = 5280 feet)",
+    "options": ["2", "3", "4", "5"],
+    "answer": 1
+  },
+  {
+    "id": 69,
+    "subject": "Mathematics",
+    "question": "There is a possible error of 0.03 cm in a scale of length 1 foot with which the height of a closed right circular cylinder and the diameter of a sphere are measured as 3.5 feet each. If the radii of both cylinder and sphere are same, then the approximate error in the sum of the surface areas of both cylinder and sphere is (in square feet)",
+    "options": ["0.385", "0.0962", "0.77", "0.1925"],
+    "answer": 3
+  },
+  {
+    "id": 70,
+    "subject": "Mathematics",
+    "question": "For a real number 'a', if a real valued function f(x) = 4x³ + ax² + 3x − 2 is monotonic in its domain, then the range of 'a' is",
+    "options": ["(−6, 6)", "Empty set", "(−2, 2)", "(2, 4)"],
+    "answer": 0
+  },
+  {
+    "id": 71,
+    "subject": "Mathematics",
+    "question": "If the point P(x₁, y₁) lying on the curve y = x² − x + 1 is the closest point to the line y = x − 3 then the perpendicular distance from P to the line 3x + 4y − 2 = 0 is",
+    "options": ["16/5", "4", "1", "7/5"],
+    "answer": 2
+  },
+  {
+    "id": 72,
+    "subject": "Mathematics",
+    "question": "∫ 3ˣ(xlog3 − 1)/x² dx =",
+    "options": ["x·3ˣ + c", "3ˣ/x² + c", "x²3ˣ + c", "3ˣ/x + c"],
+    "answer": 3
+  },
+  {
+    "id": 73,
+    "subject": "Mathematics",
+    "question": "If 5π/4 < x < 7π/4, then ∫√((1 − sin2x)/(1 + sin2x)) dx =",
+    "options": ["−sec²(π/4 − x) + c", "−log|sec(π/4 − x)| + c", "sec²(π/4 − x) + c", "log|sec(π/4 − x)| + c"],
+    "answer": 3
+  },
+  {
+    "id": 74,
+    "subject": "Mathematics",
+    "question": "∫ xTan⁻¹x √((1+x²)/(1−x²)) dx =",
+    "options": ["x²/4(π − Cos⁻¹x²) + 1/4√(1−x²) + c", "x²/4(π − Cos⁻¹x²) + 1/4√(1−x⁴) + c", "x²/4(π + Cos⁻¹x²) − 1/4√(1−x⁴) + c", "x²/4(π + Cos⁻¹x²) − 1/4√(1−x²) + c"],
+    "answer": 1
+  },
+  {
+    "id": 75,
+    "subject": "Mathematics",
+    "question": "∫ 1/(2cosx + sinx)² dx =",
+    "options": ["1/(2 + tanx) + c", "−1/(2tanx + 1) + c", "cosx/(cosx + 2sinx) + c", "−cosx/(2cosx + sinx) + c"],
+    "answer": 3
+  },
+  {
+    "id": 76,
+    "subject": "Mathematics",
+    "question": "∫₋₁¹ (log2 − log(1+x)) / √(1−x²) dx =",
+    "options": ["π/8 · log2", "−π/2 · log2", "−π/4 · log2", "2π log2"],
+    "answer": 3
+  },
+  {
+    "id": 77,
+    "subject": "Mathematics",
+    "question": "∫₀^(π/4) secx / (3cosx + 4sinx) dx =",
+    "options": ["log(7/3)", "1/4 · log(7/3)", "1/4 · log7", "log7"],
+    "answer": 1
+  },
+  {
+    "id": 78,
+    "subject": "Mathematics",
+    "question": "∫₋₂⁴ |2 − x²| dx =",
+    "options": ["8√2/3 − 3", "16√2/3 + 12", "16√2/3 − 3", "8√2/3 + 12"],
+    "answer": 1
+  },
+  {
+    "id": 79,
+    "subject": "Mathematics",
+    "question": "The general solution of the differential equation dy/dx + (secx·cosecx)y = cos²x is",
+    "options": ["ysec²x = sin²x + c", "ysec²x = tanx + c", "ytanx = sinx·cosx + c", "2ytanx = sin²x + c"],
+    "answer": 3
+  },
+  {
+    "id": 80,
+    "subject": "Mathematics",
+    "question": "If the differential equation having y = Aeˣ + Bsinx as its general solution is f(x)d²y/dx² + g(x)dy/dx + h(x)y = 0, then f(x) + g(x) + h(x) =",
+    "options": ["2cosx", "4sinx", "0", "cosx − sinx"],
+    "answer": 2
+  },
+  {
+    "id": 81,
+    "subject": "Physics",
+    "question": "The range of weak nuclear force is of the order of",
+    "options": ["10¹⁶ m", "10⁻¹⁰ m", "10¹⁰ m", "10⁻¹⁶ m"],
+    "answer": 3
+  },
+  {
+    "id": 82,
+    "subject": "Physics",
+    "question": "A piece of length 3.532 m is cut from a rod of length 43.4 m. The length of the remaining rod in metre is (up to correct significant figures)",
+    "options": ["39.9", "39.8", "39.868", "39.87"],
+    "answer": 0
+  },
+  {
+    "id": 83,
+    "subject": "Physics",
+    "question": "A person wearing a parachute jumps off a plane from a height of 2 km from the ground and falls freely for 20 m before his parachute opens. After his parachute opens if he continues to move uniformly with the velocity attained due to his freefall, the total time taken by the person to reach the ground is (Acceleration due to gravity = 10 ms⁻²)",
+    "options": ["99 s", "100 s", "101 s", "102 s"],
+    "answer": 2
+  },
+  {
+    "id": 84,
+    "subject": "Physics",
+    "question": "A ball projected at an angle of 45° with the horizontal crosses two points at equal heights separated by a distance at times 2 s and 8 s respectively. The horizontal distance between the two points is (g = 10 ms⁻²)",
+    "options": ["300 m", "400 m", "500 m", "600 m"],
+    "answer": 0
+  },
+  {
+    "id": 85,
+    "subject": "Physics",
+    "question": "A truck of mass 8 ton is carrying a block of mass 2 ton. If a breaking force of 25 kN is applied on the truck, then the frictional force acting on the block is (Coefficient of static friction between block and truck is 0.3)",
+    "options": ["6250 N", "6000 N", "5000 N", "1000 N"],
+    "answer": 2
+  },
+  {
+    "id": 86,
+    "subject": "Physics",
+    "question": "The work done in displacing a particle from y = a to y = 2a by a force −K/y² acting along y-axis is",
+    "options": ["-5K/8a", "-14K/8a³", "-K/a²", "-K/2a"],
+    "answer": 3
+  },
+  {
+    "id": 87,
+    "subject": "Physics",
+    "question": "Due to the presence of air resistance, if a body dropped from a height of 20 m reaches the ground with a speed of 18 ms⁻¹, then the time taken by the body to reach the ground is nearly",
+    "options": ["1.8 s", "2.2 s", "2 s", "2.5 s"],
+    "answer": 1
+  },
+  {
+    "id": 88,
+    "subject": "Physics",
+    "question": "A balance is made using a uniform metre scale of mass 100 g and two plates each of mass 200 g fixed at the two ends of the scale and the balance is pivoted at 45 cm mark of the scale. The error when 300 g weight is placed in the plate at 0 cm to weigh vegetables placed in the plate at 100 cm is",
+    "options": ["36.4 g", "63.6 g", "200 g", "100 g"],
+    "answer": 3
+  },
+  {
+    "id": 89,
+    "subject": "Physics",
+    "question": "The ratio of radii of gyration of a thin circular ring and a circular disc of same radius about a tangential axis in their own planes is √12 : √K. The value of K is",
+    "options": ["10", "24", "5", "12"],
+    "answer": 0
+  },
+  {
+    "id": 90,
+    "subject": "Physics",
+    "question": "At a given place, to increase the number of oscillations made by a simple pendulum in one minute from 72 to 90, the length of the pendulum is to be decreased by",
+    "options": ["64%", "36%", "50%", "56%"],
+    "answer": 1
+  },
+  {
+    "id": 91,
+    "subject": "Physics",
+    "question": "If the orbital speed of a body revolving in a circular path near the surface of the earth is 8 kms⁻¹, then the orbital speed of a body revolving around the earth in a circular orbit at height of 19,200 km from the surface of earth is (Radius of the earth = 6400 km)",
+    "options": ["4 kms⁻¹", "6 kms⁻¹", "7.5 kms⁻¹", "9 kms⁻¹"],
+    "answer": 0
+  },
+  {
+    "id": 92,
+    "subject": "Physics",
+    "question": "The Young's modulus and Poisson's ratio of a material are respectively Y and σ. The force required to decrease the area of cross-section of a wire made of this material by ΔA is",
+    "options": ["YΔA/4σ", "2YΔA/σ", "YΔA/2σ", "YΔA/σ"],
+    "answer": 2
+  },
+  {
+    "id": 93,
+    "subject": "Physics",
+    "question": "A thin film of water is formed between two straight parallel wires each of length 8 cm separated by distance of 0.6 cm. The work done to increase the distance between the wires to 0.8 cm is (Surface tension of water = 0.07 Nm⁻¹)",
+    "options": ["33.6 μJ", "22.4 μJ", "11.2 μJ", "44.8 μJ"],
+    "answer": 1
+  },
+  {
+    "id": 94,
+    "subject": "Physics",
+    "question": "A rain drop of diameter 1 mm falls with a terminal velocity of 0.7 ms⁻¹ in air. If the coefficient of viscosity of air is 2×10⁻⁵ Pa·s, the viscous force on the rain drop is",
+    "options": ["13.2×10⁻⁸ N", "6.6×10⁻⁸ N", "26.4×10⁻⁸ N", "10.4×10⁻⁸ N"],
+    "answer": 0
+  },
+  {
+    "id": 95,
+    "subject": "Physics",
+    "question": "The temperature at which the reading on Fahrenheit scale becomes 90% more than the reading on Celsius scale is",
+    "options": ["280 °F", "580 °F", "608 °F", "320 °F"],
+    "answer": 2
+  },
+  {
+    "id": 96,
+    "subject": "Physics",
+    "question": "A rectangular ice box of total surface area of 1000 cm² initially contains 1.5 kg of ice at 0°C. If the thickness of the walls of the box is 2 mm and the temperature outside the box is 42°C, then the mass of the ice remaining in the box after 160 minutes is (Thermal conductivity = 10⁻² Wm⁻¹K⁻¹, latent heat of fusion of ice = 336×10³ Jkg⁻¹)",
+    "options": ["0.6 kg", "0.9 kg", "0.8 kg", "0.7 kg"],
+    "answer": 1
+  },
+  {
+    "id": 97,
+    "subject": "Physics",
+    "question": "At constant pressure, equal amounts of heat are supplied to a monatomic gas and a diatomic gas separately. The ratio of the increases in internal energies of the two gases is",
+    "options": ["1:1", "9:49", "3:7", "21:25"],
+    "answer": 3
+  },
+  {
+    "id": 98,
+    "subject": "Physics",
+    "question": "If the rms speed of the molecules of a gas at a temperature of 77°C is 50 ms⁻¹, then the rms speed of the same gas molecules at a temperature of 150.5°C is",
+    "options": ["65 ms⁻¹", "35 ms⁻¹", "55 ms⁻¹", "45 ms⁻¹"],
+    "answer": 2
+  },
+  {
+    "id": 99,
+    "subject": "Physics",
+    "question": "Two tuning forks of frequencies 320 Hz and 323 Hz are vibrated together. The time interval between a maximum sound and its adjacent minimum sound heard by an observer is",
+    "options": ["1/6 s", "1/3 s", "1/12 s", "1/9 s"],
+    "answer": 0
+  },
+  {
+    "id": 100,
+    "subject": "Physics",
+    "question": "The frequency of sound heard by an observer moving towards a stationary source with certain speed is n₁ and if the observer moves away from the same source with same speed, the frequency of sound heard by the observer is n₂. If the speed of sound in air is 340 ms⁻¹ and n₁:n₂ = 71:65, then speed of observer is",
+    "options": ["36 kmph", "27 kmph", "15 kmph", "54 kmph"],
+    "answer": 3
+  },
+  {
+    "id": 101,
+    "subject": "Physics",
+    "question": "A Cassegrain telescope uses two mirrors of radii of curvature 25 cm and 16 cm separated by a distance of 2.5 cm. The position of the final image of an object at infinity is",
+    "options": ["40 cm from convex mirror", "4.44 cm from concave mirror", "4.44 cm from convex mirror", "40 cm from concave mirror"],
+    "answer": 0
+  },
+  {
+    "id": 102,
+    "subject": "Physics",
+    "question": "A convex lens of radii of curvature 6 cm and 12 cm is immersed in a liquid of refractive index 1.3. If the refractive index of the material of the lens is 1.5, then the focal length of the lens when immersed in the liquid is",
+    "options": ["39 cm", "13 cm", "26 cm", "52 cm"],
+    "answer": 2
+  },
+  {
+    "id": 103,
+    "subject": "Physics",
+    "question": "When unpolarised light from air incidents on the surface of a medium of refractive index √3, then the reflected light is totally polarised. The angle of refraction is",
+    "options": ["30°", "53°", "60°", "37°"],
+    "answer": 0
+  },
+  {
+    "id": 104,
+    "subject": "Physics",
+    "question": "An alpha particle and a proton are accelerated from rest in a uniform electric field. The ratio of the times taken by proton and alpha particle to attain equal displacements is",
+    "options": ["√2:1", "1:2", "1:√2", "2:1"],
+    "answer": 2
+  },
+  {
+    "id": 105,
+    "subject": "Physics",
+    "question": "A parallel plate capacitor with air as dielectric has a capacitance of 4 μF. The space between the plates of the capacitor is completely filled with a material of dielectric constant 5 and charged to a potential of 100 V. The work done to completely remove the dielectric material after the capacitor is disconnected from the battery is",
+    "options": ["0.1 J", "0.5 J", "0.6 J", "0.4 J"],
+    "answer": 3
+  },
+  {
+    "id": 106,
+    "subject": "Physics",
+    "question": "The potential difference between the terminals of a cell is 20 V when a current of 2 A flows through the circuit. When the direction of current in the circuit is reversed, the potential difference between the terminals of the cell is 30 V. The internal resistance of the cell is",
+    "options": ["1 Ω", "1.5 Ω", "2 Ω", "2.5 Ω"],
+    "answer": 3
+  },
+  {
+    "id": 107,
+    "subject": "Physics",
+    "question": "A straight uniform wire of resistance 36 Ω is bent in the form of a semi-circular loop. The effective resistance between the ends of the diameter of the semi-circular loop is",
+    "options": ["56/9 Ω", "36/7 Ω", "99/7 Ω", "77/9 Ω"],
+    "answer": 3
+  },
+  {
+    "id": 108,
+    "subject": "Physics",
+    "question": "An alpha particle moving with certain speed towards east enters a uniform magnetic field directed vertically up. The alpha particle will then move in",
+    "options": ["vertical circular path with the same speed", "horizontal circular path with the same speed", "vertical circular path with increased speed", "vertical circular path with decreased speed"],
+    "answer": 1
+  },
+  {
+    "id": 109,
+    "subject": "Physics",
+    "question": "The ratios of the voltage sensitivities, resistances and areas of the coils of two moving coil galvanometers A and B are 4:3, 3:4 and 1:2 respectively. If the number of turns of the coil of galvanometer A is 200, then the number of turns of the coil of galvanometer B is",
+    "options": ["100", "150", "200", "400"],
+    "answer": 0
+  },
+  {
+    "id": 110,
+    "subject": "Physics",
+    "question": "A solenoid of 1000 turns per metre has a core of material with relative permeability 400. The windings of the solenoid are insulated from the core and a current of 2 A is passed through the solenoid. Then the value of the magnetic intensity inside the solenoid is",
+    "options": ["2×10³ Am⁻¹", "1.0 Am⁻¹", "8×10⁵ Am⁻¹", "794 Am⁻¹"],
+    "answer": 0
+  },
+  {
+    "id": 111,
+    "subject": "Physics",
+    "question": "An emf of 2.8 mV is induced in a rectangular loop of area 150 cm² when the current in the loop changes from 3 A to 8 A in a time of 0.2 s. Then the self-inductance of the loop is",
+    "options": ["112 μH", "56 μH", "28 μH", "84 μH"],
+    "answer": 0
+  },
+  {
+    "id": 112,
+    "subject": "Physics",
+    "question": "A capacitor and a resistor of resistance 100√3 Ω are connected in series to an ac source of voltage 100sin(200t) V, where 't' is time in second. If the phase difference between the voltage and the current in the circuit is 30°, then the capacitance of the capacitor is",
+    "options": ["30 μF", "50 μF", "100 μF", "150 μF"],
+    "answer": 1
+  },
+  {
+    "id": 113,
+    "subject": "Physics",
+    "question": "The amplitude of the electric field associated with a light beam of intensity (15/π) Wm⁻² is",
+    "options": ["120 NC⁻¹", "15 NC⁻¹", "60 NC⁻¹", "30 NC⁻¹"],
+    "answer": 2
+  },
+  {
+    "id": 114,
+    "subject": "Physics",
+    "question": "When photons incident on a photosensitive material of work function 1.5 eV, the maximum velocity of the emitted photoelectrons is 8×10⁵ ms⁻¹. The stopping potential of the photoelectrons is (Mass of the electron = 9×10⁻³¹ kg and charge of the electron = 1.6×10⁻¹⁹ C)",
+    "options": ["1.8 V", "1.5 V", "2.1 V", "2.4 V"],
+    "answer": 0
+  },
+  {
+    "id": 115,
+    "subject": "Physics",
+    "question": "The potential energy of an electron in an orbit of hydrogen atom is −6.8 eV. The de Broglie wavelength of the electron in this orbit is (r₀ is Bohr radius)",
+    "options": ["2πr₀", "4πr₀", "πr₀", "3πr₀"],
+    "answer": 1
+  },
+  {
+    "id": 116,
+    "subject": "Physics",
+    "question": "If a radioactive substance decays 10% in every 16 hours, then the percentage of the radioactive substance that remains after 2 days is",
+    "options": ["82.2", "18.8", "27.1", "72.9"],
+    "answer": 3
+  },
+  {
+    "id": 117,
+    "subject": "Physics",
+    "question": "If a nucleus P converts into a nucleus Q by the decay of one alpha particle and two β⁻ particles, then the nuclei P and Q are",
+    "options": ["Isotopes", "Isobars", "Isotones", "Isomers"],
+    "answer": 0
+  },
+  {
+    "id": 118,
+    "subject": "Physics",
+    "question": "The graph between the input voltage (Vᵢ) and the output voltage (Vₒ) of a transistor connected in common emitter configuration is shown. The active, saturation and cutoff regions of the transistor are respectively",
+    "options": ["I, II and III", "II, III and I", "I, III and II", "III, I and II"],
+    "answer": 1
+  },
+  {
+    "id": 119,
+    "subject": "Physics",
+    "question": "Which of the following logic gates is a universal gate?",
+    "options": ["AND", "OR", "NOT", "NAND"],
+    "answer": 3
+  },
+  {
+    "id": 120,
+    "subject": "Physics",
+    "question": "The layer of the atmosphere which efficiently reflects high frequency waves particularly at night is",
+    "options": ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"],
+    "answer": 3
+  },
+  {
+    "id": 121,
+    "subject": "Chemistry",
+    "question": "In the atomic spectrum of hydrogen, the wavelengths of the spectral lines corresponding to electronic transitions (i) n = 4 to n = 2 and (ii) n = 3 to n = 1 are λ₁ and λ₂ Å respectively. The value of (λ₁ − λ₂) (in cm) is (R_H = Rydberg constant)",
+    "options": ["(1/R_H)[24/101]", "R_H[24/101]", "(1/R_H)[101/24]", "R_H[101/24]"],
+    "answer": 2
+  },
+  {
+    "id": 122,
+    "subject": "Chemistry",
+    "question": "Work functions of four metals M₁, M₂, M₃ and M₄ are 4.8, 4.3, 4.75 and 3.75 eV respectively. The metals which do not show photoelectric effect when light of wavelength 310 nm falls on the metals are",
+    "options": ["M₁, M₂ only", "M₁, M₃ only", "M₁, M₂, M₃ only", "M₁, M₂, M₄ only"],
+    "answer": 2
+  },
+  {
+    "id": 123,
+    "subject": "Chemistry",
+    "question": "In second period of the modern periodic table, two elements X and Y have higher first ionization enthalpy values than the preceding and succeeding elements. X and Y are respectively",
+    "options": ["B, C", "Al, S", "Be, N", "Na, S"],
+    "answer": 2
+  },
+  {
+    "id": 124,
+    "subject": "Chemistry",
+    "question": "Consider the following pairs of elements and identify the pairs of elements which have nearly same atomic radius: I. Y, La  II. Zr, Hf  III. Mo, W  IV. Cr, Mo",
+    "options": ["I & II", "II & III", "III & IV", "I & III"],
+    "answer": 1
+  },
+  {
+    "id": 125,
+    "subject": "Chemistry",
+    "question": "If the sum of bond orders of O₂⁻ and O₂²⁻ is x, then bond order of O₂²⁺ will be",
+    "options": ["1.20x", "1.33x", "1.50x", "2.50x"],
+    "answer": 0
+  },
+  {
+    "id": 126,
+    "subject": "Chemistry",
+    "question": "Identify the molecule/ion in which the ratio of σ to π bonds is 3:2",
+    "options": ["HCO₃⁻", "CH₂(CN)₂", "HClO₄", "XeO₃"],
+    "answer": 1
+  },
+  {
+    "id": 127,
+    "subject": "Chemistry",
+    "question": "At 298K, a flask 'A' of unknown volume (V) contains oxygen at 5 atm. Another flask 'B' of volume 2L contains helium at 3 atm. Two flasks are connected together by a small tube of zero volume. After the two gases are completely mixed, if the resulting mixture is found to have the mole fraction of oxygen as 0.2, the volume of flask 'A' (in L) is (Assume oxygen and helium as ideal gases)",
+    "options": ["0.1", "0.3", "0.2", "0.4"],
+    "answer": 1
+  },
+  {
+    "id": 128,
+    "subject": "Chemistry",
+    "question": "In which of the following, oxidation state of nitrogen is lowest?",
+    "options": ["NH₂OH", "NH₄Cl", "N₂H₄", "HNO₂"],
+    "answer": 1
+  },
+  {
+    "id": 129,
+    "subject": "Chemistry",
+    "question": "Which of the following processes are reversible? I. Vaporization of a liquid at its boiling point. II. Expansion of gas into vacuum. III. Transformation of a solid substance into liquid at its melting point. IV. Neutralization of an acid by a base.",
+    "options": ["I & III", "II & III", "II & IV", "I & IV"],
+    "answer": 0
+  },
+  {
+    "id": 130,
+    "subject": "Chemistry",
+    "question": "At T(K) in a saturated solution of MgCO₃ and Ag₂CO₃, if the concentration of Mg²⁺ ion is 3.2×10⁻⁵ M, then the concentration of Ag⁺ ion in the solution will be [Given: Ksp(MgCO₃) = 1.6×10⁻⁶ and Ksp(Ag₂CO₃) = 8.0×10⁻¹² at T(K)]",
+    "options": ["√1.3×10⁻⁷ M", "√1.5×10⁻⁶ M", "√1.6×10⁻⁶ M", "√1.6×10⁻⁵ M"],
+    "answer": 3
+  },
+  {
+    "id": 131,
+    "subject": "Chemistry",
+    "question": "Temperature of maximum density of H₂O is y K and D₂O is x K. (x − y) (in K) is nearly",
+    "options": ["7.0", "3.5", "4.0", "8.5"],
+    "answer": 0
+  },
+  {
+    "id": 132,
+    "subject": "Chemistry",
+    "question": "How many of the following metals give oxides and nitrides when burnt in air? Be, Na, Mg, Ba, Sr, Li, K",
+    "options": ["2", "3", "4", "5"],
+    "answer": 3
+  },
+  {
+    "id": 133,
+    "subject": "Chemistry",
+    "question": "Identify the incorrect order against the property given in brackets",
+    "options": ["BeCO₃ < MgCO₃ < CaCO₃ < SrCO₃ (Thermal stability)", "BeSO₄ > MgSO₄ > CaSO₄ > SrSO₄ (Solubility in water)", "Li₂CO₃ > Na₂CO₃ > K₂CO₃ > Rb₂CO₃ (Thermal stability)", "BeCO₃ > MgCO₃ > CaCO₃ > SrCO₃ (Solubility in water)"],
+    "answer": 2
+  },
+  {
+    "id": 134,
+    "subject": "Chemistry",
+    "question": "Diborane on hydrolysis gives a compound X. The correct statements about X are: I. It is a tribasic acid  II. It is a weak monobasic acid  III. It has a layer structure  IV. It is highly soluble in water",
+    "options": ["I & III", "II & III", "II & IV", "I & IV"],
+    "answer": 1
+  },
+  {
+    "id": 135,
+    "subject": "Chemistry",
+    "question": "Choose the correct statements about allotropes of carbon: I. Graphite has layered structure  II. Buckminster fullerene is not aromatic in nature  III. The distance between two adjacent layers in graphite is 141.5 pm  IV. The hybridization of carbons in graphite and Buckminster fullerene is same",
+    "options": ["I & IV", "I & II", "II & III", "III & IV"],
+    "answer": 0
+  },
+  {
+    "id": 136,
+    "subject": "Chemistry",
+    "question": "Which of the following is a lung irritant that can lead to an acute respiratory disease in children?",
+    "options": ["SO₂", "CO₂", "CO", "NO₂"],
+    "answer": 3
+  },
+  {
+    "id": 137,
+    "subject": "Chemistry",
+    "question": "Arrange the following in decreasing order of their boiling points: (A) 2-Methylbutane  (B) 2,2-Dimethylpropane  (C) Pentane  (D) Hexane",
+    "options": ["D > C > A > B", "B > A > C > D", "D > A > C > B", "B > C > A > D"],
+    "answer": 0
+  },
+  {
+    "id": 138,
+    "subject": "Chemistry",
+    "question": "Which of the following is not an aromatic species?",
+    "options": ["Cyclopentadienyl cation", "Cyclopentadienyl anion", "Cycloheptatrienyl cation", "Cyclooctatetraene"],
+    "answer": 0
+  },
+  {
+    "id": 139,
+    "subject": "Chemistry",
+    "question": "In the estimation of nitrogen by Kjeldahl's method 0.933 g of an organic compound 'X' was analyzed. Ammonia evolved was absorbed in 60 mL of 0.1 M H₂SO₄. The unreacted acid requires 20 mL of 0.1 M NaOH for complete neutralization. The compound 'X' is",
+    "options": ["C₆H₅CH₂NH₂", "C₆H₅NH₂", "CH₃CH₂NH₂", "CH₃−C(=O)−NH₂"],
+    "answer": 1
+  },
+  {
+    "id": 140,
+    "subject": "Chemistry",
+    "question": "Which of the following is a least stable carbocation?",
+    "options": ["CH₃−CH₂⁺", "CH₂=CH⁺", "CH₂=CH−CH₂⁺", "C₆H₅−CH₂⁺"],
+    "answer": 1
+  },
+  {
+    "id": 141,
+    "subject": "Chemistry",
+    "question": "The incorrect statement about crystals with Schottky defect is",
+    "options": ["It is due to missing of equal number of cations and anions from lattice points", "On the whole crystal is electrically neutral", "It is shown by ionic compounds in which cation and anion are of almost same size", "Density of the crystal increases"],
+    "answer": 3
+  },
+  {
+    "id": 142,
+    "subject": "Chemistry",
+    "question": "Two liquids 'A' and 'B' form an ideal solution. At 300 K, the vapour pressure of a solution containing 1 mole of 'A' and 3 moles of 'B' is 550 mm Hg. At the same temperature, if one more mole of 'B' is added to the solution, the vapour pressure of solution increases to 560 mm Hg. Then the ratio of vapour pressures of A and B in their pure state is",
+    "options": ["1:3", "3:1", "2:3", "3:2"],
+    "answer": 2
+  },
+  {
+    "id": 143,
+    "subject": "Chemistry",
+    "question": "The molar conductivity of acetic acid solution at infinite dilution is 390 S cm² mol⁻¹. What is the molar conductivity of 0.01 M acetic acid solution (in S cm² mol⁻¹)? (Given: Ka(CH₃COOH) = 1.8×10⁻⁵, assume 1 − α = 1)",
+    "options": ["10.64", "16.54", "51.64", "15.64"],
+    "answer": 1
+  },
+  {
+    "id": 144,
+    "subject": "Chemistry",
+    "question": "The half-life of a zero order reaction A → products is 0.5 hour. The initial concentration of A is 4 mol L⁻¹. How much time (in hr) does it take for its concentration to come from 2.0 mol L⁻¹ to 1.0 mol L⁻¹?",
+    "options": ["1/4", "1/8", "1/2", "1/6"],
+    "answer": 0
+  },
+  {
+    "id": 145,
+    "subject": "Chemistry",
+    "question": "Match the following colloid types with examples: A-Sol, B-Foam, C-Gel, D-Aerosol with I-Cloud, II-Whipped cream, III-Paint, IV-Butter. The correct answer is",
+    "options": ["A-IV, B-II, C-III, D-I", "A-III, B-I, C-IV, D-II", "A-III, B-II, C-IV, D-I", "A-IV, B-I, C-II, D-III"],
+    "answer": 2
+  },
+  {
+    "id": 146,
+    "subject": "Chemistry",
+    "question": "Statement I: The choice of reducing agent for the reduction of an oxide ore can be predicted by using Ellingham diagram, a plot of ΔG° Vs T. Statement II: According to Ellingham diagram, metal oxide with higher ΔG° is more stable than the oxide with lower ΔG°. The correct answer is",
+    "options": ["Both statements I and II are correct", "Statement I is correct, but statement II is not correct", "Statement I is not correct, but statement II is correct", "Both statements I and II are not correct"],
+    "answer": 1
+  },
+  {
+    "id": 147,
+    "subject": "Chemistry",
+    "question": "Which one of the orders is correctly matched with the property mentioned against it?",
+    "options": ["H₂S < H₂O < H₂Se < H₂Te (Boiling point)", "N₂O < NO < N₂O₃ < N₂O₄ < N₂O₅ (Acidic nature)", "HI < HCl < HBr < HF (Acidic nature)", "H₂O < H₂S < H₂Se < H₂Te (Bond angle)"],
+    "answer": 1
+  },
+  {
+    "id": 148,
+    "subject": "Chemistry",
+    "question": "Noble gas 'X' is used as a diluent for oxygen in modern diving apparatus and noble gas 'Y' is used mainly to provide an inert atmosphere in high temperature metallurgical processes. 'Y' and 'X' are respectively",
+    "options": ["He, Ar", "Ar, He", "He, Kr", "Ar, Kr"],
+    "answer": 1
+  },
+  {
+    "id": 149,
+    "subject": "Chemistry",
+    "question": "The dibasic oxoacid of phosphorus on disproportionation gives two products A and B. A and B are respectively",
+    "options": ["HPO₃, PH₃", "H₃PO₂, H₂O", "H₃PO₄, PH₃", "H₄P₂O₆, H₃PO₂"],
+    "answer": 2
+  },
+  {
+    "id": 150,
+    "subject": "Chemistry",
+    "question": "The number of moles of oxalate ions oxidized by one mole of permanganate ions in acidic medium is",
+    "options": ["2.5", "5.0", "1.5", "2.0"],
+    "answer": 0
+  },
+  {
+    "id": 151,
+    "subject": "Chemistry",
+    "question": "Total number of geometrical isomers possible for the complexes [NiCl₄]²⁻, [CoCl₂(NH₃)₄]⁺, [Co(NH₃)₃(NO₂)₃] and [Co(NH₃)₅Cl]²⁺ is",
+    "options": ["2", "3", "4", "5"],
+    "answer": 2
+  },
+  {
+    "id": 152,
+    "subject": "Chemistry",
+    "question": "Match the type of polymer with examples: A-Fibre, B-Elastomer, C-Thermosetting polymer, D-Thermoplastic polymer with I-PVC, II-Nylon-6,6, III-Neoprene, IV-Bakelite. The correct answer is",
+    "options": ["A-II, B-IV, C-I, D-III", "A-II, B-III, C-IV, D-I", "A-III, B-I, C-IV, D-II", "A-III, B-II, C-IV, D-I"],
+    "answer": 1
+  },
+  {
+    "id": 153,
+    "subject": "Chemistry",
+    "question": "Maltose on hydrolysis gives two monosaccharide units. The incorrect statement about the monosaccharides formed is",
+    "options": ["Both are α-D-glucose units only", "One is α-D-glucose and second one is β-D-fructose", "Both are reducing sugars", "In maltose, they are joined through 1,4-glycosidic linkage"],
+    "answer": 1
+  },
+  {
+    "id": 154,
+    "subject": "Chemistry",
+    "question": "Identify the pair of drugs which act as antihistamines.",
+    "options": ["Dimetapp, Seldane", "Iproniazid, Nardil", "Veronal, Valium", "Heroin, Codeine"],
+    "answer": 0
+  },
+  {
+    "id": 155,
+    "subject": "Chemistry",
+    "question": "Identify the product 'Y' in the given sequence of reactions: chlorobenzene → (HNO₃/conc.H₂SO₄) → X (major) → (i) NaOH, 443K (ii) H⁺ → Y",
+    "options": ["o-nitrophenol", "p-nitrophenol", "2,4-dinitrophenol", "p-sulfonylphenol"],
+    "answer": 1
+  },
+  {
+    "id": 156,
+    "subject": "Chemistry",
+    "question": "What is 'Z' in the given set of reactions? C₆H₅OCH₃ → (HI) → X + Y; X → (Zn/Δ) → benzene; Y → (C₆H₆/Anhy.AlCl₃) → Z",
+    "options": ["ethylbenzene", "benzyl chloride", "chlorobenzene", "toluene"],
+    "answer": 3
+  },
+  {
+    "id": 157,
+    "subject": "Chemistry",
+    "question": "Which of the following reactions is an example of Clemmensen reduction?",
+    "options": ["R-C(=O)-Cl + H₂ → R-C(=O)-H + HCl (Pd/BaSO₄)", "R-C(=O)-H → R-CH₃ (NH₂-NH₂/KOH/ethylene glycol)", "R-C(=O)-OC₂H₅ → R-C(=O)-H + C₂H₅OH (DIBAL-H)", "R-C(=O)-CH₃ → R-CH₂-CH₃ (Zn-Hg/HCl)"],
+    "answer": 3
+  },
+  {
+    "id": 158,
+    "subject": "Chemistry",
+    "question": "Which of the following can undergo Hell-Volhard-Zelinsky reaction?",
+    "options": ["Benzoic acid (C₆H₅COOH)", "Phenylacetic acid (C₆H₅CH₂CO₂H)", "Phenylacetaldehyde (C₆H₅CH₂CHO)", "Phenacyl ketone (C₆H₅CH₂-C(=O)-CH₃)"],
+    "answer": 1
+  },
+  {
+    "id": 159,
+    "subject": "Chemistry",
+    "question": "Which of the following has lowest pKa value?",
+    "options": ["o-nitrophenol", "benzoic acid", "p-methoxybenzoic acid", "p-nitrobenzoic acid"],
+    "answer": 3
+  },
+  {
+    "id": 160,
+    "subject": "Chemistry",
+    "question": "The correct statements about the products B and C in the given reactions are: CH₃CH₂OH → (HCl/Anhy.ZnCl₂) → A → (ethanolic AgCN) → B (minor) + C (major). I. B and C are functional isomers  II. With H₂|Catalyst B gives 1° amine and C gives 2° amine  III. B on acid hydrolysis gives formic acid and C gives C₃H₆O₂  IV. C forms isocyanate with HgO",
+    "options": ["I & III", "II & III", "I, II & IV", "II, III & IV"],
+    "answer": 2
+  }
+]
+ENDJSON

@@ -42,12 +42,13 @@ export default function Login() {
             </div>
           </div>
         </div>
-        <a
-          href="admin"
+        <button
+          type="button"
+          onClick={() => navigate("/admin")}
           className="text-xs text-muted-foreground hover:text-primary"
         >
           Admin
-        </a>
+        </button>
       </header>
 
       <main className="flex-1 max-w-4xl w-full mx-auto p-6">

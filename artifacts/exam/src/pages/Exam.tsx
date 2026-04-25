@@ -153,6 +153,61 @@ export default function Exam() {
     [questions, currentQuestion],
   );
 
+  // Subject grouping (Mathematics / Physics / Chemistry style sections).
+  // Falls back gracefully when no subjects are set on the questions.
+  const subjects = useMemo(() => {
+    const seen = new Set<string>();
+    const order: string[] = [];
+    for (const q of questions) {
+      const s = (q.subject ?? "").trim();
+      if (!s) continue;
+      if (!seen.has(s)) {
+        seen.add(s);
+        order.push(s);
+      }
+    }
+    return order;
+  }, [questions]);
+
+  const [activeSubject, setActiveSubject] = useState<string | null>(null);
+
+  // Whichever question is currently active determines which subject tab is highlighted.
+  useEffect(() => {
+    if (subjects.length === 0) {
+      setActiveSubject(null);
+      return;
+    }
+    const subjectOfCurrent = (currentQuestion?.subject ?? "").trim();
+    if (subjectOfCurrent && subjects.includes(subjectOfCurrent)) {
+      setActiveSubject(subjectOfCurrent);
+    } else if (!activeSubject) {
+      setActiveSubject(subjects[0]!);
+    }
+  }, [subjects, currentQuestion, activeSubject]);
+
+  const subjectCounts = useMemo(() => {
+    const map: Record<string, number> = {};
+    for (const s of subjects) map[s] = 0;
+    for (const q of questions) {
+      const s = (q.subject ?? "").trim();
+      if (s && map[s] !== undefined) map[s]!++;
+    }
+    return map;
+  }, [questions, subjects]);
+
+  const visibleQuestions = useMemo(() => {
+    if (!activeSubject) return questions;
+    return questions.filter((q) => (q.subject ?? "").trim() === activeSubject);
+  }, [questions, activeSubject]);
+
+  function switchSubject(subject: string) {
+    setActiveSubject(subject);
+    const first = questions.find(
+      (q) => (q.subject ?? "").trim() === subject,
+    );
+    if (first) jumpTo(first.id);
+  }
+
   function setSelected(opt: string) {
     if (!currentQuestion) return;
     setAnswers((a) => ({ ...a, [currentQuestion.id]: opt }));
@@ -168,8 +223,13 @@ export default function Exam() {
   }
 
   function nextQuestion(): string | null {
-    if (currentIndex < 0) return null;
-    if (currentIndex < questions.length - 1) return questions[currentIndex + 1]!.id;
+    if (!currentQuestion) return null;
+    // Advance within the visible (subject-filtered) list when a subject tab is selected,
+    // so "Save & Next" stays inside Mathematics/Physics/Chemistry instead of jumping out.
+    const scope = visibleQuestions.length > 0 ? visibleQuestions : questions;
+    const idx = scope.findIndex((q) => q.id === currentQuestion.id);
+    if (idx < 0) return null;
+    if (idx < scope.length - 1) return scope[idx + 1]!.id;
     return null;
   }
 
@@ -282,10 +342,12 @@ export default function Exam() {
     handleSubmitRef.current = handleSubmit;
   }, [handleSubmit]);
 
-  // Counts for footer
+  // Counts for the legend / palette — scoped to the active subject when one is selected,
+  // otherwise across all questions.
   const counts = useMemo(() => {
     const c = { answered: 0, notAnswered: 0, notVisited: 0, marked: 0, answeredMarked: 0 };
-    for (const q of questions) {
+    const scope = visibleQuestions;
+    for (const q of scope) {
       const s = statusMap[q.id] ?? "not-visited";
       if (s === "answered") c.answered++;
       else if (s === "not-answered") c.notAnswered++;
@@ -294,7 +356,7 @@ export default function Exam() {
       else c.notVisited++;
     }
     return c;
-  }, [questions, statusMap]);
+  }, [visibleQuestions, statusMap]);
 
   if (!session || !endsAt || !currentQuestion) {
     return (

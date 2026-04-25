@@ -11,17 +11,26 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
+  const FIXED_USERNAME = "sphn";
+  const FIXED_PASSWORD = "admin";
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (!username.trim() || !password.trim()) {
+    const u = username.trim().toLowerCase();
+    const p = password.trim();
+    if (!u || !p) {
       setError("Please enter both username and password.");
+      return;
+    }
+    if (u !== FIXED_USERNAME || p !== FIXED_PASSWORD) {
+      setError("Invalid username or password.");
       return;
     }
     sessionStorage.setItem(
       "exam:auth",
       JSON.stringify({
-        username: username.trim(),
+        username: FIXED_USERNAME,
         loggedInAt: Date.now(),
       }),
     );

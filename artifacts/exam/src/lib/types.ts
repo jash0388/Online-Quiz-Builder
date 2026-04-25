@@ -62,4 +62,7 @@ export interface ExamSubmissionRow {
   status: string | null;
   submitted_at: string | null;
   exam_title: string | null;
+  student_phone: string | null;
+  father_name: string | null;
+  father_phone: string | null;
 }

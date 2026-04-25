@@ -168,32 +168,31 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
   }, []);
 
   useEffect(() => {
-    if (selectedExam) {
-      loadQuestions(selectedExam);
-      loadSubmissions(selectedExam);
+    if (!selectedExam) return;
+    loadQuestions(selectedExam);
+    loadSubmissions(selectedExam);
 
-      // Real-time subscription for new submissions
-      const channel = supabase
-        .channel(`exam_subs_${selectedExam}`)
-        .on(
-          "postgres_changes",
-          {
-            event: "INSERT",
-            schema: "public",
-            table: "exam_submissions",
-            filter: `exam_id=eq.${selectedExam}`,
-          },
-          (payload) => {
-            const newSub = payload.new as ExamSubmissionRow;
-            setSubs((prev) => [newSub, ...prev]);
-          },
-        )
-        .subscribe();
+    // Real-time subscription for new submissions
+    const channel = supabase
+      .channel(`exam_subs_${selectedExam}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "exam_submissions",
+          filter: `exam_id=eq.${selectedExam}`,
+        },
+        (payload) => {
+          const newSub = payload.new as ExamSubmissionRow;
+          setSubs((prev) => [newSub, ...prev]);
+        },
+      )
+      .subscribe();
 
-      return () => {
-        supabase.removeChannel(channel);
-      };
-    }
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [selectedExam]);
 
   async function createExam() {

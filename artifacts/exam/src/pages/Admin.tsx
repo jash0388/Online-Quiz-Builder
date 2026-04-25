@@ -171,6 +171,28 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
     if (selectedExam) {
       loadQuestions(selectedExam);
       loadSubmissions(selectedExam);
+
+      // Real-time subscription for new submissions
+      const channel = supabase
+        .channel(`exam_subs_${selectedExam}`)
+        .on(
+          "postgres_changes",
+          {
+            event: "INSERT",
+            schema: "public",
+            table: "exam_submissions",
+            filter: `exam_id=eq.${selectedExam}`,
+          },
+          (payload) => {
+            const newSub = payload.new as ExamSubmissionRow;
+            setSubs((prev) => [newSub, ...prev]);
+          },
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
     }
   }, [selectedExam]);
 
@@ -399,11 +421,11 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
 
       const row: unknown[] = [
         s.id,
-        s.student_name ?? candidate?.student_name ?? "",
-        s.roll_number ?? candidate?.roll_number ?? "",
-        candidate?.student_phone ?? "",
-        candidate?.father_name ?? "",
-        candidate?.father_phone ?? "",
+        s.student_name ?? "",
+        s.roll_number ?? "",
+        s.student_phone ?? "",
+        s.father_name ?? "",
+        s.father_phone ?? "",
         candidate?.college ?? "",
         score,
         total,

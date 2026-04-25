@@ -22,6 +22,50 @@ function letterFor(idx: number) {
   return String.fromCharCode(65 + idx); // A, B, C, D...
 }
 
+// --- Seeded Shuffle Logic ---
+function createPRNG(seed: string) {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) {
+    h = (Math.imul(31, h) + seed.charCodeAt(i)) | 0;
+  }
+
+  return function () {
+    let t = (h += 0x6d2b79f5);
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+function shuffleArray<T>(array: T[], prng: () => number): T[] {
+  const result = [...array];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(prng() * (i + 1));
+    [result[i], result[j]] = [result[j]!, result[i]!];
+  }
+  return result;
+}
+
+function shuffleOptions(q: ExamQuestion, prng: () => number): ExamQuestion {
+  if (!q.options || q.options.length === 0) return q;
+
+  // Create an array of indices [0, 1, 2, 3]
+  const indices = Array.from({ length: q.options.length }, (_, i) => i);
+  // Shuffle the indices
+  const shuffledIndices = shuffleArray(indices, prng);
+
+  const newOptions = shuffledIndices.map((i) => q.options![i]!);
+  const newOptionsTe = q.options_te
+    ? shuffledIndices.map((i) => q.options_te![i]!)
+    : undefined;
+
+  return {
+    ...q,
+    options: newOptions,
+    options_te: newOptionsTe,
+  };
+}
+
 export default function Exam() {
   const [, navigate] = useLocation();
   const [session, setSession] = useState<ExamSession | null>(null);
@@ -54,12 +98,44 @@ export default function Exam() {
         .eq("exam_id", s.examId)
         .order("sort_order");
       const qs = (data ?? []) as ExamQuestion[];
-      // Normalize options - they're stored as text[] in some seeds and string[] in jsonb
-      const normalized = qs.map((q) => ({
-        ...q,
-        options: Array.isArray(q.options) ? q.options : [],
-      }));
-      setQuestions(normalized);
+      // Seeded random based on userId
+      const prng = createPRNG(s.userId);
+
+      // 1. Shuffle options for every question first
+      let shuffledQs = qs.map((q) => {
+        const normalized = {
+          ...q,
+          options: Array.isArray(q.options) ? q.options : [],
+          options_te: Array.isArray(q.options_te) ? q.options_te : undefined,
+        };
+        return shuffleOptions(normalized as ExamQuestion, prng);
+      });
+
+      // 2. Group by subject and shuffle within groups
+      const groups: Record<string, ExamQuestion[]> = {};
+      const subjectOrder: string[] = [];
+
+      shuffledQs.forEach((q) => {
+        const sub = q.subject || "General";
+        if (!groups[sub]) {
+          groups[sub] = [];
+          subjectOrder.push(sub);
+        }
+        groups[sub].push(q);
+      });
+
+      // Shuffle within each group
+      subjectOrder.forEach((sub) => {
+        groups[sub] = shuffleArray(groups[sub]!, prng);
+      });
+
+      // Flatten back to single array
+      const finalQs: ExamQuestion[] = [];
+      subjectOrder.forEach((sub) => {
+        finalQs.push(...groups[sub]!);
+      });
+
+      setQuestions(finalQs);
 
       // Restore in-progress state
       const saveKey = `exam:state:${s.examId}:${s.userId}`;
@@ -81,9 +157,9 @@ export default function Exam() {
       if (!restored) {
         setEndsAt(Date.now() + s.duration * 60 * 1000);
         setStartedAt(Date.now());
-        if (normalized.length > 0) {
-          setCurrentQId(normalized[0]!.id);
-          setStatusMap({ [normalized[0]!.id]: "not-answered" });
+        if (finalQs.length > 0) {
+          setCurrentQId(finalQs[0]!.id);
+          setStatusMap({ [finalQs[0]!.id]: "not-answered" });
         }
       }
     })();

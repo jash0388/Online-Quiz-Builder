@@ -20,6 +20,7 @@ import {
   InputOTPSlot,
 } from "@/components/ui/input-otp";
 import type { Exam, ExamQuestion, ExamSubmissionRow } from "@/lib/types";
+import eapcetQuestions from "@/data/eapcet-2025-shift2.json";
 
 const ADMIN_CODE = "729184";
 const ADMIN_KEY = "exam_admin_unlocked_v1";
@@ -136,6 +137,7 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
   const [qD, setQD] = useState("");
   const [qCorrect, setQCorrect] = useState("A");
   const [qMarks, setQMarks] = useState(1);
+  const [qSubject, setQSubject] = useState<string>("");
 
   async function loadExams() {
     const { data } = await supabase
@@ -219,7 +221,7 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
       return;
     }
     setBusy(true);
-    const { error } = await supabase.from("exam_questions").insert({
+    const payload: Record<string, unknown> = {
       exam_id: selectedExam,
       question: qBody,
       question_type: "mcq",
@@ -227,7 +229,9 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
       correct_answer: correctText,
       marks: qMarks,
       sort_order: questions.length + 1,
-    });
+    };
+    if (qSubject) payload.subject = qSubject;
+    const { error } = await supabase.from("exam_questions").insert(payload);
     setBusy(false);
     if (error) return alert(error.message);
     setQBody("");
@@ -236,6 +240,97 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
     setQC("");
     setQD("");
     loadQuestions(selectedExam);
+  }
+
+  async function importEapcet2025() {
+    if (!confirm(
+      "This will create a new exam 'TG EAPCET Engineering — 03 May 2025 Shift 2' and seed 160 questions (Mathematics 80, Physics 40, Chemistry 40). Continue?",
+    )) return;
+    setBusy(true);
+    try {
+      const examTitle = "TG EAPCET Engineering — 03 May 2025 Shift 2";
+      const { data: existing } = await supabase
+        .from("exams")
+        .select("id, title")
+        .eq("title", examTitle)
+        .maybeSingle();
+      let examId: string;
+      if (existing?.id) {
+        examId = existing.id as string;
+      } else {
+        const { data: created, error: createErr } = await supabase
+          .from("exams")
+          .insert({
+            title: examTitle,
+            description:
+              "Telangana EAPCET 2025 Engineering stream — official Shift 2, 03 May 2025. 160 MCQs across Mathematics (80), Physics (40) and Chemistry (40). Each correct answer: +1, no negative marking.",
+            duration_minutes: 180,
+            is_active: true,
+          })
+          .select("id")
+          .single();
+        if (createErr || !created) {
+          throw new Error(createErr?.message ?? "Failed to create exam");
+        }
+        examId = created.id as string;
+      }
+      const { count: existingCount } = await supabase
+        .from("exam_questions")
+        .select("id", { count: "exact", head: true })
+        .eq("exam_id", examId);
+      if ((existingCount ?? 0) > 0) {
+        if (!confirm(
+          `This exam already has ${existingCount} questions. Skip seeding?`,
+        )) {
+          // user wants to proceed anyway → fall through and add more
+        } else {
+          setSelectedExam(examId);
+          await loadExams();
+          await loadQuestions(examId);
+          alert("Exam already seeded. Selected it for you.");
+          return;
+        }
+      }
+      const rows = (eapcetQuestions as Array<{
+        id: number;
+        subject: string;
+        question: string;
+        options: string[];
+        answer: number;
+      }>).map((q, i) => ({
+        exam_id: examId,
+        question: q.question,
+        question_type: "mcq",
+        options: q.options,
+        correct_answer: q.options[q.answer],
+        marks: 1,
+        sort_order: i + 1,
+        subject: q.subject,
+      }));
+      // Insert in chunks of 50 to stay well under any payload limits
+      for (let i = 0; i < rows.length; i += 50) {
+        const chunk = rows.slice(i, i + 50);
+        const { error } = await supabase.from("exam_questions").insert(chunk);
+        if (error) {
+          if (/subject/i.test(error.message) && /column/i.test(error.message)) {
+            throw new Error(
+              "Your database is missing the 'subject' column. Open Supabase → SQL Editor and run:\n\n" +
+                "ALTER TABLE exam_questions ADD COLUMN subject TEXT;\n\nThen click Import again.",
+            );
+          }
+          throw new Error(error.message);
+        }
+      }
+      setSelectedExam(examId);
+      await loadExams();
+      await loadQuestions(examId);
+      alert(`Imported ${rows.length} questions into "${examTitle}".`);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      alert("Import failed:\n\n" + msg);
+    } finally {
+      setBusy(false);
+    }
   }
 
   async function deleteQuestion(id: string) {
@@ -495,6 +590,28 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
               </Button>
             </div>
           </Card>
+
+          <Card className="p-4 mt-4 border-dashed">
+            <div className="text-xs font-semibold mb-2">Quick Import</div>
+            <p className="text-[11px] text-muted-foreground mb-3 leading-relaxed">
+              Seed the official TG EAPCET 2025 (Engineering, 03 May Shift 2)
+              paper — 160 questions across Mathematics, Physics and Chemistry.
+            </p>
+            <Button
+              disabled={busy}
+              onClick={importEapcet2025}
+              variant="outline"
+              className="w-full"
+            >
+              Import TG EAPCET 03-May-2025 Shift 2
+            </Button>
+            <p className="text-[10px] text-muted-foreground mt-2 leading-relaxed">
+              First-time setup: in Supabase SQL Editor run{" "}
+              <code className="bg-slate-100 px-1 rounded">
+                ALTER TABLE exam_questions ADD COLUMN subject TEXT;
+              </code>
+            </p>
+          </Card>
         </div>
 
         {/* Right column */}
@@ -556,7 +673,7 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
                           <Input value={qD} onChange={(e) => setQD(e.target.value)} />
                         </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-3 gap-2">
                         <div>
                           <Label>Correct Option</Label>
                           <Select value={qCorrect} onValueChange={setQCorrect}>
@@ -579,6 +696,29 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
                             value={qMarks}
                             onChange={(e) => setQMarks(Number(e.target.value))}
                           />
+                        </div>
+                        <div>
+                          <Label>Subject (optional)</Label>
+                          <Select
+                            value={qSubject || "none"}
+                            onValueChange={(v) =>
+                              setQSubject(v === "none" ? "" : v)
+                            }
+                          >
+                            <SelectTrigger>
+                              <SelectValue placeholder="None" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="none">None</SelectItem>
+                              <SelectItem value="Mathematics">
+                                Mathematics
+                              </SelectItem>
+                              <SelectItem value="Physics">Physics</SelectItem>
+                              <SelectItem value="Chemistry">
+                                Chemistry
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                       </div>
                       <Button

@@ -12,8 +12,10 @@ export interface ExamQuestion {
   id: string;
   exam_id: string;
   question: string;
+  question_te?: string | null;
   question_type: string;
   options: string[] | null;
+  options_te?: string[] | null;
   correct_answer: string;
   marks: number;
   sort_order: number;

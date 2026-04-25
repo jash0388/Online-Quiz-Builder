@@ -1,109 +1,135 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
-import { supabase } from "@/lib/supabase";
-import type { Exam } from "@/lib/types";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import SphnHeader from "@/components/SphnHeader";
 
 export default function Login() {
   const [, navigate] = useLocation();
-  const [exams, setExams] = useState<Exam[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      const { data, error: err } = await supabase
-        .from("exams")
-        .select(
-          "id,title,description,duration_minutes,max_violations,is_active,created_at",
-        )
-        .eq("is_active", true)
-        .order("created_at", { ascending: false });
-      if (err) setError(err.message);
-      setExams((data ?? []) as Exam[]);
-      setLoading(false);
-    })();
-  }, []);
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setError(null);
+    if (!username.trim() || !password.trim()) {
+      setError("Please enter both username and password.");
+      return;
+    }
+    sessionStorage.setItem(
+      "exam:auth",
+      JSON.stringify({
+        username: username.trim(),
+        loggedInAt: Date.now(),
+      }),
+    );
+    navigate("/exams");
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#e8eef5]">
-      <header className="bg-white border-b border-border px-6 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded bg-primary flex items-center justify-center text-white font-bold">
-            OA
-          </div>
-          <div>
-            <div className="font-semibold text-base leading-tight">
-              Online Assessment
+      <SphnHeader
+        rightSlot={
+          <button
+            type="button"
+            onClick={() => navigate("/admin")}
+            className="text-[11px] text-white/80 hover:text-white underline"
+          >
+            Admin
+          </button>
+        }
+      />
+
+      {/* Candidate banner strip */}
+      <div className="bg-slate-700 text-white border-b border-slate-800">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+          <div className="min-w-0">
+            <div className="text-[11px] text-white/70 uppercase tracking-wide">
+              System Name
             </div>
-            <div className="text-xs text-muted-foreground">
-              Select a test to begin
+            <div className="text-yellow-300 font-bold text-2xl leading-tight">
+              C001
+            </div>
+            <div className="text-[11px] text-white/70 mt-1 hidden sm:block">
+              Kindly contact the invigilator if there are any discrepancies in
+              the displayed details.
+            </div>
+          </div>
+          <div className="text-right shrink-0">
+            <div className="text-[11px] text-white/70 uppercase tracking-wide">
+              Subject
+            </div>
+            <div className="text-yellow-300 font-semibold text-base">
+              EAPCET Mock Test
             </div>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => navigate("/admin")}
-          className="text-xs text-muted-foreground hover:text-primary"
+      </div>
+
+      <main className="flex-1 flex items-start justify-center px-4 py-10">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full max-w-md bg-white border border-border rounded shadow-md overflow-hidden"
         >
-          Admin
-        </button>
-      </header>
-
-      <main className="flex-1 max-w-4xl w-full mx-auto p-6">
-        <h1 className="text-xl font-semibold mb-1">Available Tests</h1>
-        <p className="text-sm text-muted-foreground mb-4">
-          Choose a test from the list below to view instructions and begin.
-        </p>
-
-        {error && (
-          <div className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded px-3 py-2 mb-3">
-            {error}
+          <div className="bg-[#f1f5f9] border-b border-border px-5 py-3">
+            <h1 className="font-semibold text-slate-800">Login</h1>
           </div>
-        )}
+          <div className="p-6 space-y-4">
+            <div>
+              <Label htmlFor="username" className="text-xs">
+                Username (Roll Number)
+              </Label>
+              <Input
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your roll number"
+                autoComplete="username"
+                data-testid="input-username"
+              />
+            </div>
+            <div>
+              <Label htmlFor="password" className="text-xs">
+                Password
+              </Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                autoComplete="current-password"
+                data-testid="input-password"
+              />
+            </div>
 
-        {loading ? (
-          <div className="text-sm text-muted-foreground">Loading tests...</div>
-        ) : exams.length === 0 ? (
-          <Card className="p-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              No active tests available right now. Please check back later.
+            {error && (
+              <div className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded px-3 py-2">
+                {error}
+              </div>
+            )}
+
+            <Button
+              type="submit"
+              className="w-full bg-[#0ea5e9] hover:bg-[#0284c7] text-white font-semibold"
+              data-testid="button-signin"
+            >
+              Sign In
+            </Button>
+
+            <p className="text-[11px] text-muted-foreground text-center pt-1">
+              Use your assigned roll number and password provided by the
+              invigilator.
             </p>
-          </Card>
-        ) : (
-          <div className="space-y-3">
-            {exams.map((e) => (
-              <Card
-                key={e.id}
-                className="p-4 flex items-start justify-between gap-4 hover-elevate"
-              >
-                <div className="min-w-0">
-                  <div className="font-semibold mb-1">{e.title}</div>
-                  {e.description && (
-                    <div className="text-sm text-muted-foreground mb-2">
-                      {e.description}
-                    </div>
-                  )}
-                  <div className="flex flex-wrap gap-3 text-xs text-muted-foreground">
-                    <span>Duration: {e.duration_minutes} min</span>
-                    <span>Max violations: {e.max_violations}</span>
-                  </div>
-                </div>
-                <Button
-                  onClick={() => navigate(`/instructions/${e.id}`)}
-                  className="bg-primary hover:bg-primary/90 shrink-0"
-                >
-                  Start Test
-                </Button>
-              </Card>
-            ))}
           </div>
-        )}
+        </form>
       </main>
 
-      <footer className="bg-white border-t border-border py-2 text-center text-xs text-muted-foreground">
-        Version 1.0 &middot; Online Assessment Platform
+      <footer className="bg-slate-800 text-white/70 text-center text-[11px] py-2">
+        Version 17.05.21 &middot; Sphoorthy Engineering College Online
+        Assessment Portal
       </footer>
     </div>
   );

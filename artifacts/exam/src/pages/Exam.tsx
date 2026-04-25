@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabase";
 import type { ExamQuestion, ExamSession, QStatus } from "@/lib/types";
 import Timer from "@/components/Timer";
 import QuestionPalette from "@/components/QuestionPalette";
+import SphnWatermark from "@/components/SphnWatermark";
 import { Button } from "@/components/ui/button";
 import {
   AlertDialog,
@@ -372,27 +373,38 @@ export default function Exam() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#e8eef5]">
-      {/* Top bar */}
-      <header className="bg-white border-b border-border px-4 py-2 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-3 min-w-0">
-          <div className="w-9 h-9 rounded bg-primary flex items-center justify-center text-white font-bold text-sm shrink-0">
-            OA
-          </div>
-          <div className="min-w-0">
-            <div className="font-semibold text-sm truncate">{session.examTitle}</div>
-            <div className="text-[11px] text-muted-foreground truncate">
-              {session.candidate.student_name} · Roll {session.candidate.roll_number}
+      {/* College header */}
+      <header className="bg-[#1e3a8a] text-white border-b-4 border-[#0ea5e9]">
+        <div className="px-4 py-2 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-md bg-white text-[#1e3a8a] flex items-center justify-center font-extrabold text-sm shrink-0 shadow">
+              SPHN
+            </div>
+            <div className="min-w-0">
+              <div className="font-bold text-sm sm:text-base leading-tight truncate">
+                Sphoorthy Engineering College
+              </div>
+              <div className="text-[11px] text-white/80 truncate">
+                {session.examTitle} · {session.candidate.student_name} · Roll{" "}
+                {session.candidate.roll_number}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="text-[11px] text-muted-foreground">
-            Violations:{" "}
-            <span className={violations > 0 ? "font-semibold text-red-600" : "font-semibold"}>
-              {violations}/{session.maxViolations}
-            </span>
+          <div className="flex items-center gap-3">
+            <div className="text-[11px] text-white/80">
+              Violations:{" "}
+              <span
+                className={
+                  violations > 0
+                    ? "font-semibold text-yellow-300"
+                    : "font-semibold text-white"
+                }
+              >
+                {violations}/{session.maxViolations}
+              </span>
+            </div>
+            <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />
           </div>
-          <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />
         </div>
       </header>
 
@@ -445,34 +457,53 @@ export default function Exam() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-6 py-5">
-            <div className="text-base leading-relaxed mb-6 whitespace-pre-wrap">
-              {currentQuestion.question}
-            </div>
-            <div className="space-y-3 max-w-2xl">
-              {(currentQuestion.options ?? []).map((opt, idx) => {
-                const checked = answers[currentQuestion.id] === opt;
-                return (
-                  <label
-                    key={idx}
-                    className={`flex items-start gap-3 px-4 py-3 border rounded cursor-pointer hover-elevate ${
-                      checked ? "border-primary bg-accent" : "border-border bg-white"
-                    }`}
-                  >
-                    <input
-                      type="radio"
-                      name={`q-${currentQuestion.id}`}
-                      checked={checked}
-                      onChange={() => setSelected(opt)}
-                      className="mt-1"
-                    />
-                    <span className="text-sm">
-                      <span className="font-semibold mr-2">{letterFor(idx)}.</span>
-                      {opt}
-                    </span>
-                  </label>
-                );
-              })}
+          <div className="relative flex-1 overflow-y-auto px-6 py-5">
+            <SphnWatermark />
+            <div className="relative z-10">
+              <div className="text-base leading-relaxed mb-2 whitespace-pre-wrap">
+                {currentQuestion.question}
+              </div>
+              {currentQuestion.question_te && (
+                <div className="text-base leading-relaxed mb-6 whitespace-pre-wrap text-slate-700">
+                  {currentQuestion.question_te}
+                </div>
+              )}
+              {!currentQuestion.question_te && <div className="mb-6" />}
+              <div className="space-y-3 max-w-2xl">
+                {(currentQuestion.options ?? []).map((opt, idx) => {
+                  const checked = answers[currentQuestion.id] === opt;
+                  const optTe = currentQuestion.options_te?.[idx];
+                  return (
+                    <label
+                      key={idx}
+                      className={`flex items-start gap-3 px-4 py-3 border rounded cursor-pointer hover-elevate bg-white/85 backdrop-blur-[1px] ${
+                        checked
+                          ? "border-primary bg-accent/85"
+                          : "border-border"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name={`q-${currentQuestion.id}`}
+                        checked={checked}
+                        onChange={() => setSelected(opt)}
+                        className="mt-1"
+                      />
+                      <span className="text-sm">
+                        <span className="font-semibold mr-2">
+                          {letterFor(idx)}.
+                        </span>
+                        {opt}
+                        {optTe && (
+                          <span className="block text-slate-700 mt-0.5">
+                            {optTe}
+                          </span>
+                        )}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
             </div>
           </div>
 

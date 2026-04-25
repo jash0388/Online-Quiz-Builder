@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Login from "@/pages/Login";
+import ExamList from "@/pages/ExamList";
 import Instructions from "@/pages/Instructions";
 import Exam from "@/pages/Exam";
 import Result from "@/pages/Result";
@@ -19,6 +20,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Login} />
+      <Route path="/exams" component={ExamList} />
       <Route path="/instructions/:examId" component={Instructions} />
       <Route path="/exam" component={Exam} />
       <Route path="/result/:submissionId" component={Result} />

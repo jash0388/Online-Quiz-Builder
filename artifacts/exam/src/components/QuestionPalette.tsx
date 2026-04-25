@@ -2,15 +2,12 @@ import type { ExamQuestion, QStatus } from "@/lib/types";
 
 interface Props {
   questions: ExamQuestion[];
-  /**
-   * The complete (unfiltered) question list. When provided, palette buttons
-   * display the question's global position (1..N) within the full exam,
-   * not its position within the current subject section.
-   */
   allQuestions?: ExamQuestion[];
   currentId: string;
   statusMap: Record<string, QStatus>;
   onJump: (questionId: string) => void;
+  isFinished?: boolean;
+  answers?: Record<string, string>;
 }
 
 const statusClass: Record<QStatus, string> = {
@@ -27,6 +24,8 @@ export default function QuestionPalette({
   currentId,
   statusMap,
   onJump,
+  isFinished,
+  answers,
 }: Props) {
   const indexLookup = (() => {
     if (!allQuestions) return null;
@@ -42,12 +41,23 @@ export default function QuestionPalette({
         const displayIndex = indexLookup
           ? (indexLookup.get(q.id) ?? idx) + 1
           : idx + 1;
+
+        let finalClass = statusClass[status];
+        if (isFinished && answers) {
+          const userAns = answers[q.id];
+          if (userAns === q.correct_answer) {
+            finalClass = "qp-correct";
+          } else {
+            finalClass = "qp-incorrect";
+          }
+        }
+
         return (
           <button
             key={q.id}
             type="button"
             onClick={() => onJump(q.id)}
-            className={`qp-btn ${statusClass[status]} ${
+            className={`qp-btn ${finalClass} ${
               isCurrent ? "is-current" : ""
             }`}
             title={`Question ${displayIndex}`}

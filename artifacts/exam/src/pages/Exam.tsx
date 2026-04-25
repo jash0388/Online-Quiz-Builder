@@ -77,6 +77,7 @@ export default function Exam() {
   const [startedAt, setStartedAt] = useState<number>(Date.now());
   const [submitting, setSubmitting] = useState(false);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
   const submitGuard = useRef(false);
   const sessionRef = useRef<ExamSession | null>(null);
 
@@ -368,8 +369,10 @@ export default function Exam() {
       if (error) throw error;
 
       localStorage.removeItem(`exam:state:${s.examId}:${s.userId}`);
-      sessionStorage.removeItem("exam:session");
-      navigate(`/result/${data.id}`);
+      // sessionStorage.removeItem("exam:session"); // Keep session so we can still show candidate info
+      setIsFinished(true);
+      setSubmitting(false);
+      
       // also surface result statistics for the result page in case fetch is slow
       sessionStorage.setItem(
         "exam:lastResult",
@@ -441,7 +444,7 @@ export default function Exam() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />
+            {!isFinished && <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />}
           </div>
         </div>
       </header>
@@ -481,7 +484,12 @@ export default function Exam() {
         {/* Question pane */}
         <section className="flex-1 flex flex-col bg-white border-r border-border min-w-0">
           <div className="px-6 py-3 border-b border-border bg-[#f8fafc] flex items-center justify-between">
-            <div className="text-sm font-semibold">
+            <div className="text-sm font-semibold flex items-center gap-2">
+              {isFinished && (
+                <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-amber-200">
+                  Review Mode
+                </span>
+              )}
               Question No. {currentIndex + 1}{" "}
               <span className="text-muted-foreground font-normal">of {questions.length}</span>
               {activeSubject && (
@@ -509,22 +517,37 @@ export default function Exam() {
               {!currentQuestion.question_te && <div className="mb-6" />}
               <div className="space-y-3 max-w-2xl">
                 {(currentQuestion.options ?? []).map((opt, idx) => {
-                  const checked = answers[currentQuestion.id] === opt;
+                  const userSelected = answers[currentQuestion.id] === opt;
+                  const isCorrect = currentQuestion.correct_answer === opt;
                   const optTe = currentQuestion.options_te?.[idx];
+
+                  let borderColor = "border-border";
+                  let bgColor = "bg-white/85";
+
+                  if (isFinished) {
+                    if (isCorrect) {
+                      borderColor = "border-green-500 shadow-[0_0_0_1px_rgba(34,197,94,0.5)]";
+                      bgColor = "bg-green-50/90";
+                    } else if (userSelected) {
+                      borderColor = "border-red-500 shadow-[0_0_0_1px_rgba(239,68,68,0.5)]";
+                      bgColor = "bg-red-50/90";
+                    }
+                  } else if (userSelected) {
+                    borderColor = "border-primary";
+                    bgColor = "bg-accent/85";
+                  }
+
                   return (
                     <label
                       key={idx}
-                      className={`flex items-start gap-3 px-4 py-3 border rounded cursor-pointer hover-elevate bg-white/85 backdrop-blur-[1px] ${
-                        checked
-                          ? "border-primary bg-accent/85"
-                          : "border-border"
-                      }`}
+                      className={`flex items-start gap-3 px-4 py-3 border rounded cursor-pointer hover-elevate backdrop-blur-[1px] transition-all ${borderColor} ${bgColor}`}
                     >
                       <input
                         type="radio"
                         name={`q-${currentQuestion.id}`}
-                        checked={checked}
-                        onChange={() => setSelected(opt)}
+                        checked={userSelected}
+                        onChange={() => !isFinished && setSelected(opt)}
+                        disabled={isFinished}
                         className="mt-1"
                       />
                       <span className="text-sm">
@@ -532,6 +555,16 @@ export default function Exam() {
                           {letterFor(idx)}.
                         </span>
                         {opt}
+                        {isFinished && isCorrect && (
+                          <span className="ml-2 text-xs font-bold text-green-700 uppercase tracking-wider">
+                            ✓ Correct Answer
+                          </span>
+                        )}
+                        {isFinished && userSelected && !isCorrect && (
+                          <span className="ml-2 text-xs font-bold text-red-700 uppercase tracking-wider">
+                            ✗ Your Choice
+                          </span>
+                        )}
                         {optTe && (
                           <span className="block text-slate-700 mt-0.5">
                             {optTe}
@@ -548,26 +581,56 @@ export default function Exam() {
           {/* Action bar */}
           <div className="border-t border-border px-4 py-3 bg-[#f8fafc] flex flex-wrap items-center justify-between gap-2">
             <div className="flex flex-wrap gap-2">
-              <Button
-                type="button"
-                onClick={handleMarkForReview}
-                variant="outline"
-                className="border-purple-400 text-purple-700 hover:bg-purple-50"
-              >
-                Mark for Review & Next
-              </Button>
-              <Button type="button" onClick={handleClearResponse} variant="outline">
-                Clear Response
-              </Button>
+              {!isFinished ? (
+                <>
+                  <Button
+                    type="button"
+                    onClick={handleMarkForReview}
+                    variant="outline"
+                    className="border-purple-400 text-purple-700 hover:bg-purple-50"
+                  >
+                    Mark for Review & Next
+                  </Button>
+                  <Button type="button" onClick={handleClearResponse} variant="outline">
+                    Clear Response
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    const idx = currentIndex;
+                    if (idx > 0) jumpTo(questions[idx - 1]!.id);
+                  }}
+                  variant="outline"
+                  disabled={currentIndex === 0}
+                >
+                  Previous Question
+                </Button>
+              )}
             </div>
             <div className="flex gap-2">
-              <Button
-                type="button"
-                onClick={handleSaveAndNext}
-                className="bg-primary hover:bg-primary/90"
-              >
-                Save & Next
-              </Button>
+              {!isFinished ? (
+                <Button
+                  type="button"
+                  onClick={handleSaveAndNext}
+                  className="bg-primary hover:bg-primary/90"
+                >
+                  Save & Next
+                </Button>
+              ) : (
+                <Button
+                  type="button"
+                  onClick={() => {
+                    const idx = currentIndex;
+                    if (idx < questions.length - 1) jumpTo(questions[idx + 1]!.id);
+                  }}
+                  className="bg-primary hover:bg-primary/90"
+                  disabled={currentIndex === questions.length - 1}
+                >
+                  Next Question
+                </Button>
+              )}
             </div>
           </div>
         </section>
@@ -577,32 +640,52 @@ export default function Exam() {
           <div className="px-4 py-2 bg-white border-b border-border">
             <div className="text-xs font-semibold mb-2">{session.candidate.student_name}</div>
             <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">
-              <div className="flex items-center gap-2">
-                <span className="legend-chip qp-answered" />
-                <span>Answered ({counts.answered})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="legend-chip qp-not-answered" />
-                <span>Not Answered ({counts.notAnswered})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="legend-chip qp-not-visited" />
-                <span>Not Visited ({counts.notVisited})</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="legend-chip qp-marked" />
-                <span>Marked ({counts.marked})</span>
-              </div>
-              <div className="flex items-center gap-2 col-span-2">
-                <span className="legend-chip qp-answered-marked" />
-                <span>
-                  Answered & Marked for Review ({counts.answeredMarked})
-                  <br />
-                  <em className="text-[10px] text-muted-foreground">
-                    (will be considered for evaluation)
-                  </em>
-                </span>
-              </div>
+              {isFinished ? (
+                <>
+                  <div className="flex items-center gap-2">
+                    <span className="legend-chip qp-correct" />
+                    <span>Correct</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="legend-chip qp-incorrect" />
+                    <span>Incorrect</span>
+                  </div>
+                  <div className="col-span-2 pt-1 border-t border-slate-100 mt-1">
+                    <div className="font-semibold text-slate-700">
+                      Score: {JSON.parse(sessionStorage.getItem("exam:lastResult") || "{}").score} / {JSON.parse(sessionStorage.getItem("exam:lastResult") || "{}").total}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center gap-2">
+                    <span className="legend-chip qp-answered" />
+                    <span>Answered ({counts.answered})</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="legend-chip qp-not-answered" />
+                    <span>Not Answered ({counts.notAnswered})</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="legend-chip qp-not-visited" />
+                    <span>Not Visited ({counts.notVisited})</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="legend-chip qp-marked" />
+                    <span>Marked ({counts.marked})</span>
+                  </div>
+                  <div className="flex items-center gap-2 col-span-2">
+                    <span className="legend-chip qp-answered-marked" />
+                    <span>
+                      Answered & Marked for Review ({counts.answeredMarked})
+                      <br />
+                      <em className="text-[10px] text-muted-foreground">
+                        (will be considered for evaluation)
+                      </em>
+                    </span>
+                  </div>
+                </>
+              )}
             </div>
           </div>
 
@@ -617,18 +700,33 @@ export default function Exam() {
               currentId={currentQuestion.id}
               statusMap={statusMap}
               onJump={jumpTo}
+              isFinished={isFinished}
+              answers={answers}
             />
           </div>
 
           <div className="p-3 border-t border-border bg-white">
-            <Button
-              type="button"
-              onClick={() => setShowSubmitDialog(true)}
-              disabled={submitting}
-              className="w-full bg-green-600 hover:bg-green-700 text-white"
-            >
-              {submitting ? "Submitting..." : "Submit"}
-            </Button>
+            {!isFinished ? (
+              <Button
+                type="button"
+                onClick={() => setShowSubmitDialog(true)}
+                disabled={submitting}
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
+              >
+                {submitting ? "Submitting..." : "Submit"}
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                onClick={() => {
+                  sessionStorage.clear();
+                  navigate("/");
+                }}
+                className="w-full bg-red-600 hover:bg-red-700 text-white"
+              >
+                Logout & Exit
+              </Button>
+            )}
           </div>
         </aside>
       </main>

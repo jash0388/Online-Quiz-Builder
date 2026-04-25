@@ -350,6 +350,14 @@
   border-radius: 50%;
   border: 2px solid #fff;
 }
+.qp-correct {
+  background: #16a34a;
+  clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
+}
+.qp-incorrect {
+  background: #ef4444;
+  clip-path: polygon(50% 0%, 100% 30%, 100% 100%, 0% 100%, 0% 30%);
+}
 
 /* Legend chips (smaller version of palette buttons) */
 .legend-chip {

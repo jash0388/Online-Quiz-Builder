@@ -22,7 +22,7 @@ import {
 import type { Exam, ExamQuestion, ExamSubmissionRow } from "@/lib/types";
 import eapcetQuestions from "@/data/eapcet-2025-shift2.json";
 
-const ADMIN_CODE = "729184";
+const ADMIN_CODES = ["729184", "481650", "203947"];
 const ADMIN_KEY = "exam_admin_unlocked_v1";
 
 export default function Admin() {
@@ -33,7 +33,7 @@ export default function Admin() {
   const [codeError, setCodeError] = useState("");
 
   function tryUnlock(value: string) {
-    if (value === ADMIN_CODE) {
+    if (ADMIN_CODES.includes(value)) {
       sessionStorage.setItem(ADMIN_KEY, "1");
       setUnlocked(true);
       setCodeError("");

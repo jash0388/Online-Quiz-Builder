@@ -635,12 +635,17 @@ export default function Exam() {
                           {letterFor(idx)}.
                         </span>
                         {opt}
+                        {optTe && (
+                          <div className="mt-1 text-slate-700 whitespace-pre-wrap">
+                            {optTe}
+                          </div>
+                        )}
                         {/* Option image (formula/diagram) */}
                         {currentQuestion.option_images?.[String(idx)] && (
                           <img
                             src={currentQuestion.option_images[String(idx)]}
-                            alt={`Option ${letterFor(idx)}`}
-                            className="block mt-1 max-h-20 max-w-xs object-contain rounded border border-slate-200 bg-white p-0.5"
+                            alt={`Option ${letterFor(idx)} diagram`}
+                            className="max-w-full max-h-32 object-contain mt-2 rounded border border-slate-200 bg-white p-1"
                           />
                         )}
                         {isFinished && isCorrect && (

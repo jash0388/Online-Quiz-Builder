@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/input-otp";
 import type { Exam, ExamQuestion, ExamSubmissionRow } from "@/lib/types";
 import eapcetQuestions from "@/data/eapcet-2025-shift2.json";
-import eapcetShift1Questions from "@/data/eapcet-2025-shift1.json";
+import shift1Data from "@/data/eapcet-shift1.json";
 
 const ADMIN_CODES = ["729184", "481650", "203947"];
 const ADMIN_KEY = "exam_admin_unlocked_v1";
@@ -402,26 +402,25 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
           return;
         }
       }
-      const rows = (eapcetShift1Questions as Array<{
-        id: number;
-        subject: string;
-        question: string;
-        options: string[];
-        answer: number;
-        question_image?: string;
-        option_images?: Record<string, string>;
-      }>).map((q, i) => ({
-        exam_id: examId,
-        question: q.question,
-        question_type: "mcq",
-        options: q.options,
-        correct_answer: q.options[q.answer] ?? q.options[0],
-        marks: 1,
-        sort_order: i + 1,
-        subject: q.subject,
-        question_image: q.question_image ?? null,
-        option_images: q.option_images ?? null,
-      }));
+      const rows = shift1Data.questions.map((q, i) => {
+        const optionTexts = q.options.map(o => o.text);
+        const optionTextsTe = q.options.map(o => o.text_te);
+        const correctOpt = q.options.find(o => o.key === q.answer);
+        return {
+          exam_id: examId,
+          question: q.question,
+          question_te: q.question_te,
+          question_type: "mcq",
+          options: optionTexts,
+          options_te: optionTextsTe,
+          correct_answer: correctOpt ? correctOpt.text : optionTexts[0],
+          marks: 1,
+          sort_order: i + 1,
+          subject: q.subject,
+          question_image: q.question_image ?? null,
+          option_images: q.option_images ?? null,
+        };
+      });
       for (let i = 0; i < rows.length; i += 50) {
         const chunk = rows.slice(i, i + 50);
         const { error } = await supabase.from("exam_questions").insert(chunk);

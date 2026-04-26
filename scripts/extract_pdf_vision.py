@@ -76,6 +76,9 @@ Rules:
 
 def extract_questions_from_page(page_img: Image.Image, page_num: int) -> list[dict]:
     """Send one page image to Gemini and get structured questions."""
+    import time
+    from google.api_core import exceptions
+    
     # Scale down if too large (Gemini has limits)
     w, h = page_img.size
     if w > 1600:
@@ -85,24 +88,41 @@ def extract_questions_from_page(page_img: Image.Image, page_num: int) -> list[di
     # Convert to Gemini-compatible format
     img_data = pil_to_base64(page_img, "JPEG")
 
-    try:
-        response = model.generate_content([
-            {"mime_type": "image/jpeg", "data": img_data},
-            PROMPT,
-        ])
-        raw = response.text.strip()
-        # Strip markdown fences if present
-        raw = re.sub(r"^```(?:json)?\s*", "", raw)
-        raw = re.sub(r"\s*```$", "", raw)
-        questions = json.loads(raw)
-        return questions if isinstance(questions, list) else []
-    except json.JSONDecodeError as e:
-        print(f"  [page {page_num}] JSON parse error: {e}")
-        print(f"  Raw response snippet: {response.text[:300]}")
-        return []
-    except Exception as e:
-        print(f"  [page {page_num}] Gemini error: {e}")
-        return []
+    max_retries = 5
+    for attempt in range(max_retries):
+        try:
+            response = model.generate_content([
+                {"mime_type": "image/jpeg", "data": img_data},
+                PROMPT,
+            ])
+            raw = response.text.strip()
+            # Strip markdown fences if present
+            raw = re.sub(r"^```(?:json)?\s*", "", raw)
+            raw = re.sub(r"\s*```$", "", raw)
+            questions = json.loads(raw)
+            return questions if isinstance(questions, list) else []
+        except json.JSONDecodeError as e:
+            print(f"  [page {page_num}] JSON parse error: {e}")
+            try:
+                print(f"  Raw response snippet: {response.text[:300]}")
+            except Exception:
+                pass
+            return []
+        except exceptions.ResourceExhausted as e:
+            delay = 60 * (attempt + 1)
+            print(f"  [page {page_num}] Quota exceeded (429). Retrying in {delay}s...")
+            time.sleep(delay)
+        except Exception as e:
+            if "429" in str(e):
+                delay = 60 * (attempt + 1)
+                print(f"  [page {page_num}] Quota exceeded (429). Retrying in {delay}s...")
+                time.sleep(delay)
+            else:
+                print(f"  [page {page_num}] Gemini error: {e}")
+                return []
+    
+    print(f"  [page {page_num}] Failed after {max_retries} retries due to quota.")
+    return []
 
 def crop_question_region(page_img: Image.Image, q_index_on_page: int, total_on_page: int) -> Image.Image:
     """Rough crop of the question's region for embedding as image."""

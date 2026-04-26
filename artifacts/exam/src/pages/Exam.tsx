@@ -526,7 +526,7 @@ export default function Exam() {
           <div className="px-6 py-3 border-b border-border bg-[#f8fafc] flex items-center justify-between">
             <div className="text-sm font-semibold flex items-center gap-2">
               {isFinished && (
-                <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-amber-200">
+                <span className="bg-[#fef3c7] text-[#b45309] px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#fde68a]">
                   Review Mode
                 </span>
               )}
@@ -539,7 +539,7 @@ export default function Exam() {
               )}
             </div>
             <div className="text-xs text-muted-foreground">
-              Marks: <span className="text-green-700 font-semibold">+{currentQuestion.marks}</span>
+              Marks: <span className="text-[#15803d] font-semibold">+{currentQuestion.marks}</span>
             </div>
           </div>
 
@@ -566,11 +566,11 @@ export default function Exam() {
 
                   if (isFinished) {
                     if (isCorrect) {
-                      borderColor = "border-green-500 shadow-[0_0_0_1px_rgba(34,197,94,0.5)]";
-                      bgColor = "bg-green-50/90";
+                      borderColor = "border-[#22c55e] shadow-[0_0_0_1px_rgba(34,197,94,0.5)]";
+                      bgColor = "bg-[#f0fdf4]";
                     } else if (userSelected) {
-                      borderColor = "border-red-500 shadow-[0_0_0_1px_rgba(239,68,68,0.5)]";
-                      bgColor = "bg-red-50/90";
+                      borderColor = "border-[#ef4444] shadow-[0_0_0_1px_rgba(239,68,68,0.5)]";
+                      bgColor = "bg-[#fef2f2]";
                     }
                   } else if (userSelected) {
                     borderColor = "border-primary";
@@ -596,12 +596,12 @@ export default function Exam() {
                         </span>
                         {opt}
                         {isFinished && isCorrect && (
-                          <span className="ml-2 text-xs font-bold text-green-700 uppercase tracking-wider">
+                          <span className="ml-2 text-xs font-bold text-[#15803d] uppercase tracking-wider">
                             ✓ Correct Answer
                           </span>
                         )}
                         {isFinished && userSelected && !isCorrect && (
-                          <span className="ml-2 text-xs font-bold text-red-700 uppercase tracking-wider">
+                          <span className="ml-2 text-xs font-bold text-[#b91c1c] uppercase tracking-wider">
                             ✗ Your Choice
                           </span>
                         )}
@@ -627,7 +627,7 @@ export default function Exam() {
                     type="button"
                     onClick={handleMarkForReview}
                     variant="outline"
-                    className="border-purple-400 text-purple-700 hover:bg-purple-50"
+                    className="border-[#c084fc] text-[#7e22ce] hover:bg-[#faf5ff]"
                   >
                     Mark for Review & Next
                   </Button>
@@ -751,7 +751,7 @@ export default function Exam() {
                 type="button"
                 onClick={() => setShowSubmitDialog(true)}
                 disabled={submitting}
-                className="w-full bg-green-600 hover:bg-green-700 text-white"
+                className="w-full bg-[#16a34a] hover:bg-[#15803d] text-white"
               >
                 {submitting ? "Submitting..." : "Submit"}
               </Button>
@@ -762,7 +762,7 @@ export default function Exam() {
                   sessionStorage.clear();
                   navigate("/");
                 }}
-                className="w-full bg-red-600 hover:bg-red-700 text-white"
+                className="w-full bg-[#dc2626] hover:bg-[#b91c1c] text-white"
               >
                 Logout & Exit
               </Button>
@@ -799,7 +799,7 @@ export default function Exam() {
                 handleSubmit();
               }}
               disabled={submitting}
-              className="bg-green-600 hover:bg-green-700 text-white"
+              className="bg-[#16a34a] hover:bg-[#15803d] text-white"
             >
               {submitting ? "Submitting..." : "Yes, Submit"}
             </AlertDialogAction>

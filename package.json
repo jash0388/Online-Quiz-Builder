@@ -14,6 +14,5 @@
     "lightningcss-darwin-arm64": "^1.32.0",
     "prettier": "^3.8.1",
     "typescript": "~5.9.2"
-  },
-  "packageManager": "pnpm@9.12.2"
+  }
 }

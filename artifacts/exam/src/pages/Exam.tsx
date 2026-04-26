@@ -550,9 +550,9 @@ export default function Exam() {
       )}
 
       {/* Main content */}
-      <main className="flex-1 flex overflow-hidden min-h-0">
+      <main className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
         {/* Question pane */}
-        <section className="flex-1 flex flex-col bg-white border-r border-border min-w-0">
+        <section className="flex-1 flex flex-col bg-white lg:border-r border-border min-w-0">
           <div className="px-6 py-3 border-b border-border bg-[#f8fafc] flex items-center justify-between">
             <div className="text-sm font-semibold flex items-center gap-2">
               {isFinished && (
@@ -729,7 +729,7 @@ export default function Exam() {
         </section>
 
         {/* Right palette */}
-        <aside className="w-[320px] bg-[#f1f5f9] border-l border-border flex flex-col min-h-0">
+        <aside className="w-full lg:w-[320px] bg-[#f1f5f9] border-t lg:border-t-0 lg:border-l border-border flex flex-col min-h-0 h-[280px] lg:h-auto flex-shrink-0">
           <div className="px-4 py-2 bg-white border-b border-border">
             <div className="text-xs font-semibold mb-2">{session.candidate.student_name}</div>
             <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-[11px]">

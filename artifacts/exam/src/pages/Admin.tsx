@@ -417,8 +417,8 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
           marks: 1,
           sort_order: i + 1,
           subject: q.subject,
-          question_image: q.question_image ?? null,
-          option_images: q.option_images ?? null,
+          question_image: (q as any).question_image ?? null,
+          option_images: (q as any).option_images ?? null,
         };
       });
       for (let i = 0; i < rows.length; i += 50) {

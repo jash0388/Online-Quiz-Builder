@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/input-otp";
 import type { Exam, ExamQuestion, ExamSubmissionRow } from "@/lib/types";
 import eapcetQuestions from "@/data/eapcet-2025-shift2.json";
+import eapcetShift1Questions from "@/data/eapcet-2025-shift1.json";
 
 const ADMIN_CODES = ["729184", "481650", "203947"];
 const ADMIN_KEY = "exam_admin_unlocked_v1";
@@ -354,6 +355,90 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
     }
   }
 
+  async function importShift1() {
+    if (!confirm(
+      "This will create 'TG EAPCET MOCK TEST - 2' and seed the 02 May 2025 Shift 1 paper (160 questions). Continue?",
+    )) return;
+    setBusy(true);
+    try {
+      const examTitle = "TG EAPCET MOCK TEST - 2";
+      const { data: existing } = await supabase
+        .from("exams")
+        .select("id, title")
+        .eq("title", examTitle)
+        .maybeSingle();
+      let examId: string;
+      if (existing?.id) {
+        examId = existing.id as string;
+      } else {
+        const { data: created, error: createErr } = await supabase
+          .from("exams")
+          .insert({
+            title: examTitle,
+            description:
+              "Telangana EAPCET 2025 Engineering stream — official Shift 1, 02 May 2025. 160 MCQs across Mathematics (80), Physics (40) and Chemistry (40). Each correct answer: +1, no negative marking.",
+            duration_minutes: 180,
+            is_active: true,
+          })
+          .select("id")
+          .single();
+        if (createErr || !created) {
+          throw new Error(createErr?.message ?? "Failed to create exam");
+        }
+        examId = created.id as string;
+      }
+      const { count: existingCount } = await supabase
+        .from("exam_questions")
+        .select("id", { count: "exact", head: true })
+        .eq("exam_id", examId);
+      if ((existingCount ?? 0) > 0) {
+        if (!confirm(`This exam already has ${existingCount} questions. Skip seeding?`)) {
+          // fall through
+        } else {
+          setSelectedExam(examId);
+          await loadExams();
+          await loadQuestions(examId);
+          alert("Exam already seeded. Selected it for you.");
+          return;
+        }
+      }
+      const rows = (eapcetShift1Questions as Array<{
+        id: number;
+        subject: string;
+        question: string;
+        options: string[];
+        answer: number;
+        question_image?: string;
+        option_images?: Record<string, string>;
+      }>).map((q, i) => ({
+        exam_id: examId,
+        question: q.question,
+        question_type: "mcq",
+        options: q.options,
+        correct_answer: q.options[q.answer] ?? q.options[0],
+        marks: 1,
+        sort_order: i + 1,
+        subject: q.subject,
+        question_image: q.question_image ?? null,
+        option_images: q.option_images ?? null,
+      }));
+      for (let i = 0; i < rows.length; i += 50) {
+        const chunk = rows.slice(i, i + 50);
+        const { error } = await supabase.from("exam_questions").insert(chunk);
+        if (error) throw new Error(error.message);
+      }
+      setSelectedExam(examId);
+      await loadExams();
+      await loadQuestions(examId);
+      alert(`Imported ${rows.length} questions into "${examTitle}".`);
+    } catch (e: unknown) {
+      const msg = e instanceof Error ? e.message : String(e);
+      alert("Import failed:\n\n" + msg);
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function deleteQuestion(id: string) {
     if (!confirm("Delete this question?")) return;
     await supabase.from("exam_questions").delete().eq("id", id);
@@ -626,6 +711,19 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
             >
               Import TG EAPCET 03-May-2025 Shift 2
             </Button>
+            <div className="border-t mt-3 pt-3">
+              <p className="text-[11px] text-muted-foreground mb-2 leading-relaxed">
+                <span className="font-semibold text-slate-700">NEW:</span> TG EAPCET Mock Test 2 — 02 May 2025 Shift 1 paper.
+              </p>
+              <Button
+                disabled={busy}
+                onClick={importShift1}
+                variant="outline"
+                className="w-full border-primary/40 text-primary hover:bg-primary/5"
+              >
+                Import TG EAPCET MOCK TEST - 2
+              </Button>
+            </div>
             <p className="text-[10px] text-muted-foreground mt-2 leading-relaxed">
               First-time setup: in Supabase SQL Editor run{" "}
               <code className="bg-slate-100 px-1 rounded">

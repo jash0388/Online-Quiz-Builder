@@ -45,10 +45,10 @@ export default function QuestionPalette({
         let finalClass = statusClass[status];
         if (isFinished && answers) {
           const userAns = answers[q.id];
-          if (userAns === q.correct_answer) {
-            finalClass = "qp-correct";
+          if (userAns && userAns === q.correct_answer) {
+            finalClass = "qp-correct";   // green
           } else {
-            finalClass = "qp-incorrect";
+            finalClass = "qp-incorrect"; // red — wrong OR not attempted
           }
         }
 

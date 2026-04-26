@@ -20,6 +20,10 @@ export interface ExamQuestion {
   marks: number;
   sort_order: number;
   subject: string | null;
+  /** Base64 data-URL for a diagram/graph/formula image attached to the question */
+  question_image?: string | null;
+  /** Per-option images keyed by option index (0-3) as base64 data-URLs */
+  option_images?: Record<string, string> | null;
 }
 
 export type QStatus =

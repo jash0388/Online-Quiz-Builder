@@ -353,6 +353,15 @@ export default function Exam() {
     setStatusMap((m) => ({ ...m, [currentQuestion.id]: "not-answered" }));
   }
 
+  const [resultStats, setResultStats] = useState<{
+    score: number;
+    total: number;
+    attempted: number;
+    correct: number;
+    wrong: number;
+    notAttempted: number;
+  } | null>(null);
+
   const handleSubmit = useCallback(async () => {
     const s = sessionRef.current;
     if (!s || submitGuard.current) return;
@@ -374,6 +383,8 @@ export default function Exam() {
           }
         }
       }
+      const wrong = attempted - correct;
+      const notAttempted = questions.length - attempted;
       const timeUsed = Math.floor((Date.now() - startedAt) / 1000);
       const studentAnswers = {
         __candidate__: s.candidate,
@@ -405,22 +416,11 @@ export default function Exam() {
       if (error) throw error;
 
       localStorage.removeItem(`exam:state:${s.examId}:${s.userId}`);
-      // sessionStorage.removeItem("exam:session"); // Keep session so we can still show candidate info
+      const stats = { score, total, attempted, correct, wrong, notAttempted };
+      setResultStats(stats);
+      sessionStorage.setItem("exam:lastResult", JSON.stringify(stats));
       setIsFinished(true);
       setSubmitting(false);
-      
-      // also surface result statistics for the result page in case fetch is slow
-      sessionStorage.setItem(
-        "exam:lastResult",
-        JSON.stringify({
-          score,
-          total,
-          attempted,
-          correct,
-          wrong: attempted - correct,
-        }),
-      );
-      
       setShowSubmitDialog(false);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -519,6 +519,36 @@ export default function Exam() {
         </div>
       )}
 
+      {/* ── RESULT SUMMARY BANNER (shown after submission) ── */}
+      {isFinished && resultStats && (
+        <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] text-white px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <span className="text-lg font-bold text-[#4ade80]">✓ Submitted</span>
+            <span className="text-xs text-white/60">Review your answers below</span>
+          </div>
+          <div className="flex flex-wrap gap-3 text-sm">
+            <div className="flex items-center gap-1.5">
+              <span className="text-xs text-white/60">Score</span>
+              <span className="font-bold text-white">{resultStats.score}/{resultStats.total}</span>
+              <span className="text-xs text-[#93c5fd]">({resultStats.total > 0 ? ((resultStats.score / resultStats.total) * 100).toFixed(1) : 0}%)</span>
+            </div>
+            <div className="w-px bg-white/20" />
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] inline-block" />
+              <span className="text-[#4ade80] font-semibold">{resultStats.correct} Correct</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] inline-block" />
+              <span className="text-[#f87171] font-semibold">{resultStats.wrong} Wrong</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] inline-block" />
+              <span className="text-[#fca5a5] font-semibold">{resultStats.notAttempted} Not Attempted</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Main content */}
       <main className="flex-1 flex overflow-hidden min-h-0">
         {/* Question pane */}
@@ -549,6 +579,16 @@ export default function Exam() {
               <div className="text-base leading-relaxed mb-2 whitespace-pre-wrap">
                 {currentQuestion.question}
               </div>
+              {/* Question image (diagram / formula / graph) */}
+              {currentQuestion.question_image && (
+                <div className="mb-4 mt-2">
+                  <img
+                    src={currentQuestion.question_image}
+                    alt="Question diagram"
+                    className="max-w-full max-h-72 object-contain rounded border border-slate-200 bg-white p-1"
+                  />
+                </div>
+              )}
               {currentQuestion.question_te && (
                 <div className="text-base leading-relaxed mb-6 whitespace-pre-wrap text-slate-700">
                   {currentQuestion.question_te}
@@ -590,11 +630,19 @@ export default function Exam() {
                         disabled={isFinished}
                         className="mt-1"
                       />
-                      <span className="text-sm">
+                      <span className="text-sm flex-1">
                         <span className="font-semibold mr-2">
                           {letterFor(idx)}.
                         </span>
                         {opt}
+                        {/* Option image (formula/diagram) */}
+                        {currentQuestion.option_images?.[String(idx)] && (
+                          <img
+                            src={currentQuestion.option_images[String(idx)]}
+                            alt={`Option ${letterFor(idx)}`}
+                            className="block mt-1 max-h-20 max-w-xs object-contain rounded border border-slate-200 bg-white p-0.5"
+                          />
+                        )}
                         {isFinished && isCorrect && (
                           <span className="ml-2 text-xs font-bold text-[#15803d] uppercase tracking-wider">
                             ✓ Correct Answer

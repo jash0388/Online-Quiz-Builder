@@ -419,11 +419,14 @@ export default function Exam() {
           wrong: attempted - correct,
         }),
       );
+      
+      setShowSubmitDialog(false);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       alert("Submission failed: " + msg);
       submitGuard.current = false;
       setSubmitting(false);
+      setShowSubmitDialog(false);
     }
   }, [answers, questions, startedAt, navigate]);
 
@@ -789,11 +792,14 @@ export default function Exam() {
               No, Continue Test
             </AlertDialogCancel>
             <AlertDialogAction
-              onClick={handleSubmit}
+              onClick={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
               disabled={submitting}
               className="bg-green-600 hover:bg-green-700"
             >
-              Yes, Submit
+              {submitting ? "Submitting..." : "Yes, Submit"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

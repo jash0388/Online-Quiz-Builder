@@ -7,6 +7,7 @@ import QuestionPalette from "@/components/QuestionPalette";
 import SphnWatermark from "@/components/SphnWatermark";
 import { Button } from "@/components/ui/button";
 import sphnLogo from "@assets/image_1777100399723.png";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -423,10 +424,10 @@ export default function Exam() {
       setShowSubmitDialog(false);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
-      alert("Submission failed: " + msg);
+      setShowSubmitDialog(false);
+      setTimeout(() => alert("Submission failed: " + msg), 50);
       submitGuard.current = false;
       setSubmitting(false);
-      setShowSubmitDialog(false);
     }
   }, [answers, questions, startedAt, navigate]);
 
@@ -459,8 +460,9 @@ export default function Exam() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#e8eef5]">
-      {/* College header */}
+    <ErrorBoundary>
+      <div className="min-h-screen flex flex-col bg-[#e8eef5]">
+        {/* College header */}
       <header className="bg-[#1e3a8a] text-white border-b-4 border-[#0ea5e9]">
         <div className="px-4 py-2 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3 min-w-0">
@@ -797,13 +799,14 @@ export default function Exam() {
                 handleSubmit();
               }}
               disabled={submitting}
-              className="bg-green-600 hover:bg-green-700"
+              className="bg-green-600 hover:bg-green-700 text-white"
             >
               {submitting ? "Submitting..." : "Yes, Submit"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </div>
+      </div>
+    </ErrorBoundary>
   );
 }

@@ -176,6 +176,7 @@ function AdminPanel({
 
   useEffect(() => {
     loadExams();
+    loadStudents();
   }, []);
 
   useEffect(() => {
@@ -871,13 +872,13 @@ function AdminPanel({
             <AdminsManager currentUserEmail={userEmail} />
           )}
 
-          {tab !== "admins" && !selectedExam && (
+          {tab !== "admins" && tab !== "students" && !selectedExam && (
             <Card className="p-8 text-center text-muted-foreground text-sm">
               Select an exam to manage questions and view submissions.
             </Card>
           )}
 
-          {selectedExam && tab !== "admins" && (
+          {selectedExam && tab !== "admins" && tab !== "students" && (
             <>
 
               {tab === "questions" && (
@@ -1131,80 +1132,81 @@ function AdminPanel({
                 </Card>
               )}
 
-              {tab === "students" && (
-                <Card className="p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="font-semibold">Manage Students</h3>
-                    <p className="text-xs text-muted-foreground">
-                      {!isSuperAdmin && currentAdmin.college ? `Showing students for ${currentAdmin.college}` : "Showing all students"}
-                    </p>
-                  </div>
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
-                      <thead>
-                        <tr className="text-left border-b">
-                          <th className="py-2 pr-3">Name</th>
-                          <th className="py-2 pr-3">Roll Number</th>
-                          <th className="py-2 pr-3">Email</th>
-                          <th className="py-2 pr-3">Status</th>
-                          <th className="py-2 pr-3">Actions</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {students.map((s) => (
-                          <tr key={s.uid} className="border-b hover:bg-accent/30">
-                            <td className="py-3 pr-3 font-medium">{s.name}</td>
-                            <td className="py-3 pr-3">{s.roll_number}</td>
-                            <td className="py-3 pr-3 text-xs text-muted-foreground">{s.email}</td>
-                            <td className="py-3 pr-3">
-                              {s.is_approved ? (
-                                <span className="inline-flex items-center bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
-                                  Approved
-                                </span>
-                              ) : (
-                                <span className="inline-flex items-center bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
-                                  Pending
-                                </span>
-                              )}
-                            </td>
-                            <td className="py-3 pr-3">
-                              <div className="flex items-center gap-2">
-                                {!s.is_approved && (
-                                  <Button
-                                    size="sm"
-                                    onClick={() => approveStudent(s.uid)}
-                                    disabled={busy}
-                                    className="bg-green-600 hover:bg-green-700 h-7 text-xs"
-                                  >
-                                    Approve
-                                  </Button>
-                                )}
-                                <Button
-                                  variant="outline"
-                                  size="sm"
-                                  onClick={() => deleteStudent(s.uid)}
-                                  disabled={busy}
-                                  className="text-destructive border-destructive/30 h-7 text-xs"
-                                >
-                                  Delete
-                                </Button>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                        {students.length === 0 && (
-                          <tr>
-                            <td colSpan={5} className="py-8 text-center text-muted-foreground text-xs italic">
-                              No students registered yet for this college.
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </Card>
-              )}
             </>
+          )}
+
+          {tab === "students" && (
+            <Card className="p-4">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold">Manage Students</h3>
+                <p className="text-xs text-muted-foreground">
+                  {!isSuperAdmin && currentAdmin.college ? `Showing students for ${currentAdmin.college}` : "Showing all students"}
+                </p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="text-left border-b">
+                      <th className="py-2 pr-3">Name</th>
+                      <th className="py-2 pr-3">Roll Number</th>
+                      <th className="py-2 pr-3">Email</th>
+                      <th className="py-2 pr-3">Status</th>
+                      <th className="py-2 pr-3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {students.map((s) => (
+                      <tr key={s.uid} className="border-b hover:bg-accent/30">
+                        <td className="py-3 pr-3 font-medium">{s.name}</td>
+                        <td className="py-3 pr-3">{s.roll_number}</td>
+                        <td className="py-3 pr-3 text-xs text-muted-foreground">{s.email}</td>
+                        <td className="py-3 pr-3">
+                          {s.is_approved ? (
+                            <span className="inline-flex items-center bg-green-100 text-green-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
+                              Approved
+                            </span>
+                          ) : (
+                            <span className="inline-flex items-center bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">
+                              Pending
+                            </span>
+                          )}
+                        </td>
+                        <td className="py-3 pr-3">
+                          <div className="flex items-center gap-2">
+                            {!s.is_approved && (
+                              <Button
+                                size="sm"
+                                onClick={() => approveStudent(s.uid)}
+                                disabled={busy}
+                                className="bg-green-600 hover:bg-green-700 h-7 text-xs"
+                              >
+                                Approve
+                              </Button>
+                            )}
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => deleteStudent(s.uid)}
+                              disabled={busy}
+                              className="text-destructive border-destructive/30 h-7 text-xs"
+                            >
+                              Delete
+                            </Button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                    {students.length === 0 && (
+                      <tr>
+                        <td colSpan={5} className="py-8 text-center text-muted-foreground text-xs italic">
+                          No students registered yet for this college.
+                        </td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </Card>
           )}
         </div>
       </div>

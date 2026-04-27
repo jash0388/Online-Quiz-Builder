@@ -81,7 +81,12 @@ export function describeAuthError(e: unknown): string {
     case "auth/unauthorized-domain":
       return "This site isn't yet allowed in Firebase. In Firebase Console → Authentication → Settings → Authorized domains, add this site's domain and try again.";
     case "auth/operation-not-allowed":
-      return "This sign-in method isn't enabled. In Firebase Console → Authentication → Sign-in method, enable Email/Password and Google.";
+      return "This sign-in method isn't enabled yet. In Firebase Console → Authentication → Sign-in method, enable Email/Password and Google for project 'sphntestonline'.";
+    case "auth/configuration-not-found":
+      return "Firebase Authentication isn't set up on the project yet. Open Firebase Console → Authentication → Get Started, then under Sign-in method enable Email/Password and Google for project 'sphntestonline'. After enabling, refresh this page.";
+    case "auth/invalid-api-key":
+    case "auth/api-key-not-valid":
+      return "The Firebase API key is invalid. Verify the apiKey in src/lib/firebase.ts matches the one shown in Firebase Console → Project settings → Web app.";
     case "auth/too-many-requests":
       return "Too many attempts. Please wait a moment and try again.";
     case "auth/network-request-failed":

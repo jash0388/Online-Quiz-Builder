@@ -1,0 +1,16 @@
+Retrieving project…
+Deploying alphabay-x/api-server
+Uploading [--------------------] (0.0B/54B)
+Uploading [====================] (54.0B/54B)
+Inspect: https://vercel.com/alphabay-x/api-server/6Vo7tkskm3vwfkDxCMvg3YLrsFgu [2s]
+Production: https://api-server-2qyxk5fj1-alphabay-x.vercel.app [2s]
+https://api-server-2qyxk5fj1-alphabay-x.vercel.appBuilding...
+Building...
+Building: Running build in Washington, D.C., USA (East) – iad1
+Building: Build machine configuration: 2 cores, 8 GB
+Building: Retrieving list of deployment files...
+Building: Previous build caches not available.
+Building: Downloading 13 deployment files...
+Building: Running "vercel build"
+Building: Vercel CLI 51.6.1
+Error: Command "npm install" exited with 1

@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 export interface AdminInfo {
   email: string;
   is_super: boolean;
+  college: string | null;
 }
 
 export interface AuthState {
@@ -48,7 +49,7 @@ export function useAuth(): AuthState {
       const email = user.email.toLowerCase();
       const { data, error } = await supabase
         .from("admins")
-        .select("email, is_super")
+        .select("email, is_super, college")
         .eq("email", email)
         .maybeSingle();
       if (cancelled) return;
@@ -58,7 +59,11 @@ export function useAuth(): AuthState {
         console.warn("admin lookup failed:", error.message);
         setAdmin(null);
       } else if (data) {
-        setAdmin({ email: data.email as string, is_super: !!data.is_super });
+        setAdmin({
+          email: data.email as string,
+          is_super: !!data.is_super,
+          college: data.college as string | null,
+        });
       } else {
         setAdmin(null);
       }

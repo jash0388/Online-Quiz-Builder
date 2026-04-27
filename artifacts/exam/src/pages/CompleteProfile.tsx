@@ -8,11 +8,21 @@ import SphnHeader from "@/components/SphnHeader";
 import { useAuth } from "@/lib/useAuth";
 import { useProfile, saveProfile } from "@/lib/useProfile";
 import { signOut } from "@/lib/firebase";
+import { supabase } from "@/lib/supabase";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function CompleteProfile() {
   const [, navigate] = useLocation();
-  const { loading: authLoading, user } = useAuth();
+  const { loading: authLoading, user, isAdmin } = useAuth();
   const { loading: profileLoading, profile, refresh } = useProfile();
+  const [colleges, setColleges] = useState<string[]>([]);
+  const [collegesLoading, setCollegesLoading] = useState(true);
 
   const [name, setName] = useState("");
   const [rollNumber, setRollNumber] = useState("");
@@ -31,7 +41,7 @@ export default function CompleteProfile() {
       return;
     }
   }, [authLoading, user, navigate]);
-
+  
   // Pre-fill from existing profile or Google account
   useEffect(() => {
     if (profileLoading) return;
@@ -46,6 +56,22 @@ export default function CompleteProfile() {
       setName(user.displayName);
     }
   }, [profileLoading, profile, user]);
+
+  // Fetch unique colleges from admins table
+  useEffect(() => {
+    async function loadColleges() {
+      const { data } = await supabase
+        .from("admins")
+        .select("college")
+        .not("college", "is", null);
+      if (data) {
+        const unique = Array.from(new Set(data.map((r) => r.college as string))).sort();
+        setColleges(unique);
+      }
+      setCollegesLoading(false);
+    }
+    loadColleges();
+  }, []);
 
   function validatePhone(p: string): boolean {
     return /^\+?\d{7,15}$/.test(p.replace(/[\s-]/g, ""));
@@ -100,7 +126,21 @@ export default function CompleteProfile() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
-      <SphnHeader subtitle={isFirstTime ? "Complete Your Profile" : "Edit Your Profile"} />
+      <SphnHeader
+        subtitle={isFirstTime ? "Complete Your Profile" : "Edit Your Profile"}
+        rightSlot={
+          isAdmin ? (
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-8 text-xs bg-white/10 border-white/20 text-white hover:bg-white/20"
+              onClick={() => navigate("/admin")}
+            >
+              Admin Panel
+            </Button>
+          ) : undefined
+        }
+      />
 
       <main className="flex-1 flex justify-center p-5 sm:p-8">
         <Card className="w-full max-w-2xl p-6 sm:p-8 shadow-sm">
@@ -181,14 +221,23 @@ export default function CompleteProfile() {
                 />
               </Field>
               <Field label="College" htmlFor="college" required>
-                <Input
-                  id="college"
-                  value={college}
-                  onChange={(e) => setCollege(e.target.value)}
-                  placeholder="Your college"
-                  className="h-11"
-                  data-testid="input-college"
-                />
+                <Select value={college} onValueChange={setCollege}>
+                  <SelectTrigger id="college" className="h-11">
+                    <SelectValue placeholder={collegesLoading ? "Loading colleges…" : "Select your college"} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {colleges.map((c) => (
+                      <SelectItem key={c} value={c}>
+                        {c}
+                      </SelectItem>
+                    ))}
+                    {colleges.length === 0 && !collegesLoading && (
+                      <SelectItem value="Sphoorthy Engineering College" disabled>
+                        Sphoorthy Engineering College
+                      </SelectItem>
+                    )}
+                  </SelectContent>
+                </Select>
               </Field>
             </div>
 

@@ -11,7 +11,7 @@ import { signOut } from "@/lib/firebase";
 
 export default function ExamList() {
   const [, navigate] = useLocation();
-  const { loading: authLoading, user } = useAuth();
+  const { loading: authLoading, user, isAdmin } = useAuth();
   const { loading: profileLoading, profile } = useProfile();
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
@@ -53,6 +53,16 @@ export default function ExamList() {
         subtitle="Available Tests"
         rightSlot={
           <div className="flex items-center gap-3">
+            {isAdmin && (
+              <Button
+                size="sm"
+                variant="outline"
+                className="h-8 text-xs bg-white/10 border-white/20 text-white hover:bg-white/20"
+                onClick={() => navigate("/admin")}
+              >
+                Admin Panel
+              </Button>
+            )}
             {username && (
               <span className="text-xs text-white/80 hidden sm:inline">
                 {username}

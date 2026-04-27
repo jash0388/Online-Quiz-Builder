@@ -24,6 +24,7 @@ import ImagePicker from "@/components/ImagePicker";
 interface AdminRow {
   email: string;
   is_super: boolean;
+  college: string | null;
   created_at?: string | null;
   added_by?: string | null;
 }
@@ -100,7 +101,7 @@ function AdminPanel({
   isSuperAdmin,
   userEmail,
 }: {
-  currentAdmin: { email: string; is_super: boolean };
+  currentAdmin: { email: string; is_super: boolean; college: string | null };
   isSuperAdmin: boolean;
   userEmail: string;
 }) {
@@ -149,11 +150,17 @@ function AdminPanel({
     setQuestions((data ?? []) as ExamQuestion[]);
   }
   async function loadSubmissions(examId: string) {
-    const { data } = await supabase
+    let query = supabase
       .from("exam_submissions")
       .select("*")
-      .eq("exam_id", examId)
-      .order("submitted_at", { ascending: false });
+      .eq("exam_id", examId);
+
+    // Filter by college if not a super admin
+    if (!isSuperAdmin && currentAdmin.college) {
+      query = query.eq("college", currentAdmin.college);
+    }
+
+    const { data } = await query.order("submitted_at", { ascending: false });
     setSubs((data ?? []) as ExamSubmissionRow[]);
   }
 
@@ -1059,6 +1066,7 @@ function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
   const [admins, setAdmins] = useState<AdminRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [newEmail, setNewEmail] = useState("");
+  const [newCollege, setNewCollege] = useState("");
   const [newSuper, setNewSuper] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -1068,7 +1076,7 @@ function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
     setError(null);
     const { data, error } = await supabase
       .from("admins")
-      .select("email, is_super, created_at, added_by")
+      .select("email, is_super, college, created_at, added_by")
       .order("created_at", { ascending: true });
     if (error) {
       setError(error.message);
@@ -1094,6 +1102,7 @@ function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
     const { error } = await supabase.from("admins").insert({
       email,
       is_super: newSuper,
+      college: newCollege.trim() || null,
       added_by: currentUserEmail,
     });
     setBusy(false);
@@ -1102,6 +1111,7 @@ function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
       return;
     }
     setNewEmail("");
+    setNewCollege("");
     setNewSuper(false);
     load();
   }
@@ -1155,11 +1165,17 @@ function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
         <div className="flex flex-col sm:flex-row gap-2">
           <Input
             type="email"
-            placeholder="principal@sphoorthyengg.ac.in"
+            placeholder="principal@college.ac.in"
             value={newEmail}
             onChange={(e) => setNewEmail(e.target.value)}
-            className="flex-1"
+            className="flex-1 h-10"
             data-testid="input-new-admin-email"
+          />
+          <Input
+            placeholder="College Name (e.g. AVN Inter College)"
+            value={newCollege}
+            onChange={(e) => setNewCollege(e.target.value)}
+            className="flex-1 h-10"
           />
           <label className="flex items-center gap-2 text-xs px-2">
             <Switch checked={newSuper} onCheckedChange={setNewSuper} />
@@ -1208,6 +1224,7 @@ function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
                     </div>
                     <div className="text-[11px] text-muted-foreground">
                       {a.is_super ? "Super-admin" : "Admin"}
+                      {a.college && ` · ${a.college}`}
                       {a.added_by && ` · added by ${a.added_by}`}
                     </div>
                   </div>

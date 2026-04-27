@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import SphnHeader from "@/components/SphnHeader";
+import { useAuth } from "@/lib/useAuth";
 
 type Step = "details" | "general" | "other";
 
@@ -48,20 +49,16 @@ export default function Instructions() {
   const [college, setCollege] = useState("Sphoorthy Engineering College");
   const [error, setError] = useState<string | null>(null);
 
-  // Auth gate + prefill from login
+  // Auth gate via Firebase + prefill name from Google account
+  const { loading: authLoading, user } = useAuth();
   useEffect(() => {
-    const raw = sessionStorage.getItem("exam:auth");
-    if (!raw) {
+    if (authLoading) return;
+    if (!user) {
       navigate("/");
       return;
     }
-    try {
-      const auth = JSON.parse(raw);
-      if (auth.username) setRollNumber(String(auth.username));
-    } catch {
-      navigate("/");
-    }
-  }, [navigate]);
+    if (user.displayName && !studentName) setStudentName(user.displayName);
+  }, [authLoading, user, navigate, studentName]);
 
   useEffect(() => {
     (async () => {

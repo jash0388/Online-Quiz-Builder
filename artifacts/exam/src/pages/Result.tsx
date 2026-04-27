@@ -5,6 +5,7 @@ import type { ExamSubmissionRow, ExamQuestion } from "@/lib/types";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import sphnLogo from "@assets/image_1777100399723.png";
+import { signOut } from "@/lib/firebase";
 
 export default function Result() {
   const params = useParams<{ submissionId: string }>();
@@ -126,9 +127,9 @@ export default function Result() {
               </Button>
             )}
             <Button
-              onClick={() => {
-                sessionStorage.removeItem("exam:auth");
+              onClick={async () => {
                 sessionStorage.removeItem("exam:session");
+                await signOut();
                 navigate("/");
               }}
               variant="outline"

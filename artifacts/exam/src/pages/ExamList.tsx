@@ -5,28 +5,23 @@ import type { Exam } from "@/lib/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import SphnHeader from "@/components/SphnHeader";
+import { useAuth } from "@/lib/useAuth";
+import { signOut } from "@/lib/firebase";
 
 export default function ExamList() {
   const [, navigate] = useLocation();
+  const { loading: authLoading, user } = useAuth();
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [username, setUsername] = useState<string | null>(null);
+  const username = user?.displayName ?? user?.email ?? null;
 
   useEffect(() => {
-    const raw = sessionStorage.getItem("exam:auth");
-    if (!raw) {
+    if (authLoading) return;
+    if (!user) {
       navigate("/");
       return;
     }
-    try {
-      const auth = JSON.parse(raw);
-      setUsername(auth.username ?? null);
-    } catch {
-      navigate("/");
-      return;
-    }
-
     (async () => {
       const { data, error: err } = await supabase
         .from("exams")
@@ -39,10 +34,10 @@ export default function ExamList() {
       setExams((data ?? []) as Exam[]);
       setLoading(false);
     })();
-  }, [navigate]);
+  }, [authLoading, user, navigate]);
 
-  function handleLogout() {
-    sessionStorage.removeItem("exam:auth");
+  async function handleLogout() {
+    await signOut();
     navigate("/");
   }
 

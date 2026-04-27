@@ -14,110 +14,97 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSlot,
-} from "@/components/ui/input-otp";
 import type { Exam, ExamQuestion, ExamSubmissionRow } from "@/lib/types";
 import eapcetQuestions from "@/data/eapcet-2025-shift2.json";
 import shift1Data from "@/data/eapcet-shift1.json";
+import { useAuth } from "@/lib/useAuth";
+import { signInWithGoogle, signOut } from "@/lib/firebase";
 
-const ADMIN_CODES = ["729184", "481650", "203947"];
-const ADMIN_KEY = "exam_admin_unlocked_v1";
+interface AdminRow {
+  email: string;
+  is_super: boolean;
+  created_at?: string | null;
+  added_by?: string | null;
+}
 
 export default function Admin() {
-  const [unlocked, setUnlocked] = useState<boolean>(
-    () => sessionStorage.getItem(ADMIN_KEY) === "1",
-  );
-  const [code, setCode] = useState("");
-  const [codeError, setCodeError] = useState("");
+  const { loading, user, isAdmin, isSuperAdmin, admin } = useAuth();
+  const [, navigate] = useLocation();
 
-  function tryUnlock(value: string) {
-    if (ADMIN_CODES.includes(value)) {
-      sessionStorage.setItem(ADMIN_KEY, "1");
-      setUnlocked(true);
-      setCodeError("");
-    } else {
-      setCodeError("Incorrect code. Try again.");
-      setCode("");
-    }
-  }
-
-  if (!unlocked) {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#e8eef5] p-6">
-        <Card className="p-8 w-full max-w-sm shadow-sm">
-          <div className="text-center mb-6">
-            <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-3">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="text-primary"
-              >
-                <rect x="3" y="11" width="18" height="11" rx="2" />
-                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-              </svg>
-            </div>
-            <h1 className="text-lg font-semibold">Admin Access</h1>
-            <p className="text-xs text-muted-foreground mt-1">
-              Enter the 6-digit access code to continue.
-            </p>
+        <div className="text-sm text-muted-foreground">Checking access…</div>
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#e8eef5] p-6">
+        <Card className="p-8 w-full max-w-sm shadow-sm text-center space-y-4">
+          <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-primary">
+              <rect x="3" y="11" width="18" height="11" rx="2" />
+              <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
           </div>
-
-          <div className="flex justify-center mb-3">
-            <InputOTP
-              maxLength={6}
-              value={code}
-              onChange={(v) => {
-                setCode(v);
-                setCodeError("");
-                if (v.length === 6) tryUnlock(v);
-              }}
-            >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
-              </InputOTPGroup>
-            </InputOTP>
-          </div>
-
-          {codeError && (
-            <div className="text-xs text-red-600 text-center mb-2">
-              {codeError}
-            </div>
-          )}
-
-          <Button
-            className="w-full bg-primary hover:bg-primary/90"
-            disabled={code.length !== 6}
-            onClick={() => tryUnlock(code)}
-          >
-            Unlock Admin
+          <h1 className="text-lg font-semibold">Admin Sign In</h1>
+          <p className="text-xs text-muted-foreground">
+            Sign in with your Google account. Only approved admin emails can access this panel.
+          </p>
+          <Button onClick={() => signInWithGoogle()} className="w-full bg-primary hover:bg-primary/90">
+            Sign in with Google
+          </Button>
+          <Button variant="ghost" className="w-full text-xs" onClick={() => navigate("/")}>
+            Back to Home
           </Button>
         </Card>
       </div>
     );
   }
 
-  return <AdminPanel onLock={() => {
-    sessionStorage.removeItem(ADMIN_KEY);
-    setUnlocked(false);
-    setCode("");
-  }} />;
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#e8eef5] p-6">
+        <Card className="p-8 w-full max-w-sm shadow-sm text-center space-y-4">
+          <div className="w-12 h-12 mx-auto rounded-full bg-red-100 flex items-center justify-center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-red-600">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <line x1="9" y1="9" x2="15" y2="15" />
+            </svg>
+          </div>
+          <h1 className="text-lg font-semibold">Not Authorized</h1>
+          <p className="text-xs text-muted-foreground">
+            <span className="font-semibold">{user.email}</span> is not an admin.
+            Ask a super-admin to grant access, then sign in again.
+          </p>
+          <Button variant="outline" className="w-full" onClick={async () => { await signOut(); }}>
+            Sign out
+          </Button>
+          <Button variant="ghost" className="w-full text-xs" onClick={() => navigate("/")}>
+            Back to Home
+          </Button>
+        </Card>
+      </div>
+    );
+  }
+
+  return <AdminPanel currentAdmin={admin!} isSuperAdmin={isSuperAdmin} userEmail={user.email ?? ""} />;
 }
 
-function AdminPanel({ onLock }: { onLock: () => void }) {
+function AdminPanel({
+  currentAdmin,
+  isSuperAdmin,
+  userEmail,
+}: {
+  currentAdmin: { email: string; is_super: boolean };
+  isSuperAdmin: boolean;
+  userEmail: string;
+}) {
   const [, navigate] = useLocation();
-  const [tab, setTab] = useState<"questions" | "submissions">("questions");
+  const [tab, setTab] = useState<"questions" | "submissions" | "admins">("questions");
   const [exams, setExams] = useState<Exam[]>([]);
   const [selectedExam, setSelectedExam] = useState<string | null>(null);
   const [questions, setQuestions] = useState<ExamQuestion[]>([]);
@@ -581,8 +568,18 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
 
   return (
     <div className="min-h-screen bg-[#e8eef5]">
-      <header className="bg-white border-b border-border px-6 py-3 flex items-center justify-between">
-        <div className="font-semibold">Online Assessment · Admin</div>
+      <header className="bg-white border-b border-border px-6 py-3 flex items-center justify-between gap-3 flex-wrap">
+        <div className="min-w-0">
+          <div className="font-semibold">Online Assessment · Admin</div>
+          <div className="text-[11px] text-muted-foreground truncate">
+            {userEmail}
+            {isSuperAdmin && (
+              <span className="ml-2 inline-flex items-center bg-amber-100 text-amber-800 rounded px-1.5 py-0.5 text-[10px] font-semibold">
+                SUPER ADMIN
+              </span>
+            )}
+          </div>
+        </div>
         <div className="flex items-center gap-2">
           <Button
             size="sm"
@@ -607,10 +604,10 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
           <Button
             size="sm"
             variant="ghost"
-            onClick={onLock}
+            onClick={async () => { await signOut(); navigate("/"); }}
             className="h-8 text-xs"
           >
-            Lock
+            Sign out
           </Button>
         </div>
       </header>
@@ -734,30 +731,46 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
 
         {/* Right column */}
         <div className="col-span-12 md:col-span-8 space-y-4">
-          {!selectedExam && (
+          <div className="flex gap-2 flex-wrap">
+            <Button
+              variant={tab === "questions" ? "default" : "outline"}
+              onClick={() => setTab("questions")}
+              size="sm"
+              disabled={!selectedExam}
+            >
+              Questions{selectedExam ? ` (${questions.length})` : ""}
+            </Button>
+            <Button
+              variant={tab === "submissions" ? "default" : "outline"}
+              onClick={() => setTab("submissions")}
+              size="sm"
+              disabled={!selectedExam}
+            >
+              Submissions{selectedExam ? ` (${subs.length})` : ""}
+            </Button>
+            {isSuperAdmin && (
+              <Button
+                variant={tab === "admins" ? "default" : "outline"}
+                onClick={() => setTab("admins")}
+                size="sm"
+              >
+                Manage Admins
+              </Button>
+            )}
+          </div>
+
+          {tab === "admins" && isSuperAdmin && (
+            <AdminsManager currentUserEmail={userEmail} />
+          )}
+
+          {tab !== "admins" && !selectedExam && (
             <Card className="p-8 text-center text-muted-foreground text-sm">
               Select an exam to manage questions and view submissions.
             </Card>
           )}
 
-          {selectedExam && (
+          {selectedExam && tab !== "admins" && (
             <>
-              <div className="flex gap-2">
-                <Button
-                  variant={tab === "questions" ? "default" : "outline"}
-                  onClick={() => setTab("questions")}
-                  size="sm"
-                >
-                  Questions ({questions.length})
-                </Button>
-                <Button
-                  variant={tab === "submissions" ? "default" : "outline"}
-                  onClick={() => setTab("submissions")}
-                  size="sm"
-                >
-                  Submissions ({subs.length})
-                </Button>
-              </div>
 
               {tab === "questions" && (
                 <>
@@ -980,5 +993,190 @@ function AdminPanel({ onLock }: { onLock: () => void }) {
         </div>
       </div>
     </div>
+  );
+}
+
+function AdminsManager({ currentUserEmail }: { currentUserEmail: string }) {
+  const [admins, setAdmins] = useState<AdminRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [newEmail, setNewEmail] = useState("");
+  const [newSuper, setNewSuper] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function load() {
+    setLoading(true);
+    setError(null);
+    const { data, error } = await supabase
+      .from("admins")
+      .select("email, is_super, created_at, added_by")
+      .order("created_at", { ascending: true });
+    if (error) {
+      setError(error.message);
+      setAdmins([]);
+    } else {
+      setAdmins((data ?? []) as AdminRow[]);
+    }
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    load();
+  }, []);
+
+  async function addAdmin() {
+    const email = newEmail.trim().toLowerCase();
+    if (!email || !email.includes("@")) {
+      setError("Please enter a valid email.");
+      return;
+    }
+    setBusy(true);
+    setError(null);
+    const { error } = await supabase.from("admins").insert({
+      email,
+      is_super: newSuper,
+      added_by: currentUserEmail,
+    });
+    setBusy(false);
+    if (error) {
+      setError(error.message);
+      return;
+    }
+    setNewEmail("");
+    setNewSuper(false);
+    load();
+  }
+
+  async function removeAdmin(email: string) {
+    if (email.toLowerCase() === currentUserEmail.toLowerCase()) {
+      alert("You cannot revoke your own super-admin access.");
+      return;
+    }
+    if (!confirm(`Revoke admin access for ${email}?`)) return;
+    setBusy(true);
+    const { error } = await supabase.from("admins").delete().eq("email", email);
+    setBusy(false);
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    load();
+  }
+
+  async function toggleSuper(row: AdminRow) {
+    if (row.email.toLowerCase() === currentUserEmail.toLowerCase()) {
+      alert("You cannot change your own super-admin flag.");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase
+      .from("admins")
+      .update({ is_super: !row.is_super })
+      .eq("email", row.email);
+    setBusy(false);
+    if (error) {
+      alert(error.message);
+      return;
+    }
+    load();
+  }
+
+  return (
+    <Card className="p-4 space-y-4">
+      <div>
+        <h3 className="font-semibold">Manage Admins</h3>
+        <p className="text-xs text-muted-foreground mt-0.5">
+          Add Google email addresses for principals and invigilators.
+          Super-admins can manage other admins; regular admins can only manage exams and submissions.
+        </p>
+      </div>
+
+      <div className="border border-border rounded p-3 bg-slate-50 space-y-3">
+        <div className="text-xs font-semibold">Add new admin</div>
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Input
+            type="email"
+            placeholder="principal@sphoorthyengg.ac.in"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+            className="flex-1"
+            data-testid="input-new-admin-email"
+          />
+          <label className="flex items-center gap-2 text-xs px-2">
+            <Switch checked={newSuper} onCheckedChange={setNewSuper} />
+            <span>Super-admin</span>
+          </label>
+          <Button
+            onClick={addAdmin}
+            disabled={busy || !newEmail.trim()}
+            className="bg-primary hover:bg-primary/90"
+          >
+            Add
+          </Button>
+        </div>
+        {error && (
+          <div className="text-xs text-red-600 bg-red-50 border border-red-200 rounded px-2 py-1.5">
+            {error}
+          </div>
+        )}
+      </div>
+
+      <div className="border-t pt-3">
+        <div className="text-xs font-semibold mb-2">
+          Current admins ({admins.length})
+        </div>
+        {loading ? (
+          <div className="text-xs text-muted-foreground">Loading…</div>
+        ) : admins.length === 0 ? (
+          <div className="text-xs text-muted-foreground">
+            No admins yet. Run the setup SQL in Supabase first.
+          </div>
+        ) : (
+          <div className="space-y-2">
+            {admins.map((a) => {
+              const isSelf = a.email.toLowerCase() === currentUserEmail.toLowerCase();
+              return (
+                <div
+                  key={a.email}
+                  className="flex items-center justify-between gap-2 border border-border rounded px-3 py-2 bg-white text-sm"
+                >
+                  <div className="min-w-0">
+                    <div className="font-medium truncate">
+                      {a.email}{" "}
+                      {isSelf && (
+                        <span className="text-[10px] text-muted-foreground">(you)</span>
+                      )}
+                    </div>
+                    <div className="text-[11px] text-muted-foreground">
+                      {a.is_super ? "Super-admin" : "Admin"}
+                      {a.added_by && ` · added by ${a.added_by}`}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <label className="flex items-center gap-1 text-[11px]">
+                      <Switch
+                        checked={a.is_super}
+                        onCheckedChange={() => toggleSuper(a)}
+                        disabled={isSelf || busy}
+                      />
+                      <span className="text-muted-foreground">Super</span>
+                    </label>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => removeAdmin(a.email)}
+                      disabled={isSelf || busy}
+                      className="text-destructive border-destructive/30 h-7 text-xs"
+                    >
+                      Revoke
+                    </Button>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    </Card>
   );
 }

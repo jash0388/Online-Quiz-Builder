@@ -329,6 +329,7 @@ export default function Exam() {
           student_phone: s.candidate.student_phone,
           father_name: s.candidate.father_name,
           father_phone: s.candidate.father_phone,
+          college: s.candidate.college,
           answers, student_answers: studentAnswers, score,
           total_marks: total, violations: 0,
           time_used_seconds: timeUsed, status: "completed",

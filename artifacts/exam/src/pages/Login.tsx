@@ -86,297 +86,209 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 flex">
-      {/* Left brand panel — hidden on small screens */}
-      <aside className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#0ea5e9] text-white">
+    <div className="min-h-screen w-full bg-[#f0f4f8] flex flex-col">
+      {/* Hero banner */}
+      <div className="bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#0369a1] text-white px-6 pt-12 pb-16 relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-15"
+          className="absolute inset-0 opacity-10"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0, transparent 40%), radial-gradient(circle at 80% 80%, rgba(255,255,255,0.3) 0, transparent 40%)",
+              "radial-gradient(circle at 15% 85%, rgba(255,255,255,0.5) 0, transparent 45%), radial-gradient(circle at 85% 15%, rgba(255,255,255,0.4) 0, transparent 45%)",
           }}
         />
-        <div className="relative z-10 flex flex-col justify-between p-12 w-full">
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-xl bg-white shadow-lg flex items-center justify-center p-1.5 shrink-0">
-              <img src={sphnLogo} alt="" className="w-full h-full object-contain" />
-            </div>
-            <div className="leading-tight">
-              <div className="text-lg font-bold">Sphoorthy Engineering College</div>
-              <div className="text-xs text-white/70">Online Examination Portal</div>
-            </div>
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <div className="w-16 h-16 rounded-2xl bg-white shadow-lg flex items-center justify-center p-1.5 mb-4">
+            <img src={sphnLogo} alt="SPHN" className="w-full h-full object-contain" />
           </div>
-
-          <div className="space-y-5 max-w-md">
-            <h1 className="text-4xl font-bold leading-tight tracking-tight">
-              A secure, modern testing platform built for colleges.
-            </h1>
-            <p className="text-white/80 text-base leading-relaxed">
-              Conduct proctored online assessments at scale. Real-time
-              monitoring, auto-evaluation and instant results — trusted by
-              institutions across India.
-            </p>
-            <ul className="space-y-3 text-sm text-white/90 pt-2">
-              <FeatureBullet>Tab-switch & focus monitoring with auto-submit</FeatureBullet>
-              <FeatureBullet>Automatic scoring & exportable results</FeatureBullet>
-              <FeatureBullet>Role-based admin access (principal, invigilator)</FeatureBullet>
-              <FeatureBullet>Mobile, tablet and desktop ready</FeatureBullet>
-            </ul>
-          </div>
-
-          <div className="text-[11px] text-white/60">
-            Version 17.05.21 · &copy; {new Date().getFullYear()} Sphoorthy Engineering College
-          </div>
+          <h1 className="text-xl font-bold leading-tight mb-1">Sphoorthy Engineering College</h1>
+          <p className="text-white/70 text-sm">Online Examination Portal</p>
         </div>
-      </aside>
+      </div>
 
-      {/* Right form panel */}
-      <main className="flex-1 flex flex-col">
-        {/* Compact header for mobile */}
-        <div className="lg:hidden bg-gradient-to-r from-[#0b1e4d] to-[#1e3a8a] text-white px-5 py-4 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-white p-1 shrink-0">
-            <img src={sphnLogo} alt="" className="w-full h-full object-contain" />
-          </div>
-          <div className="leading-tight">
-            <div className="text-sm font-bold">Sphoorthy Engineering College</div>
-            <div className="text-[11px] text-white/70">Online Examination Portal</div>
-          </div>
-        </div>
+      {/* Form card (overlapping) */}
+      <div className="flex-1 relative -mt-6">
+        <div className="mx-4 bg-white rounded-3xl shadow-xl border border-slate-100 px-5 py-6">
 
-        <div className="flex-1 flex items-center justify-center p-5 sm:p-8">
-          <div className="w-full max-w-sm">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
-                {mode === "signin" && "Welcome back"}
-                {mode === "signup" && "Create your account"}
-                {mode === "reset" && "Reset password"}
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                {mode === "signin" && "Sign in to access your tests."}
-                {mode === "signup" && "Register with your college email to begin."}
-                {mode === "reset" &&
-                  "Enter your email — we'll send you a reset link."}
-              </p>
+          {/* Tab switcher */}
+          {mode !== "reset" && (
+            <div className="flex bg-slate-100 rounded-2xl p-1 mb-6">
+              <button
+                type="button"
+                onClick={() => { clearMessages(); setMode("signin"); }}
+                className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all ${
+                  mode === "signin" ? "bg-white text-slate-800 shadow-sm" : "text-slate-500"
+                }`}
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                onClick={() => { clearMessages(); setMode("signup"); }}
+                className={`flex-1 py-2.5 text-sm font-semibold rounded-xl transition-all ${
+                  mode === "signup" ? "bg-white text-slate-800 shadow-sm" : "text-slate-500"
+                }`}
+              >
+                Register
+              </button>
             </div>
+          )}
 
-            <form onSubmit={handleEmailSubmit} className="space-y-4">
-              {mode === "signup" && (
-                <div className="space-y-1.5">
-                  <Label htmlFor="name" className="text-xs font-medium text-slate-700">
-                    Full name
-                  </Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Your full name"
-                    autoComplete="name"
-                    className="h-11"
-                    data-testid="input-name"
-                  />
-                </div>
-              )}
+          {mode === "reset" && (
+            <div className="mb-5">
+              <button
+                type="button"
+                onClick={() => { clearMessages(); setMode("signin"); }}
+                className="flex items-center gap-1.5 text-sm text-[#0ea5e9] font-medium"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M15 18l-6-6 6-6"/>
+                </svg>
+                Back to sign in
+              </button>
+              <h2 className="text-lg font-bold text-slate-800 mt-3">Reset Password</h2>
+              <p className="text-sm text-slate-500">We'll send a reset link to your email.</p>
+            </div>
+          )}
 
+          <form onSubmit={handleEmailSubmit} className="space-y-4">
+            {mode === "signup" && (
               <div className="space-y-1.5">
-                <Label htmlFor="email" className="text-xs font-medium text-slate-700">
-                  Email
-                </Label>
+                <Label htmlFor="name" className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Full Name</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@college.edu"
-                  autoComplete="email"
-                  required
-                  className="h-11"
-                  data-testid="input-email"
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your full name"
+                  autoComplete="name"
+                  className="h-12 rounded-xl text-base"
+                  data-testid="input-name"
                 />
               </div>
-
-              {mode !== "reset" && (
-                <div className="space-y-1.5">
-                  <div className="flex items-center justify-between">
-                    <Label
-                      htmlFor="password"
-                      className="text-xs font-medium text-slate-700"
-                    >
-                      Password
-                    </Label>
-                    {mode === "signin" && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          clearMessages();
-                          setMode("reset");
-                        }}
-                        className="text-[11px] text-[#0ea5e9] hover:underline font-medium"
-                      >
-                        Forgot?
-                      </button>
-                    )}
-                  </div>
-                  <div className="relative">
-                    <Input
-                      id="password"
-                      type={showPwd ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      placeholder={mode === "signup" ? "At least 8 characters" : "Your password"}
-                      autoComplete={mode === "signup" ? "new-password" : "current-password"}
-                      required
-                      className="h-11 pr-10"
-                      data-testid="input-password"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPwd((v) => !v)}
-                      className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 p-1"
-                      tabIndex={-1}
-                      aria-label={showPwd ? "Hide password" : "Show password"}
-                    >
-                      {showPwd ? <EyeOffIcon /> : <EyeIcon />}
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {error && (
-                <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-3 py-2">
-                  {error}
-                </div>
-              )}
-              {info && (
-                <div className="text-sm text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-md px-3 py-2">
-                  {info}
-                </div>
-              )}
-
-              <Button
-                type="submit"
-                disabled={busy || loading}
-                className="w-full h-11 bg-[#1e3a8a] hover:bg-[#1e40af] text-white font-semibold shadow-sm"
-                data-testid="button-submit"
-              >
-                {busy ? (
-                  <span className="inline-flex items-center gap-2">
-                    <Spinner /> Please wait…
-                  </span>
-                ) : mode === "signin" ? (
-                  "Sign in"
-                ) : mode === "signup" ? (
-                  "Create account"
-                ) : (
-                  "Send reset link"
-                )}
-              </Button>
-            </form>
-
-            {mode !== "reset" && (
-              <>
-                <div className="relative my-6">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-slate-200" />
-                  </div>
-                  <div className="relative flex justify-center text-[11px] uppercase tracking-wide">
-                    <span className="bg-slate-50 px-3 text-slate-500 font-medium">
-                      Or continue with
-                    </span>
-                  </div>
-                </div>
-
-                <Button
-                  type="button"
-                  onClick={handleGoogle}
-                  disabled={busy || loading}
-                  variant="outline"
-                  className="w-full h-11 bg-white border-slate-300 hover:bg-slate-50 text-slate-800 font-medium shadow-sm gap-2"
-                  data-testid="button-google-signin"
-                >
-                  <GoogleIcon /> Continue with Google
-                </Button>
-              </>
             )}
 
-            <div className="mt-6 text-center text-sm text-slate-600">
-              {mode === "signin" && (
-                <>
-                  Don't have an account?{" "}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      clearMessages();
-                      setMode("signup");
-                    }}
-                    className="text-[#0ea5e9] hover:underline font-semibold"
-                  >
-                    Create one
-                  </button>
-                </>
-              )}
-              {mode === "signup" && (
-                <>
-                  Already have an account?{" "}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      clearMessages();
-                      setMode("signin");
-                    }}
-                    className="text-[#0ea5e9] hover:underline font-semibold"
-                  >
-                    Sign in
-                  </button>
-                </>
-              )}
-              {mode === "reset" && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    clearMessages();
-                    setMode("signin");
-                  }}
-                  className="text-[#0ea5e9] hover:underline font-semibold"
-                >
-                  ← Back to sign in
-                </button>
-              )}
+            <div className="space-y-1.5">
+              <Label htmlFor="email" className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@college.edu"
+                autoComplete="email"
+                required
+                className="h-12 rounded-xl text-base"
+                data-testid="input-email"
+              />
             </div>
 
-            {user && (
-              <div className="mt-6 text-center">
-                <button
-                  type="button"
-                  onClick={() => signOut()}
-                  className="text-[11px] text-slate-500 hover:text-slate-800 underline"
-                >
-                  Sign out {user.email}
-                </button>
+            {mode !== "reset" && (
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password" className="text-xs font-semibold text-slate-600 uppercase tracking-wide">Password</Label>
+                  {mode === "signin" && (
+                    <button
+                      type="button"
+                      onClick={() => { clearMessages(); setMode("reset"); }}
+                      className="text-xs text-[#0ea5e9] font-medium"
+                    >
+                      Forgot?
+                    </button>
+                  )}
+                </div>
+                <div className="relative">
+                  <Input
+                    id="password"
+                    type={showPwd ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder={mode === "signup" ? "At least 8 characters" : "Your password"}
+                    autoComplete={mode === "signup" ? "new-password" : "current-password"}
+                    required
+                    className="h-12 rounded-xl text-base pr-12"
+                    data-testid="input-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPwd((v) => !v)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 p-1"
+                    tabIndex={-1}
+                  >
+                    {showPwd ? <EyeOffIcon /> : <EyeIcon />}
+                  </button>
+                </div>
               </div>
             )}
 
-            <p className="mt-8 text-[11px] text-slate-400 text-center leading-relaxed">
-              By continuing you agree to follow examination rules and the
-              college's testing policies.
-            </p>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-}
+            {error && (
+              <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
+                {error}
+              </div>
+            )}
+            {info && (
+              <div className="text-sm text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3">
+                {info}
+              </div>
+            )}
 
-function FeatureBullet({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex items-start gap-2">
-      <span className="mt-0.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/15">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="20 6 9 17 4 12" />
-        </svg>
-      </span>
-      <span>{children}</span>
-    </li>
+            <Button
+              type="submit"
+              disabled={busy || loading}
+              className="w-full h-13 text-base font-bold rounded-xl bg-[#1e3a8a] hover:bg-[#1e40af] text-white shadow-md"
+              data-testid="button-submit"
+            >
+              {busy ? (
+                <span className="inline-flex items-center gap-2"><Spinner /> Please wait…</span>
+              ) : mode === "signin" ? "Sign In" : mode === "signup" ? "Create Account" : "Send Reset Link"}
+            </Button>
+          </form>
+
+          {mode !== "reset" && (
+            <>
+              <div className="relative my-5">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-slate-200" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase tracking-wider">
+                  <span className="bg-white px-3 text-slate-400 font-medium">or</span>
+                </div>
+              </div>
+
+              <Button
+                type="button"
+                onClick={handleGoogle}
+                disabled={busy || loading}
+                variant="outline"
+                className="w-full h-12 rounded-xl bg-white border-slate-200 text-slate-700 font-semibold text-sm gap-2 shadow-sm"
+                data-testid="button-google-signin"
+              >
+                <GoogleIcon /> Continue with Google
+              </Button>
+            </>
+          )}
+
+          {user && (
+            <div className="mt-5 text-center">
+              <button
+                type="button"
+                onClick={() => signOut()}
+                className="text-xs text-slate-400 underline"
+              >
+                Sign out {user.email}
+              </button>
+            </div>
+          )}
+
+          <p className="mt-5 text-[11px] text-slate-400 text-center leading-relaxed">
+            By continuing you agree to follow examination rules and the college's testing policies.
+          </p>
+        </div>
+
+        <div className="mt-4 pb-6 text-center text-[11px] text-slate-400">
+          Version 17.05.21 · &copy; {new Date().getFullYear()} Sphoorthy Engineering College
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -393,7 +305,7 @@ function GoogleIcon() {
 
 function EyeIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
       <circle cx="12" cy="12" r="3" />
     </svg>
@@ -402,7 +314,7 @@ function EyeIcon() {
 
 function EyeOffIcon() {
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
       <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
       <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
@@ -413,7 +325,7 @@ function EyeOffIcon() {
 
 function Spinner() {
   return (
-    <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none">
       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" opacity="0.25" />
       <path d="M22 12a10 10 0 0 1-10 10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
     </svg>

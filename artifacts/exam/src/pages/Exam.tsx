@@ -18,18 +18,23 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerClose,
+} from "@/components/ui/drawer";
 
 function letterFor(idx: number) {
-  return String.fromCharCode(65 + idx); // A, B, C, D...
+  return String.fromCharCode(65 + idx);
 }
 
-// --- Seeded Shuffle Logic ---
 function createPRNG(seed: string) {
   let h = 0;
   for (let i = 0; i < seed.length; i++) {
     h = (Math.imul(31, h) + seed.charCodeAt(i)) | 0;
   }
-
   return function () {
     let t = (h += 0x6d2b79f5);
     t = Math.imul(t ^ (t >>> 15), t | 1);
@@ -49,22 +54,13 @@ function shuffleArray<T>(array: T[], prng: () => number): T[] {
 
 function shuffleOptions(q: ExamQuestion, prng: () => number): ExamQuestion {
   if (!q.options || q.options.length === 0) return q;
-
-  // Create an array of indices [0, 1, 2, 3]
   const indices = Array.from({ length: q.options.length }, (_, i) => i);
-  // Shuffle the indices
   const shuffledIndices = shuffleArray(indices, prng);
-
   const newOptions = shuffledIndices.map((i) => q.options![i]!);
   const newOptionsTe = q.options_te
     ? shuffledIndices.map((i) => q.options_te![i]!)
     : undefined;
-
-  return {
-    ...q,
-    options: newOptions,
-    options_te: newOptionsTe,
-  };
+  return { ...q, options: newOptions, options_te: newOptionsTe };
 }
 
 export default function Exam() {
@@ -79,16 +75,13 @@ export default function Exam() {
   const [submitting, setSubmitting] = useState(false);
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const [paletteOpen, setPaletteOpen] = useState(false);
   const submitGuard = useRef(false);
   const sessionRef = useRef<ExamSession | null>(null);
 
-  // Load session + questions
   useEffect(() => {
     const raw = sessionStorage.getItem("exam:session");
-    if (!raw) {
-      navigate("/");
-      return;
-    }
+    if (!raw) { navigate("/"); return; }
     const s = JSON.parse(raw) as ExamSession;
     setSession(s);
     sessionRef.current = s;
@@ -100,10 +93,7 @@ export default function Exam() {
         .eq("exam_id", s.examId)
         .order("sort_order");
       const qs = (data ?? []) as ExamQuestion[];
-      // Seeded random based on userId
       const prng = createPRNG(s.userId);
-
-      // 1. Shuffle options for every question first
       let shuffledQs = qs.map((q) => {
         const normalized = {
           ...q,
@@ -113,33 +103,18 @@ export default function Exam() {
         return shuffleOptions(normalized as ExamQuestion, prng);
       });
 
-      // 2. Group by subject and shuffle within groups
       const groups: Record<string, ExamQuestion[]> = {};
       const subjectOrder: string[] = [];
-
       shuffledQs.forEach((q) => {
         const sub = q.subject || "General";
-        if (!groups[sub]) {
-          groups[sub] = [];
-          subjectOrder.push(sub);
-        }
+        if (!groups[sub]) { groups[sub] = []; subjectOrder.push(sub); }
         groups[sub].push(q);
       });
-
-      // Shuffle within each group
-      subjectOrder.forEach((sub) => {
-        groups[sub] = shuffleArray(groups[sub]!, prng);
-      });
-
-      // Flatten back to single array
+      subjectOrder.forEach((sub) => { groups[sub] = shuffleArray(groups[sub]!, prng); });
       const finalQs: ExamQuestion[] = [];
-      subjectOrder.forEach((sub) => {
-        finalQs.push(...groups[sub]!);
-      });
-
+      subjectOrder.forEach((sub) => { finalQs.push(...groups[sub]!); });
       setQuestions(finalQs);
 
-      // Restore in-progress state
       const saveKey = `exam:state:${s.examId}:${s.userId}`;
       const saved = localStorage.getItem(saveKey);
       let restored = false;
@@ -152,9 +127,7 @@ export default function Exam() {
           if (parsed.currentQId) setCurrentQId(parsed.currentQId);
           if (parsed.startedAt) setStartedAt(parsed.startedAt);
           restored = true;
-        } catch {
-          /* fall through */
-        }
+        } catch { /* fall through */ }
       }
       if (!restored) {
         setEndsAt(Date.now() + s.duration * 60 * 1000);
@@ -167,25 +140,17 @@ export default function Exam() {
     })();
   }, [navigate]);
 
-  // Persist state (debounced to avoid hammering localStorage with every state change)
   useEffect(() => {
     if (!session || !endsAt) return;
     const t = setTimeout(() => {
       localStorage.setItem(
         `exam:state:${session.examId}:${session.userId}`,
-        JSON.stringify({
-          answers,
-          statusMap,
-          endsAt,
-          currentQId,
-          startedAt,
-        }),
+        JSON.stringify({ answers, statusMap, endsAt, currentQId, startedAt }),
       );
     }, 300);
     return () => clearTimeout(t);
   }, [answers, statusMap, endsAt, currentQId, startedAt, session]);
 
-  // Block right-click and copy on the test page
   useEffect(() => {
     const block = (e: Event) => e.preventDefault();
     document.addEventListener("contextmenu", block);
@@ -196,35 +161,24 @@ export default function Exam() {
     };
   }, []);
 
-  // Fullscreen: enter on exam start, exit on finish
   useEffect(() => {
     if (!session || isFinished) return;
-
     const enterFullscreen = () => {
       const el = document.documentElement;
       if (!document.fullscreenElement) {
-        el.requestFullscreen?.().catch(() => {/* user gesture required or denied */});
+        el.requestFullscreen?.().catch(() => {});
       }
     };
-
-    // Enter fullscreen on mount
     enterFullscreen();
-
-    // Re-enter fullscreen if user exits it during exam
     const onFsChange = () => {
       if (!document.fullscreenElement && !submitGuard.current) {
-        // Small delay to avoid browser blocking rapid re-requests
         setTimeout(enterFullscreen, 300);
       }
     };
     document.addEventListener("fullscreenchange", onFsChange);
-
-    return () => {
-      document.removeEventListener("fullscreenchange", onFsChange);
-    };
+    return () => { document.removeEventListener("fullscreenchange", onFsChange); };
   }, [session, isFinished]);
 
-  // Exit fullscreen when exam is finished
   useEffect(() => {
     if (isFinished && document.fullscreenElement) {
       document.exitFullscreen?.().catch(() => {});
@@ -241,30 +195,21 @@ export default function Exam() {
     [questions, currentQuestion],
   );
 
-  // Subject grouping (Mathematics / Physics / Chemistry style sections).
-  // Falls back gracefully when no subjects are set on the questions.
   const subjects = useMemo(() => {
     const seen = new Set<string>();
     const order: string[] = [];
     for (const q of questions) {
       const s = (q.subject ?? "").trim();
       if (!s) continue;
-      if (!seen.has(s)) {
-        seen.add(s);
-        order.push(s);
-      }
+      if (!seen.has(s)) { seen.add(s); order.push(s); }
     }
     return order;
   }, [questions]);
 
   const [activeSubject, setActiveSubject] = useState<string | null>(null);
 
-  // Whichever question is currently active determines which subject tab is highlighted.
   useEffect(() => {
-    if (subjects.length === 0) {
-      setActiveSubject(null);
-      return;
-    }
+    if (subjects.length === 0) { setActiveSubject(null); return; }
     const subjectOfCurrent = (currentQuestion?.subject ?? "").trim();
     if (subjectOfCurrent && subjects.includes(subjectOfCurrent)) {
       setActiveSubject(subjectOfCurrent);
@@ -290,9 +235,7 @@ export default function Exam() {
 
   function switchSubject(subject: string) {
     setActiveSubject(subject);
-    const first = questions.find(
-      (q) => (q.subject ?? "").trim() === subject,
-    );
+    const first = questions.find((q) => (q.subject ?? "").trim() === subject);
     if (first) jumpTo(first.id);
   }
 
@@ -308,12 +251,11 @@ export default function Exam() {
   function jumpTo(qId: string) {
     setCurrentQId(qId);
     markVisited(qId);
+    setPaletteOpen(false);
   }
 
   function nextQuestion(): string | null {
     if (!currentQuestion) return null;
-    // Advance within the visible (subject-filtered) list when a subject tab is selected,
-    // so "Save & Next" stays inside Mathematics/Physics/Chemistry instead of jumping out.
     const scope = visibleQuestions.length > 0 ? visibleQuestions : questions;
     const idx = scope.findIndex((q) => q.id === currentQuestion.id);
     if (idx < 0) return null;
@@ -354,12 +296,8 @@ export default function Exam() {
   }
 
   const [resultStats, setResultStats] = useState<{
-    score: number;
-    total: number;
-    attempted: number;
-    correct: number;
-    wrong: number;
-    notAttempted: number;
+    score: number; total: number; attempted: number;
+    correct: number; wrong: number; notAttempted: number;
   } | null>(null);
 
   const handleSubmit = useCallback(async () => {
@@ -368,46 +306,32 @@ export default function Exam() {
     submitGuard.current = true;
     setSubmitting(true);
     try {
-      let score = 0;
-      let total = 0;
-      let attempted = 0;
-      let correct = 0;
+      let score = 0, total = 0, attempted = 0, correct = 0;
       for (const q of questions) {
         total += Number(q.marks);
         const ans = answers[q.id];
         if (ans !== undefined && ans !== "") {
           attempted++;
-          if (ans === q.correct_answer) {
-            score += Number(q.marks);
-            correct++;
-          }
+          if (ans === q.correct_answer) { score += Number(q.marks); correct++; }
         }
       }
       const wrong = attempted - correct;
       const notAttempted = questions.length - attempted;
       const timeUsed = Math.floor((Date.now() - startedAt) / 1000);
-      const studentAnswers = {
-        __candidate__: s.candidate,
-        ...answers,
-      };
+      const studentAnswers = { __candidate__: s.candidate, ...answers };
 
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("exam_submissions")
         .insert({
-          exam_id: s.examId,
-          user_id: s.userId,
+          exam_id: s.examId, user_id: s.userId,
           student_name: s.candidate.student_name,
           roll_number: s.candidate.roll_number,
           student_phone: s.candidate.student_phone,
           father_name: s.candidate.father_name,
           father_phone: s.candidate.father_phone,
-          answers,
-          student_answers: studentAnswers,
-          score,
-          total_marks: total,
-          violations: 0,
-          time_used_seconds: timeUsed,
-          status: "completed",
+          answers, student_answers: studentAnswers, score,
+          total_marks: total, violations: 0,
+          time_used_seconds: timeUsed, status: "completed",
           submitted_at: new Date().toISOString(),
           exam_title: s.examTitle,
         })
@@ -431,12 +355,9 @@ export default function Exam() {
     }
   }, [answers, questions, startedAt, navigate]);
 
-  // Counts for the legend / palette — scoped to the active subject when one is selected,
-  // otherwise across all questions.
   const counts = useMemo(() => {
     const c = { answered: 0, notAnswered: 0, notVisited: 0, marked: 0, answeredMarked: 0 };
-    const scope = visibleQuestions;
-    for (const q of scope) {
+    for (const q of visibleQuestions) {
       const s = statusMap[q.id] ?? "not-visited";
       if (s === "answered") c.answered++;
       else if (s === "not-answered") c.notAnswered++;
@@ -451,9 +372,7 @@ export default function Exam() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#e8eef5]">
         <div className="text-sm text-muted-foreground">
-          {questions.length === 0 && session
-            ? "No questions found for this test."
-            : "Loading test..."}
+          {questions.length === 0 && session ? "No questions found for this test." : "Loading test..."}
         </div>
       </div>
     );
@@ -461,195 +380,178 @@ export default function Exam() {
 
   return (
     <ErrorBoundary>
-      <div className="h-screen flex flex-col bg-[#e8eef5] overflow-hidden">
-        {/* College header */}
-      <header className="bg-[#1e3a8a] text-white border-b-4 border-[#0ea5e9]">
-        <div className="px-4 py-2 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-10 h-10 rounded-md bg-white flex items-center justify-center shrink-0 shadow overflow-hidden p-0.5">
-              <img
-                src={sphnLogo}
-                alt="Sphoorthy Engineering College"
-                className="w-full h-full object-contain"
-              />
-            </div>
-            <div className="min-w-0">
-              <div className="font-bold text-sm sm:text-base leading-tight truncate">
-                Sphoorthy Engineering College
-              </div>
-              <div className="text-[11px] text-white/80 truncate">
-                {session.examTitle} · {session.candidate.student_name} ·{" "}
-                {session.candidate.roll_number}
-              </div>
-            </div>
-          </div>
-          <div className="flex items-center gap-3">
-            {!isFinished && <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />}
-          </div>
-        </div>
-      </header>
+      <div className="h-screen flex flex-col bg-[#f0f4f8] overflow-hidden">
 
-      {/* Subject sections (Mathematics / Physics / Chemistry) */}
-      {subjects.length > 0 && (
-        <div className="bg-white border-b border-border px-3 pt-2 flex items-end gap-1 overflow-x-auto no-scrollbar scroll-smooth">
-          {subjects.map((s) => {
-            const isActive = activeSubject === s;
-            return (
-              <button
-                key={s}
-                type="button"
-                onClick={() => switchSubject(s)}
-                className={`px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium rounded-t-md border border-b-0 transition-colors whitespace-nowrap ${
-                  isActive
-                    ? "bg-[#1e3a8a] text-white border-[#1e3a8a]"
-                    : "bg-[#f1f5f9] text-slate-700 border-border hover:bg-slate-200"
-                }`}
-              >
-                {s}{" "}
-                <span
-                  className={`ml-1 text-[10px] sm:text-[11px] ${
-                    isActive ? "text-white/80" : "text-muted-foreground"
-                  }`}
-                >
-                  ({subjectCounts[s] ?? 0})
+        {/* ── TOP HEADER ── */}
+        <header className="bg-[#1e3a8a] text-white shrink-0 shadow-lg">
+          <div className="px-3 py-2.5 flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="w-8 h-8 rounded-md bg-white flex items-center justify-center shrink-0 overflow-hidden p-0.5">
+                <img src={sphnLogo} alt="SPHN" className="w-full h-full object-contain" />
+              </div>
+              <div className="min-w-0">
+                <div className="font-bold text-xs leading-tight truncate">Sphoorthy Engineering College</div>
+                <div className="text-[10px] text-white/70 truncate">
+                  {session.candidate.student_name} · {session.candidate.roll_number}
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              {!isFinished && <Timer endsAt={endsAt} onExpire={() => handleSubmit()} />}
+              {isFinished && (
+                <span className="text-xs font-bold text-[#4ade80] bg-[#4ade80]/20 px-2 py-1 rounded-full">
+                  ✓ Submitted
                 </span>
-              </button>
-            );
-          })}
-        </div>
-      )}
+              )}
+            </div>
+          </div>
+        </header>
 
-      {/* ── QUESTION NAVIGATION BOX (Top Navigator) ── */}
-      {!isFinished && (
-        <div className="bg-[#f8fafc] border-b border-border px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-inner">
-          <div className="text-[10px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mr-1">Jump to:</div>
-          <div className="flex gap-1.5 py-0.5">
-            {visibleQuestions.map((q, idx) => {
-              const status = statusMap[q.id] ?? "not-visited";
-              const isCurrent = q.id === currentQId;
-              const displayIdx = questions.findIndex(x => x.id === q.id) + 1;
-              
-              let bgColor = "bg-white border-slate-300 text-slate-700";
-              if (status === "answered") bgColor = "bg-[#22c55e] border-[#16a34a] text-white";
-              else if (status === "not-answered") bgColor = "bg-[#ef4444] border-[#dc2626] text-white";
-              else if (status === "marked" || status === "answered-marked") bgColor = "bg-[#a855f7] border-[#9333ea] text-white";
-              
+        {/* ── SUBJECT TABS ── */}
+        {subjects.length > 0 && (
+          <div className="bg-white border-b border-slate-200 px-2 pt-2 flex items-end gap-1 overflow-x-auto no-scrollbar shrink-0">
+            {subjects.map((s) => {
+              const isActive = activeSubject === s;
               return (
                 <button
-                  key={q.id}
-                  onClick={() => jumpTo(q.id)}
-                  className={`w-7 h-7 sm:w-8 sm:h-8 shrink-0 rounded-md text-xs font-bold border transition-all flex items-center justify-center ${bgColor} ${isCurrent ? "ring-2 ring-[#0ea5e9] ring-offset-1 scale-110 shadow-md" : "hover:border-slate-400"}`}
+                  key={s}
+                  type="button"
+                  onClick={() => switchSubject(s)}
+                  className={`px-3 py-2 text-xs font-semibold rounded-t-lg border border-b-0 transition-colors whitespace-nowrap ${
+                    isActive
+                      ? "bg-[#1e3a8a] text-white border-[#1e3a8a]"
+                      : "bg-slate-100 text-slate-600 border-slate-200 hover:bg-slate-200"
+                  }`}
                 >
-                  {displayIdx}
+                  {s} <span className={`ml-1 text-[10px] ${isActive ? "text-white/70" : "text-slate-400"}`}>({subjectCounts[s] ?? 0})</span>
                 </button>
               );
             })}
           </div>
-        </div>
-      )}
+        )}
 
-      {/* ── RESULT SUMMARY BANNER (shown after submission) ── */}
-      {isFinished && resultStats && (
-        <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] text-white px-4 py-3 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-bold text-[#4ade80]">✓ Submitted</span>
-            <span className="text-xs text-white/60">Review your answers below</span>
-          </div>
-          <div className="flex flex-wrap gap-3 text-sm">
-            <div className="flex items-center gap-1.5">
-              <span className="text-xs text-white/60">Score</span>
-              <span className="font-bold text-white">{resultStats.score}/{resultStats.total}</span>
-              <span className="text-xs text-[#93c5fd]">({resultStats.total > 0 ? ((resultStats.score / resultStats.total) * 100).toFixed(1) : 0}%)</span>
-            </div>
-            <div className="w-px bg-white/20" />
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#22c55e] inline-block" />
-              <span className="text-[#4ade80] font-semibold">{resultStats.correct} Correct</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] inline-block" />
-              <span className="text-[#f87171] font-semibold">{resultStats.wrong} Wrong</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444] inline-block" />
-              <span className="text-[#fca5a5] font-semibold">{resultStats.notAttempted} Not Attempted</span>
+        {/* ── RESULT BANNER ── */}
+        {isFinished && resultStats && (
+          <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] text-white px-4 py-3 shrink-0">
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div>
+                <div className="text-[10px] text-white/60 uppercase tracking-wider">Score</div>
+                <div className="font-bold text-white text-sm">{resultStats.score}/{resultStats.total}</div>
+              </div>
+              <div>
+                <div className="text-[10px] text-[#4ade80] uppercase tracking-wider">Correct</div>
+                <div className="font-bold text-[#4ade80] text-sm">{resultStats.correct}</div>
+              </div>
+              <div>
+                <div className="text-[10px] text-[#f87171] uppercase tracking-wider">Wrong</div>
+                <div className="font-bold text-[#f87171] text-sm">{resultStats.wrong}</div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Main content */}
-      <main className="flex-1 flex flex-col lg:flex-row overflow-hidden min-h-0">
-        {/* Question pane */}
-        <section className="flex-1 flex flex-col bg-white lg:border-r border-border min-w-0">
-          <div className="px-6 py-3 border-b border-border bg-[#f8fafc] flex items-center justify-between">
-            <div className="text-sm font-semibold flex items-center gap-2">
+        {/* ── QUESTION NUMBER BAR ── */}
+        {!isFinished && (
+          <div className="bg-white border-b border-slate-200 px-3 py-2 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
+            <div className="text-[9px] font-bold text-slate-400 uppercase tracking-wider shrink-0">Q:</div>
+            <div className="flex gap-1 py-0.5">
+              {visibleQuestions.map((q) => {
+                const status = statusMap[q.id] ?? "not-visited";
+                const isCurrent = q.id === currentQId;
+                const displayIdx = questions.findIndex((x) => x.id === q.id) + 1;
+                let bg = "bg-white border-slate-300 text-slate-600";
+                if (status === "answered") bg = "bg-[#16a34a] border-[#16a34a] text-white";
+                else if (status === "not-answered") bg = "bg-[#ef4444] border-[#ef4444] text-white";
+                else if (status === "marked" || status === "answered-marked") bg = "bg-[#7c3aed] border-[#7c3aed] text-white";
+                return (
+                  <button
+                    key={q.id}
+                    onClick={() => jumpTo(q.id)}
+                    className={`w-7 h-7 shrink-0 rounded text-xs font-bold border transition-all flex items-center justify-center ${bg} ${isCurrent ? "ring-2 ring-[#0ea5e9] ring-offset-1 scale-110 shadow-md" : ""}`}
+                  >
+                    {displayIdx}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* ── MAIN QUESTION AREA ── */}
+        <main className="flex-1 overflow-y-auto min-h-0">
+          {/* Question header */}
+          <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between sticky top-0 z-10">
+            <div className="text-sm font-semibold text-slate-800 flex items-center gap-2">
               {isFinished && (
-                <span className="bg-[#fef3c7] text-[#b45309] px-2 py-0.5 rounded text-[10px] uppercase font-bold border border-[#fde68a]">
-                  Review Mode
+                <span className="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase">
+                  Review
                 </span>
               )}
-              Question No. {currentIndex + 1}{" "}
-              <span className="text-muted-foreground font-normal">of {questions.length}</span>
+              Q{currentIndex + 1}
+              <span className="text-slate-400 font-normal text-xs">/ {questions.length}</span>
               {activeSubject && (
-                <span className="ml-3 text-xs text-muted-foreground font-normal">
-                  Section: <span className="text-slate-700 font-medium">{activeSubject}</span>
-                </span>
+                <span className="text-xs text-slate-400 font-normal">{activeSubject}</span>
               )}
             </div>
-            <div className="text-xs text-muted-foreground">
-              Marks: <span className="text-[#15803d] font-semibold">+{currentQuestion.marks}</span>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-semibold text-[#15803d] bg-green-50 px-2 py-0.5 rounded-full">
+                +{currentQuestion.marks} mark{currentQuestion.marks === 1 ? "" : "s"}
+              </span>
             </div>
           </div>
 
-          <div className="relative flex-1 overflow-y-auto px-4 sm:px-6 py-4 sm:py-5">
+          {/* Question content */}
+          <div className="relative px-4 py-4">
             <SphnWatermark />
             <div className="relative z-10">
-              <div className="text-base sm:text-lg lg:text-xl font-medium leading-relaxed mb-4 whitespace-pre-wrap text-slate-800">
+              <div className="text-base font-medium leading-relaxed mb-4 whitespace-pre-wrap text-slate-800">
                 {currentQuestion.question}
               </div>
-              {/* Question image (diagram / formula / graph) */}
               {currentQuestion.question_image && (
-                <div className="mb-4 mt-2">
+                <div className="mb-4">
                   <img
                     src={currentQuestion.question_image}
                     alt="Question diagram"
-                    className="max-w-full max-h-72 object-contain rounded border border-slate-200 bg-white p-1"
+                    className="max-w-full max-h-56 object-contain rounded-lg border border-slate-200 bg-white p-1 shadow-sm"
                   />
                 </div>
               )}
               {currentQuestion.question_te && (
-                <div className="text-base sm:text-lg lg:text-xl leading-relaxed mb-8 whitespace-pre-wrap text-slate-600 border-t border-slate-100 pt-4">
+                <div className="text-sm leading-relaxed mb-6 whitespace-pre-wrap text-slate-600 border-t border-slate-100 pt-3">
                   {currentQuestion.question_te}
                 </div>
               )}
-              {!currentQuestion.question_te && <div className="mb-6" />}
-              <div className="space-y-3 max-w-2xl">
+              {!currentQuestion.question_te && <div className="mb-4" />}
+
+              {/* Options */}
+              <div className="space-y-3 pb-4">
                 {(currentQuestion.options ?? []).map((opt, idx) => {
                   const userSelected = answers[currentQuestion.id] === opt;
                   const isCorrect = currentQuestion.correct_answer === opt;
                   const optTe = currentQuestion.options_te?.[idx];
 
-                  let borderColor = "border-border";
-                  let bgColor = "bg-white/85";
+                  let borderColor = "border-slate-200";
+                  let bgColor = "bg-white";
+                  let ringColor = "";
 
                   if (isFinished) {
                     if (isCorrect) {
-                      borderColor = "border-[#22c55e] shadow-[0_0_0_1px_rgba(34,197,94,0.5)]";
-                      bgColor = "bg-[#f0fdf4]";
+                      borderColor = "border-green-400";
+                      bgColor = "bg-green-50";
                     } else if (userSelected) {
-                      borderColor = "border-[#ef4444] shadow-[0_0_0_1px_rgba(239,68,68,0.5)]";
-                      bgColor = "bg-[#fef2f2]";
+                      borderColor = "border-red-400";
+                      bgColor = "bg-red-50";
                     }
                   } else if (userSelected) {
-                    borderColor = "border-primary";
-                    bgColor = "bg-accent/85";
+                    borderColor = "border-[#1e3a8a]";
+                    bgColor = "bg-[#eff6ff]";
+                    ringColor = "ring-2 ring-[#1e3a8a]/20";
                   }
 
                   return (
                     <label
                       key={idx}
-                      className={`flex items-center gap-3 px-4 py-4 border rounded-xl cursor-pointer hover-elevate backdrop-blur-[1px] transition-all group ${borderColor} ${bgColor}`}
+                      className={`flex items-start gap-3 px-4 py-4 border-2 rounded-2xl cursor-pointer transition-all active:scale-[0.98] shadow-sm ${borderColor} ${bgColor} ${ringColor}`}
                     >
                       <input
                         type="radio"
@@ -657,40 +559,26 @@ export default function Exam() {
                         checked={userSelected}
                         onChange={() => !isFinished && setSelected(opt)}
                         disabled={isFinished}
-                        className="w-5 h-5 sm:w-6 sm:h-6 accent-[#1e3a8a] shrink-0"
+                        className="w-5 h-5 mt-0.5 accent-[#1e3a8a] shrink-0"
                       />
-                      <span className="text-sm sm:text-base lg:text-lg flex-1">
-                        <span className="font-semibold mr-2">
-                          {letterFor(idx)}.
-                        </span>
-                        {opt}
+                      <span className="text-sm leading-relaxed flex-1">
+                        <span className="font-bold mr-2 text-slate-700">{letterFor(idx)}.</span>
+                        <span className="text-slate-800">{opt}</span>
                         {optTe && (
-                          <div className="mt-1 text-slate-700 whitespace-pre-wrap">
-                            {optTe}
-                          </div>
+                          <div className="mt-1 text-slate-500 text-xs whitespace-pre-wrap">{optTe}</div>
                         )}
-                        {/* Option image (formula/diagram) */}
                         {currentQuestion.option_images?.[String(idx)] && (
                           <img
                             src={currentQuestion.option_images[String(idx)]}
-                            alt={`Option ${letterFor(idx)} diagram`}
-                            className="max-w-full max-h-32 object-contain mt-2 rounded border border-slate-200 bg-white p-1"
+                            alt={`Option ${letterFor(idx)}`}
+                            className="max-w-full max-h-28 object-contain mt-2 rounded border border-slate-200 bg-white p-1"
                           />
                         )}
                         {isFinished && isCorrect && (
-                          <span className="ml-2 text-xs font-bold text-[#15803d] uppercase tracking-wider">
-                            ✓ Correct Answer
-                          </span>
+                          <span className="ml-2 text-xs font-bold text-green-700">✓ Correct</span>
                         )}
                         {isFinished && userSelected && !isCorrect && (
-                          <span className="ml-2 text-xs font-bold text-[#b91c1c] uppercase tracking-wider">
-                            ✗ Your Choice
-                          </span>
-                        )}
-                        {optTe && (
-                          <span className="block text-slate-700 mt-0.5">
-                            {optTe}
-                          </span>
+                          <span className="ml-2 text-xs font-bold text-red-700">✗ Your choice</span>
                         )}
                       </span>
                     </label>
@@ -699,195 +587,205 @@ export default function Exam() {
               </div>
             </div>
           </div>
+        </main>
 
-          {/* Action bar */}
-          <div className="border-t border-border px-4 py-3 bg-[#f8fafc] flex flex-wrap items-center justify-between gap-2">
-            <div className="flex flex-wrap gap-2">
-              {!isFinished ? (
-                <>
-                  <Button
-                    type="button"
-                    onClick={handleMarkForReview}
-                    variant="outline"
-                    className="border-[#c084fc] text-[#7e22ce] hover:bg-[#faf5ff]"
-                  >
-                    Mark for Review & Next
-                  </Button>
-                  <Button type="button" onClick={handleClearResponse} variant="outline">
-                    Clear Response
-                  </Button>
-                </>
-              ) : (
-                <Button
+        {/* ── BOTTOM ACTION BAR ── */}
+        <div className="bg-white border-t border-slate-200 px-3 py-3 shrink-0 shadow-[0_-2px_8px_rgba(0,0,0,0.08)]">
+          {!isFinished ? (
+            <div className="flex flex-col gap-2">
+              {/* Top row: secondary actions + palette */}
+              <div className="flex gap-2">
+                <button
                   type="button"
-                  onClick={() => {
-                    const idx = currentIndex;
-                    if (idx > 0) jumpTo(questions[idx - 1]!.id);
-                  }}
-                  variant="outline"
-                  disabled={currentIndex === 0}
+                  onClick={handleMarkForReview}
+                  className="flex-1 py-2.5 text-xs font-semibold rounded-xl border-2 border-[#c084fc] text-[#7e22ce] bg-[#faf5ff] active:bg-[#f3e8ff] transition-colors"
                 >
-                  Previous Question
-                </Button>
-              )}
-            </div>
-            <div className="flex gap-2">
-              {!isFinished ? (
+                  Mark for Review
+                </button>
+                <button
+                  type="button"
+                  onClick={handleClearResponse}
+                  className="flex-1 py-2.5 text-xs font-semibold rounded-xl border-2 border-slate-200 text-slate-600 bg-white active:bg-slate-50 transition-colors"
+                >
+                  Clear
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaletteOpen(true)}
+                  className="py-2.5 px-3 text-xs font-semibold rounded-xl border-2 border-[#0ea5e9] text-[#0ea5e9] bg-white active:bg-[#f0f9ff] transition-colors"
+                >
+                  <span className="flex flex-col items-center gap-0.5">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+                      <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+                    </svg>
+                    Palette
+                  </span>
+                </button>
+              </div>
+              {/* Bottom row: Save & Next + Submit */}
+              <div className="flex gap-2">
                 <Button
                   type="button"
                   onClick={handleSaveAndNext}
-                  className="bg-primary hover:bg-primary/90"
+                  className="flex-1 h-12 text-sm font-bold rounded-xl bg-[#1e3a8a] hover:bg-[#1e40af] text-white shadow-md"
                 >
-                  Save & Next
+                  Save & Next →
                 </Button>
-              ) : (
                 <Button
                   type="button"
-                  onClick={() => {
-                    const idx = currentIndex;
-                    if (idx < questions.length - 1) jumpTo(questions[idx + 1]!.id);
-                  }}
-                  className="bg-primary hover:bg-primary/90"
-                  disabled={currentIndex === questions.length - 1}
+                  onClick={() => setShowSubmitDialog(true)}
+                  disabled={submitting}
+                  className="h-12 px-4 text-sm font-bold rounded-xl bg-[#16a34a] hover:bg-[#15803d] text-white shadow-md"
                 >
-                  Next Question
+                  Submit
                 </Button>
-              )}
+              </div>
             </div>
-          </div>
-        </section>
-
-        {/* Right palette (Desktop only, hidden on mobile to prioritize question space) */}
-        <aside className="hidden lg:flex w-[320px] bg-[#f1f5f9] border-l border-border flex-col min-h-0 flex-shrink-0">
-          <div className="px-4 py-3 bg-white border-b border-border">
-            <div className="text-sm font-semibold mb-2">{session.candidate.student_name}</div>
-            <div className="grid grid-cols-2 gap-x-3 gap-y-2 text-xs">
-              {isFinished ? (
-                <>
-                  <div className="flex items-center gap-2">
-                    <span className="legend-chip qp-correct" />
-                    <span>Correct</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="legend-chip qp-incorrect" />
-                    <span>Incorrect</span>
-                  </div>
-                  <div className="col-span-2 pt-1 border-t border-slate-100 mt-1">
-                    <div className="font-semibold text-slate-700">
-                      Score: {JSON.parse(sessionStorage.getItem("exam:lastResult") || "{}").score} / {JSON.parse(sessionStorage.getItem("exam:lastResult") || "{}").total}
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex items-center gap-2">
-                    <span className="legend-chip qp-answered" />
-                    <span>Answered ({counts.answered})</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="legend-chip qp-not-answered" />
-                    <span>Not Answered ({counts.notAnswered})</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="legend-chip qp-not-visited" />
-                    <span>Not Visited ({counts.notVisited})</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="legend-chip qp-marked" />
-                    <span>Marked ({counts.marked})</span>
-                  </div>
-                  <div className="flex items-center gap-2 col-span-2">
-                    <span className="legend-chip qp-answered-marked" />
-                    <span>
-                      Answered & Marked for Review ({counts.answeredMarked})
-                      <br />
-                      <em className="text-[10px] text-muted-foreground">
-                        (will be considered for evaluation)
-                      </em>
-                    </span>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
-
-          <div className="px-3 py-3 border-b border-border bg-[#1e3a8a] text-white text-xs font-semibold">
-            Question Palette
-          </div>
-
-          <div className="flex-1 overflow-y-auto p-3">
-            <QuestionPalette
-              questions={visibleQuestions}
-              allQuestions={questions}
-              currentId={currentQuestion.id}
-              statusMap={statusMap}
-              onJump={jumpTo}
-              isFinished={isFinished}
-              answers={answers}
-            />
-          </div>
-
-          <div className="p-3 border-t border-border bg-white">
-            {!isFinished ? (
-              <Button
-                type="button"
-                onClick={() => setShowSubmitDialog(true)}
-                disabled={submitting}
-                className="w-full bg-[#16a34a] hover:bg-[#15803d] text-white"
-              >
-                {submitting ? "Submitting..." : "Submit"}
-              </Button>
-            ) : (
+          ) : (
+            <div className="flex gap-2">
               <Button
                 type="button"
                 onClick={() => {
-                  sessionStorage.clear();
-                  navigate("/");
+                  if (currentIndex > 0) jumpTo(questions[currentIndex - 1]!.id);
                 }}
-                className="w-full bg-[#dc2626] hover:bg-[#b91c1c] text-white"
+                variant="outline"
+                disabled={currentIndex === 0}
+                className="flex-1 h-12 rounded-xl text-sm font-semibold"
               >
-                Logout & Exit
+                ← Previous
               </Button>
-            )}
-          </div>
-        </aside>
-      </main>
+              <Button
+                type="button"
+                onClick={() => {
+                  if (currentIndex < questions.length - 1) jumpTo(questions[currentIndex + 1]!.id);
+                }}
+                className="flex-1 h-12 rounded-xl text-sm font-semibold bg-[#1e3a8a]"
+                disabled={currentIndex === questions.length - 1}
+              >
+                Next →
+              </Button>
+              <Button
+                type="button"
+                onClick={() => { sessionStorage.clear(); navigate("/"); }}
+                className="h-12 px-4 rounded-xl text-sm font-bold bg-[#dc2626] hover:bg-[#b91c1c] text-white"
+              >
+                Exit
+              </Button>
+            </div>
+          )}
+        </div>
 
-      <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Submit Test?</AlertDialogTitle>
-            <AlertDialogDescription asChild>
-              <div className="space-y-1 text-sm">
-                <div>Total Questions: {questions.length}</div>
-                <div>Answered: {counts.answered + counts.answeredMarked}</div>
-                <div>Not Answered: {counts.notAnswered}</div>
-                <div>Not Visited: {counts.notVisited}</div>
-                <div>Marked for Review: {counts.marked}</div>
-                <div className="pt-2">
-                  Are you sure you want to submit? You cannot change your
-                  answers after submission.
-                </div>
+        {/* ── QUESTION PALETTE DRAWER ── */}
+        <Drawer open={paletteOpen} onOpenChange={setPaletteOpen}>
+          <DrawerContent className="max-h-[80vh]">
+            <DrawerHeader className="pb-2">
+              <div className="flex items-center justify-between">
+                <DrawerTitle className="text-base font-bold text-slate-800">Question Palette</DrawerTitle>
+                <DrawerClose asChild>
+                  <button className="text-slate-400 hover:text-slate-700 p-1 rounded-full">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M18 6 6 18M6 6l12 12"/>
+                    </svg>
+                  </button>
+                </DrawerClose>
               </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={submitting}>
-              No, Continue Test
-            </AlertDialogCancel>
-            <AlertDialogAction
-              onClick={(e) => {
-                e.preventDefault();
-                handleSubmit();
-              }}
-              disabled={submitting}
-              className="bg-[#16a34a] hover:bg-[#15803d] text-white"
-            >
-              {submitting ? "Submitting..." : "Yes, Submit"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+              {/* Legend */}
+              <div className="flex flex-wrap gap-x-4 gap-y-1.5 mt-3 text-xs">
+                <span className="flex items-center gap-1.5"><span className="legend-chip qp-answered" />Answered ({counts.answered})</span>
+                <span className="flex items-center gap-1.5"><span className="legend-chip qp-not-answered" />Not Answered ({counts.notAnswered})</span>
+                <span className="flex items-center gap-1.5"><span className="legend-chip qp-not-visited" />Not Visited ({counts.notVisited})</span>
+                <span className="flex items-center gap-1.5"><span className="legend-chip qp-marked" />Marked ({counts.marked})</span>
+              </div>
+              {/* Subject tabs in drawer */}
+              {subjects.length > 0 && (
+                <div className="flex gap-1.5 mt-3 overflow-x-auto no-scrollbar pb-1">
+                  {subjects.map((s) => (
+                    <button
+                      key={s}
+                      type="button"
+                      onClick={() => switchSubject(s)}
+                      className={`px-3 py-1.5 text-xs font-semibold rounded-full whitespace-nowrap transition-colors ${
+                        activeSubject === s
+                          ? "bg-[#1e3a8a] text-white"
+                          : "bg-slate-100 text-slate-600"
+                      }`}
+                    >
+                      {s} ({subjectCounts[s] ?? 0})
+                    </button>
+                  ))}
+                </div>
+              )}
+            </DrawerHeader>
+            <div className="overflow-y-auto px-4 pb-6">
+              <QuestionPalette
+                questions={visibleQuestions}
+                allQuestions={questions}
+                currentId={currentQuestion.id}
+                statusMap={statusMap}
+                onJump={jumpTo}
+                isFinished={isFinished}
+                answers={answers}
+              />
+            </div>
+            {!isFinished && (
+              <div className="p-4 border-t border-slate-200">
+                <Button
+                  type="button"
+                  onClick={() => { setPaletteOpen(false); setShowSubmitDialog(true); }}
+                  disabled={submitting}
+                  className="w-full h-12 text-sm font-bold rounded-xl bg-[#16a34a] hover:bg-[#15803d] text-white"
+                >
+                  {submitting ? "Submitting..." : "Submit Test"}
+                </Button>
+              </div>
+            )}
+          </DrawerContent>
+        </Drawer>
+
+        {/* ── SUBMIT DIALOG ── */}
+        <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
+          <AlertDialogContent className="mx-4 rounded-2xl">
+            <AlertDialogHeader>
+              <AlertDialogTitle>Submit Test?</AlertDialogTitle>
+              <AlertDialogDescription asChild>
+                <div className="space-y-1 text-sm mt-2">
+                  <div className="grid grid-cols-2 gap-2 text-center">
+                    <div className="bg-green-50 rounded-xl p-3">
+                      <div className="text-2xl font-bold text-green-700">{counts.answered + counts.answeredMarked}</div>
+                      <div className="text-xs text-green-600">Answered</div>
+                    </div>
+                    <div className="bg-red-50 rounded-xl p-3">
+                      <div className="text-2xl font-bold text-red-700">{counts.notAnswered}</div>
+                      <div className="text-xs text-red-600">Not Answered</div>
+                    </div>
+                    <div className="bg-slate-50 rounded-xl p-3">
+                      <div className="text-2xl font-bold text-slate-700">{counts.notVisited}</div>
+                      <div className="text-xs text-slate-500">Not Visited</div>
+                    </div>
+                    <div className="bg-purple-50 rounded-xl p-3">
+                      <div className="text-2xl font-bold text-purple-700">{counts.marked}</div>
+                      <div className="text-xs text-purple-600">Marked for Review</div>
+                    </div>
+                  </div>
+                  <p className="pt-2 text-center text-slate-500">You cannot change answers after submission.</p>
+                </div>
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter className="flex-col gap-2 sm:flex-row">
+              <AlertDialogCancel disabled={submitting} className="flex-1 h-11 rounded-xl">
+                Continue Test
+              </AlertDialogCancel>
+              <AlertDialogAction
+                onClick={(e) => { e.preventDefault(); handleSubmit(); }}
+                disabled={submitting}
+                className="flex-1 h-11 rounded-xl bg-[#16a34a] hover:bg-[#15803d] text-white font-bold"
+              >
+                {submitting ? "Submitting..." : "Yes, Submit"}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </ErrorBoundary>
   );

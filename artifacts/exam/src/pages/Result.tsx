@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "wouter";
 import { supabase } from "@/lib/supabase";
 import type { ExamSubmissionRow, ExamQuestion } from "@/lib/types";
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import sphnLogo from "@assets/image_1777100399723.png";
 import { signOut } from "@/lib/firebase";
@@ -40,15 +39,15 @@ export default function Result() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#e8eef5]">
-        <div className="text-sm text-muted-foreground">Loading result...</div>
+      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8]">
+        <div className="text-sm text-slate-500">Loading result...</div>
       </div>
     );
   }
   if (!sub) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#e8eef5]">
-        <div className="text-sm">Submission not found.</div>
+      <div className="min-h-screen flex items-center justify-center bg-[#f0f4f8]">
+        <div className="text-sm text-slate-500">Submission not found.</div>
       </div>
     );
   }
@@ -63,67 +62,65 @@ export default function Result() {
   const timeMin = Math.floor((sub.time_used_seconds ?? 0) / 60);
   const timeSec = (sub.time_used_seconds ?? 0) % 60;
 
-  const correctCount = questions.filter(
-    (q) => answersObj[q.id] && answersObj[q.id] === q.correct_answer,
-  ).length;
-  const wrongCount = questions.filter(
-    (q) => answersObj[q.id] && answersObj[q.id] !== q.correct_answer,
-  ).length;
+  const correctCount = questions.filter((q) => answersObj[q.id] && answersObj[q.id] === q.correct_answer).length;
+  const wrongCount = questions.filter((q) => answersObj[q.id] && answersObj[q.id] !== q.correct_answer).length;
   const unansweredCount = questions.length - correctCount - wrongCount;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#e8eef5]">
-      <header className="bg-white border-b border-border px-6 py-3">
-        <div className="font-semibold">Test Submitted Successfully</div>
-      </header>
+    <div className="min-h-screen flex flex-col bg-[#f0f4f8]">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] text-white px-4 py-5 text-center">
+        <div className="w-12 h-12 mx-auto rounded-2xl bg-white flex items-center justify-center p-1 mb-3 shadow-md">
+          <img src={sphnLogo} alt="" className="w-full h-full object-contain" />
+        </div>
+        <div className="text-base font-bold">Test Submitted!</div>
+        <div className="text-sm text-white/70 mt-0.5">
+          {sub.exam_title ?? "Examination"} · {sub.student_name ?? "Candidate"}
+        </div>
+      </div>
 
-      <main className="flex-1 max-w-3xl w-full mx-auto p-6">
-        <Card className="p-8 shadow-sm">
-          <div className="text-center mb-6">
-            <div className="w-16 h-16 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-3">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#16a34a"
-                strokeWidth="3"
-              >
-                <path d="M5 12l5 5L20 7" />
-              </svg>
-            </div>
-            <h1 className="text-xl font-semibold mb-1">
-              Thank you, {sub.student_name ?? "Candidate"}!
-            </h1>
-            <p className="text-sm text-muted-foreground">
-              Your responses have been recorded for{" "}
-              <span className="font-medium">{sub.exam_title ?? "this test"}</span>.
-            </p>
+      <main className="flex-1 px-4 py-5 max-w-xl w-full mx-auto">
+        {/* Score card */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 mb-4 text-center">
+          <div className="text-5xl font-black text-[#1e3a8a] mb-1">
+            {score}<span className="text-2xl text-slate-400 font-medium">/{total}</span>
+          </div>
+          <div className="text-sm text-slate-500 mb-4">
+            {percentage.toFixed(1)}% · {timeMin}m {timeSec}s
           </div>
 
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <Stat label="Score" value={`${score} / ${total}`} accent="primary" />
-            <Stat label="Percentage" value={`${percentage.toFixed(2)}%`} />
-            <Stat label="Attempted" value={String(attempted)} />
-            <Stat label="Time Used" value={`${timeMin}m ${timeSec}s`} small />
-            <Stat
-              label="Submitted At"
-              value={
-                sub.submitted_at
-                  ? new Date(sub.submitted_at).toLocaleString()
-                  : "—"
-              }
-              small
+          {/* Stats row */}
+          <div className="grid grid-cols-3 gap-3 mb-5">
+            <div className="bg-green-50 rounded-xl py-3">
+              <div className="text-2xl font-bold text-green-700">{correctCount}</div>
+              <div className="text-xs text-green-600 font-medium">Correct</div>
+            </div>
+            <div className="bg-red-50 rounded-xl py-3">
+              <div className="text-2xl font-bold text-red-700">{wrongCount}</div>
+              <div className="text-xs text-red-600 font-medium">Wrong</div>
+            </div>
+            <div className="bg-slate-50 rounded-xl py-3">
+              <div className="text-2xl font-bold text-slate-600">{unansweredCount}</div>
+              <div className="text-xs text-slate-500 font-medium">Skipped</div>
+            </div>
+          </div>
+
+          {/* Progress bar */}
+          <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden mb-4">
+            <div
+              className="h-full bg-gradient-to-r from-[#1e3a8a] to-[#0ea5e9] rounded-full transition-all"
+              style={{ width: `${percentage}%` }}
             />
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 justify-center">
+          <div className="flex flex-col gap-2">
             {questions.length > 0 && (
               <Button
                 onClick={() => setShowAnswers((v) => !v)}
-                className="bg-primary hover:bg-primary/90"
+                variant="outline"
+                className="w-full h-11 rounded-xl font-semibold"
               >
-                {showAnswers ? "Hide Correct Answers" : "View Correct Answers"}
+                {showAnswers ? "Hide Answer Review" : "View Answer Review"}
               </Button>
             )}
             <Button
@@ -132,163 +129,91 @@ export default function Result() {
                 await signOut();
                 navigate("/");
               }}
-              variant="outline"
+              className="w-full h-11 rounded-xl bg-[#dc2626] hover:bg-[#b91c1c] text-white font-semibold"
             >
-              Logout
+              Logout & Exit
             </Button>
           </div>
-        </Card>
-
-        {showAnswers && questions.length > 0 && (
-          <Card className="p-6 mt-4 shadow-sm">
-            <div className="flex items-center justify-between mb-4 flex-wrap gap-2">
-              <h2 className="font-semibold">Answer Review</h2>
-              <div className="flex gap-3 text-xs">
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-2.5 rounded-full bg-green-600 inline-block" />
-                  Correct: {correctCount}
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-600 inline-block" />
-                  Wrong: {wrongCount}
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="w-2.5 h-2.5 rounded-full bg-gray-400 inline-block" />
-                  Unanswered: {unansweredCount}
-                </span>
-              </div>
-            </div>
-
-            <div className="space-y-4">
-              {questions.map((q, i) => {
-                const userAns = answersObj[q.id] ?? "";
-                const isCorrect = userAns && userAns === q.correct_answer;
-                const isWrong = userAns && !isCorrect;
-                return (
-                  <div
-                    key={q.id}
-                    className={`border rounded-lg p-4 bg-white ${
-                      isCorrect
-                        ? "border-green-300"
-                        : isWrong
-                          ? "border-red-300"
-                          : "border-border"
-                    }`}
-                  >
-                    <div className="flex items-start justify-between gap-3 mb-3">
-                      <div className="text-xs font-semibold text-muted-foreground">
-                        Question {i + 1} · {q.marks} mark{q.marks === 1 ? "" : "s"}
-                      </div>
-                      <span
-                        className={`text-[11px] font-semibold px-2 py-0.5 rounded ${
-                          isCorrect
-                            ? "bg-green-100 text-green-700"
-                            : isWrong
-                              ? "bg-red-100 text-red-700"
-                              : "bg-gray-100 text-gray-600"
-                        }`}
-                      >
-                        {isCorrect ? "Correct" : isWrong ? "Wrong" : "Not Answered"}
-                      </span>
-                    </div>
-                    <div className="text-sm mb-3 whitespace-pre-wrap">
-                      {q.question}
-                    </div>
-                    <div className="space-y-1.5">
-                      {(q.options ?? []).map((opt, idx) => {
-                        const letter = "ABCD"[idx] ?? String(idx + 1);
-                        const isOptCorrect = opt === q.correct_answer;
-                        const isOptUser = opt === userAns;
-                        return (
-                          <div
-                            key={idx}
-                            className={`text-sm px-3 py-2 rounded border flex items-start gap-2 ${
-                              isOptCorrect
-                                ? "border-green-400 bg-green-50"
-                                : isOptUser
-                                  ? "border-red-400 bg-red-50"
-                                  : "border-border bg-white"
-                            }`}
-                          >
-                            <span className="font-semibold w-5 shrink-0">
-                              {letter}.
-                            </span>
-                            <span className="flex-1">{opt}</span>
-                            {isOptCorrect && (
-                              <span className="text-[11px] font-semibold text-green-700 shrink-0">
-                                Correct Answer
-                              </span>
-                            )}
-                            {isOptUser && !isOptCorrect && (
-                              <span className="text-[11px] font-semibold text-red-700 shrink-0">
-                                Your Answer
-                              </span>
-                            )}
-                            {isOptUser && isOptCorrect && (
-                              <span className="text-[11px] font-semibold text-green-700 shrink-0">
-                                Your Answer
-                              </span>
-                            )}
-                          </div>
-                        );
-                      })}
-                    </div>
-                    {!userAns && (
-                      <div className="mt-2 text-xs text-muted-foreground italic">
-                        You did not answer this question.
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </Card>
-        )}
-
-        <div className="mt-4 text-xs text-center text-muted-foreground">
-          Submission ID: <span className="font-mono">{sub.id}</span>
         </div>
 
-        <div className="mt-10 mb-6 flex flex-col items-center gap-2">
-          <img
-            src={sphnLogo}
-            alt="Sphoorthy Engineering College"
-            className="h-32 w-auto object-contain"
-          />
-          <div className="text-xs text-muted-foreground text-center">
-            Sphoorthy Engineering College &middot; Online Examination Portal
+        {/* Meta info */}
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 px-4 py-3 mb-4">
+          <div className="grid grid-cols-2 gap-y-2 text-xs">
+            <div className="text-slate-400">Student</div>
+            <div className="text-slate-700 font-medium text-right">{sub.student_name}</div>
+            <div className="text-slate-400">Roll No.</div>
+            <div className="text-slate-700 font-medium text-right">{sub.roll_number}</div>
+            <div className="text-slate-400">Attempted</div>
+            <div className="text-slate-700 font-medium text-right">{attempted} / {questions.length}</div>
+            <div className="text-slate-400">Submitted At</div>
+            <div className="text-slate-700 font-medium text-right text-[11px]">
+              {sub.submitted_at ? new Date(sub.submitted_at).toLocaleString() : "—"}
+            </div>
           </div>
         </div>
-      </main>
-    </div>
-  );
-}
 
-function Stat({
-  label,
-  value,
-  accent,
-  small,
-}: {
-  label: string;
-  value: string;
-  accent?: "primary" | "green" | "red";
-  small?: boolean;
-}) {
-  const color =
-    accent === "primary"
-      ? "text-primary"
-      : accent === "green"
-        ? "text-green-700"
-        : accent === "red"
-          ? "text-red-700"
-          : "text-foreground";
-  return (
-    <div className="border border-border rounded p-4 bg-white">
-      <div className="text-xs text-muted-foreground mb-1">{label}</div>
-      <div className={`font-semibold ${color} ${small ? "text-sm" : "text-lg"}`}>
-        {value}
-      </div>
+        {/* Answer review */}
+        {showAnswers && questions.length > 0 && (
+          <div className="space-y-3 mb-4">
+            <div className="flex items-center justify-between px-1">
+              <h2 className="font-bold text-slate-800">Answer Review</h2>
+              <div className="flex gap-3 text-xs text-slate-500">
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-600 inline-block" />{correctCount} correct</span>
+                <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-red-600 inline-block" />{wrongCount} wrong</span>
+              </div>
+            </div>
+            {questions.map((q, i) => {
+              const userAns = answersObj[q.id] ?? "";
+              const isCorrect = userAns && userAns === q.correct_answer;
+              const isWrong = userAns && !isCorrect;
+              return (
+                <div
+                  key={q.id}
+                  className={`bg-white rounded-2xl border p-4 shadow-sm ${
+                    isCorrect ? "border-green-300" : isWrong ? "border-red-300" : "border-slate-200"
+                  }`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-xs font-semibold text-slate-400">Q{i + 1} · {q.marks} mark{q.marks === 1 ? "" : "s"}</span>
+                    <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      isCorrect ? "bg-green-100 text-green-700" : isWrong ? "bg-red-100 text-red-700" : "bg-slate-100 text-slate-500"
+                    }`}>
+                      {isCorrect ? "✓ Correct" : isWrong ? "✗ Wrong" : "Skipped"}
+                    </span>
+                  </div>
+                  <div className="text-sm text-slate-800 mb-3 whitespace-pre-wrap leading-relaxed">{q.question}</div>
+                  <div className="space-y-1.5">
+                    {(q.options ?? []).map((opt, idx) => {
+                      const letter = "ABCD"[idx] ?? String(idx + 1);
+                      const isOptCorrect = opt === q.correct_answer;
+                      const isOptUser = opt === userAns;
+                      return (
+                        <div
+                          key={idx}
+                          className={`text-sm px-3 py-2.5 rounded-xl border flex items-center gap-2 ${
+                            isOptCorrect ? "border-green-400 bg-green-50" :
+                            isOptUser ? "border-red-400 bg-red-50" : "border-slate-200 bg-white"
+                          }`}
+                        >
+                          <span className="font-bold text-slate-500 w-5 shrink-0">{letter}.</span>
+                          <span className="flex-1 text-slate-700">{opt}</span>
+                          {isOptCorrect && <span className="text-[10px] font-bold text-green-700 shrink-0">✓ Correct</span>}
+                          {isOptUser && !isOptCorrect && <span className="text-[10px] font-bold text-red-700 shrink-0">Your answer</span>}
+                        </div>
+                      );
+                    })}
+                  </div>
+                  {!userAns && <div className="mt-2 text-xs text-slate-400 italic">Not answered.</div>}
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <div className="text-[10px] text-center text-slate-400 pb-4">
+          Submission ID: <span className="font-mono">{sub.id}</span>
+        </div>
+      </main>
     </div>
   );
 }

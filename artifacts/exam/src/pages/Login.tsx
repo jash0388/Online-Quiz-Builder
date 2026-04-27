@@ -8,6 +8,7 @@ import {
   signInWithEmail,
   signUpWithEmail,
   sendResetEmail,
+  checkEmailRegistered,
   signOut,
   describeAuthError,
 } from "@/lib/firebase";
@@ -29,6 +30,7 @@ export default function Login() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [info, setInfo] = useState<string | null>(null);
+  const [suggestRegister, setSuggestRegister] = useState(false);
 
   useEffect(() => {
     if (!loading && user) navigate("/exams");
@@ -37,6 +39,7 @@ export default function Login() {
   function clearMessages() {
     setError(null);
     setInfo(null);
+    setSuggestRegister(false);
   }
 
   async function handleEmailSubmit(e: React.FormEvent) {
@@ -64,8 +67,24 @@ export default function Login() {
         setInfo("Password reset link sent. Check your email.");
       }
     } catch (err) {
-      const msg = describeAuthError(err);
-      if (msg) setError(msg);
+      const code = (err as { code?: string })?.code ?? "";
+      if (
+        mode === "signin" &&
+        (code === "auth/invalid-credential" ||
+          code === "auth/user-not-found" ||
+          code === "auth/wrong-password")
+      ) {
+        const isRegistered = await checkEmailRegistered(email);
+        if (!isRegistered) {
+          setError("No account found for this email.");
+          setSuggestRegister(true);
+        } else {
+          setError("Incorrect password. Please try again.");
+        }
+      } else {
+        const msg = describeAuthError(err);
+        if (msg) setError(msg);
+      }
     } finally {
       setBusy(false);
     }
@@ -221,8 +240,17 @@ export default function Login() {
             )}
 
             {error && (
-              <div className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-xl px-4 py-3">
-                {error}
+              <div className="bg-red-50 border border-red-200 rounded-xl px-4 py-3 space-y-2">
+                <p className="text-sm text-red-700">{error}</p>
+                {suggestRegister && (
+                  <button
+                    type="button"
+                    onClick={() => { clearMessages(); setMode("signup"); }}
+                    className="w-full flex items-center justify-center gap-2 h-9 rounded-lg bg-[#1e3a8a] text-white text-sm font-semibold"
+                  >
+                    Register now →
+                  </button>
+                )}
               </div>
             )}
             {info && (

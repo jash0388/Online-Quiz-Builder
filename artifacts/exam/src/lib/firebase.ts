@@ -6,6 +6,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
+  fetchSignInMethodsForEmail,
   updateProfile,
   signOut as fbSignOut,
   onAuthStateChanged,
@@ -54,6 +55,15 @@ export async function signUpWithEmail(
 
 export async function sendResetEmail(email: string) {
   return sendPasswordResetEmail(auth, email.trim());
+}
+
+export async function checkEmailRegistered(email: string): Promise<boolean> {
+  try {
+    const methods = await fetchSignInMethodsForEmail(auth, email.trim());
+    return methods.length > 0;
+  } catch {
+    return true;
+  }
 }
 
 export async function signOut() {

@@ -52,8 +52,8 @@ export default function Login() {
         await signInWithEmail(email, password);
         navigate("/exams");
       } else if (mode === "signup") {
-        if (password.length < 6) {
-          setError("Password must be at least 6 characters.");
+        if (password.length < 8) {
+          setError("Password must be at least 8 characters.");
           setBusy(false);
           return;
         }
@@ -223,7 +223,7 @@ export default function Login() {
                       type={showPwd ? "text" : "password"}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      placeholder={mode === "signup" ? "At least 6 characters" : "Your password"}
+                      placeholder={mode === "signup" ? "At least 8 characters" : "Your password"}
                       autoComplete={mode === "signup" ? "new-password" : "current-password"}
                       required
                       className="h-11 pr-10"

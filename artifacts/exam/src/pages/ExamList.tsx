@@ -40,7 +40,7 @@ export default function ExamList() {
       setExams((data ?? []) as Exam[]);
       setLoading(false);
     })();
-  }, [authLoading, user, navigate]);
+  }, [authLoading, profileLoading, user, profile, navigate]);
 
   async function handleLogout() {
     await signOut();

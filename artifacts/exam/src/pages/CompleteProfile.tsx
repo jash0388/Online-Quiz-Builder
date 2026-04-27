@@ -19,7 +19,7 @@ export default function CompleteProfile() {
   const [phone, setPhone] = useState("");
   const [fatherName, setFatherName] = useState("");
   const [fatherPhone, setFatherPhone] = useState("");
-  const [college, setCollege] = useState("Sphoorthy Engineering College");
+  const [college, setCollege] = useState("");
 
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);

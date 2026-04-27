@@ -47,7 +47,7 @@ export default function Instructions() {
   const [studentPhone, setStudentPhone] = useState("");
   const [fatherName, setFatherName] = useState("");
   const [fatherPhone, setFatherPhone] = useState("");
-  const [college, setCollege] = useState("Sphoorthy Engineering College");
+  const [college, setCollege] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   // Auth gate via Firebase + prefill from saved student profile

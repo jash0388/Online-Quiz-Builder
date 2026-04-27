@@ -3,13 +3,19 @@
 -- Run this ONCE in Supabase → SQL Editor for project cqjjbvccldipkqqtqzqc.
 -- ============================================================================
 
--- 1) Create the admins table
+-- 1) Create the admins table (idempotent — safe to re-run)
 create table if not exists public.admins (
   email       text primary key,
   is_super    boolean not null default false,
   added_by    text,
   created_at  timestamptz not null default now()
 );
+
+-- 1b) Self-heal older versions of the table that may be missing columns
+alter table public.admins
+  add column if not exists is_super   boolean not null default false,
+  add column if not exists added_by   text,
+  add column if not exists created_at timestamptz not null default now();
 
 -- 2) Enable Row Level Security so the table is locked down by policy
 alter table public.admins enable row level security;

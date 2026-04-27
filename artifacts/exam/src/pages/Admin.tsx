@@ -200,12 +200,15 @@ function AdminPanel({
       )
       .subscribe();
 
-    if (tab === "students") loadStudents();
-
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [selectedExam, tab]);
+  }, [selectedExam]);
+
+  // Load students whenever the Students tab is opened (independent of exam selection)
+  useEffect(() => {
+    if (tab === "students") loadStudents();
+  }, [tab]);
 
   async function createExam() {
     if (!newTitle) return;

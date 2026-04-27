@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "npx pnpm --filter \"@workspace/exam\" build",
   "outputDirectory": "artifacts/exam/dist/public",
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }

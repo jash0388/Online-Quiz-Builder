@@ -1,0 +1,1940 @@
+{
+  "exam": "TG Engineering 03rd May 2025 Shift 2",
+  "sections": [
+    {
+      "subject": "Mathematics",
+      "questions": [
+        {
+          "q_no": 1,
+          "q_id": "9674212881",
+          "question": "Let f : ℝ → ℝ be defined by f(x) = 5^(-|x|) + sgn(5^(-x)), where sgn x denotes signum function of x. Then f is\nf : ℝ → ℝ అనేది f(x) = 5^(-|x|) + sgn(5^(-x)) గా నిర్వచింపబడిన దనుకుందాం. ఇక్కడ sgn x అనేది x యొక్క సంజ్ఞా ప్రమేయాన్ని సూచిస్తుంది. అప్పుడు f",
+          "options": [
+            "one-one but not onto",
+            "onto but not one-one",
+            "both one-one and onto",
+            "neither one-one nor onto"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 2,
+          "q_id": "9674212882",
+          "question": "If the range of the real valued function f(x) = (x²+x+k)/(x²-x+k) is [1/3, 3], then k =\nf(x) = (x²+x+k)/(x²-x+k) అనే వాస్తవ మూల్య ప్రమేయం యొక్క వ్యాప్తి [1/3, 3] అయితే k =",
+          "options": [
+            "-2",
+            "-1",
+            "1",
+            "2"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 3,
+          "q_id": "9674212883",
+          "question": "The value of the greatest integer k satisfying the inequation 2^(n+4) + 12 ≥ k(n+4) for all n ∈ N is\nఅన్ని n ∈ N లకు 2^(n+4) + 12 ≥ k(n+4) అనే అసమీకరణాన్ని తృప్తి పరిచే గరిష్ఠ పూర్ణ సంఖ్య k యొక్క విలువ",
+          "options": [
+            "7",
+            "8",
+            "9",
+            "10"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 4,
+          "q_id": "9674212884",
+          "question": "If the system of simultaneous linear equations x-2y+z=0, 2x+3y+z=6 and x+2y+pz=q has infinitely many solutions, then\nసమకాలిక ఏక ఘాత సమీకరణాల వ్యవస్థ x-2y+z=0, 2x+3y+z=6 మరియు x+2y+pz=q కు అనంతమైనన్ని సాధనలు ఉంటే",
+          "options": [
+            "p + q = 4",
+            "pq = 48/49",
+            "q - p = 3",
+            "p/q = 4"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 5,
+          "q_id": "9674212885",
+          "question": "If the system of linear equations (sinθ)x-y+z=0, x-(cosθ)y+z=0, x+y+(sinθ)z=0 has non-trivial solution, then the least positive value of θ is\n(sinθ)x-y+z=0, x-(cosθ)y+z=0, x+y+(sinθ)z=0 అనే ఏక ఘాత సమీకరణ వ్యవస్థ కు త్రివేతర సాధన ఉంటే, అప్పుడు θ యొక్క కనిష్ఠ ధన విలువ",
+          "options": [
+            "π/6",
+            "π/4",
+            "π/3",
+            "π/2"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 6,
+          "q_id": "9674212886",
+          "question": "If A = [[1,2,3],[2,1,1],[1,3,1]] and B = [[2,3,4],[3,2,2],[2,4,2]], then √|Adj(AB)| =\nA = [[1,2,3],[2,1,1],[1,3,1]] మరియు B = [[2,3,4],[3,2,2],[2,4,2]] అయితే √|Adj(AB)| =",
+          "options": [
+            "176",
+            "208",
+            "198",
+            "234"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 7,
+          "q_id": "9674212887",
+          "question": "If A = [[1,5,2],[4,1,3],[2,6,3]], then |(Adj A)^(-1)| =\nA = [[1,5,2],[4,1,3],[2,6,3]] అయితే |(Adj A)^(-1)| =",
+          "options": [
+            "-1",
+            "1",
+            "4",
+            "-4"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 8,
+          "q_id": "9674212888",
+          "question": "The amplitude of the complex number ((√3+i)(1-√3i)) / ((-1+i)(-1-i)) is\n((√3+i)(1-√3i)) / ((-1+i)(-1-i)) అనే సంకీర్ణ సంఖ్య యొక్క ఆయామము",
+          "options": [
+            "π/2",
+            "π/3",
+            "-5π/12",
+            "-π/6"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 9,
+          "q_id": "9674212889",
+          "question": "If a complex number z = x+iy represents a point P(x,y) in the Argand plane and z satisfies the condition that the imaginary part of (z-3)/(z+3i) is zero, then the locus of the point P is\nఒక సంకీర్ణ సంఖ్య z = x+iy అనేది ఆర్గండ్ తలంలో ఒక బిందువు P(x,y) ని సూచిస్తుంది మరియు (z-3)/(z+3i) యొక్క కల్పిత భాగం సున్నగా ఉండాలన్న నియమాన్ని z తృప్తి పరిస్తే, అప్పుడు P బిందువు యొక్క బిందు పథం",
+          "options": [
+            "x² + y² - 3x + 3y = 0, (x,y) ≠ (0,-3)",
+            "2xy - 3x + 3y + 9 = 0, (x,y) ≠ (0,-3)",
+            "x - y - 3 = 0, (x,y) ≠ (0,-3)",
+            "x + y + 3 = 0, (x,y) ≠ (0,-3)"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 10,
+          "q_id": "9674212890",
+          "question": "(√3+i)^10 + (√3-i)^10 =\n(√3+i)^10 + (√3-i)^10 =",
+          "options": [
+            "1024√3",
+            "1024",
+            "2048",
+            "512√3"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 11,
+          "q_id": "9674212891",
+          "question": "Number of real values of (-1-√3i)^(3/4) is\n(-1-√3i)^(3/4) యొక్క వాస్తవ విలువల సంఖ్య",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 12,
+          "q_id": "9674212892",
+          "question": "If tanθ and cotθ are two distinct roots of the equation ax²+bx+c=0, a≠0, b≠0, then\ntanθ మరియు cotθ లు ax²+bx+c=0, a≠0, b≠0 సమీకరణం యొక్క రెండు విభిన్న మూలాలయితే",
+          "options": [
+            "cos2θ = -2b/c",
+            "sin2θ = -2c/b",
+            "tan2θ = 2b/c",
+            "cot2θ = 2c/a"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 13,
+          "q_id": "9674212893",
+          "question": "Sum of all the roots of the equation ||2x-3|-4| = 2 is\n||2x-3|-4| = 2 సమీకరణం యొక్క మూలాలన్నింటి మొత్తం",
+          "options": [
+            "8",
+            "0",
+            "6",
+            "9"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 14,
+          "q_id": "9674212894",
+          "question": "If the quotient and remainder obtained when the expression 3x⁵-6x⁴+2x³+4x²-5x+8 is divided by x²-2x+3 are ax³+bx²+cx+d and px+q respectively, then ab+cd =\n3x⁵-6x⁴+2x³+4x²-5x+8 సమాసాన్ని x²-2x+3 సమాసము చేత భాగించినప్పుడు భాగఫలము మరియు శేషములు వరుసగా ax³+bx²+cx+d మరియు px+q అయితే ab+cd =",
+          "options": [
+            "p + 2q",
+            "p + 2q - 2",
+            "2p + q",
+            "2p + q - 2"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 15,
+          "q_id": "9674212895",
+          "question": "If α, β, γ, δ are the roots of the equation 12x⁴-56x³+89x²-56x+12=0 such that αβ = γδ = 1 and (α+β)/(γ+δ) > 1, then (α+β)/(γ+δ) =\n12x⁴-56x³+89x²-56x+12=0 యొక్క మూలాలు α, β, γ, δ లు αβ = γδ = 1 మరియు (α+β)/(γ+δ) > 1 అయితే (α+β)/(γ+δ) =",
+          "options": [
+            "65/6",
+            "13/2",
+            "17/15",
+            "15/13"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 16,
+          "q_id": "9674212896",
+          "question": "If all the letters of the word ACADEMICIAN are permuted in all possible ways then the number of permutations in which no two A's are together and all the consonants are together is\nACADEMICIAN అనే పదం లోని అక్షరాలన్నింటిని సాధ్యమైనన్ని విధాలుగా అమర్చితే, అప్పుడు ఏ రెండు A లు కలిసి ఉండకుండానూ మరియు హల్లులన్నీ కలిసి ఉండేటట్లుగా ఉండే ప్రస్తారాల సంఖ్య",
+          "options": [
+            "7200",
+            "14400",
+            "3600",
+            "1800"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 17,
+          "q_id": "9674212897",
+          "question": "The number of all possible three letter words that can be formed by choosing three letters from the letters of the word FEBRUARY so that a vowel always occupies the middle place is\nFEBRUARY అనే పదంలోని అక్షరాల నుండి ఎన్నుకోగలిగే 3 అక్షరాలతో, ఎల్లప్పుడు ఒక అచ్చు మధ్య స్థానంలో ఉండేటట్లుగా ఏర్పరచడానికి వీలయ్యే 3 అక్షరాల పదాలన్నింటి సంఖ్య",
+          "options": [
+            "90",
+            "93",
+            "126",
+            "129"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 18,
+          "q_id": "9674212898",
+          "question": "The number of ways in which 6 boys and 4 girls can be arranged in a row such that between any two girls there must be exactly 2 boys is\n6 మంది బాలురు మరియు 4 గురు బాలికలను ఒక వరుసలో ప్రతి ఇద్దరు బాలికలమధ్య కచ్చితంగా ఇద్దరు బాలురు ఉండేటట్లు అమర్చగలిగే విధాల సంఖ్య",
+          "options": [
+            "6!5!",
+            "(72)6!",
+            "(144)5!",
+            "4!7!"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 19,
+          "q_id": "9674212899",
+          "question": "If C₀, C₁, C₂,...,Cₙ are the binomial coefficients in the expansion of (1+x)ⁿ then the value of Σr³·Cᵣ when n=5 is\n(1+x)ⁿ విస్తరణలో C₀, C₁, C₂,...,Cₙ లు ద్విపదగుణకాలయితే, n=5 అయినప్పుడు Σr³·Cᵣ యొక్క విలువ",
+          "options": [
+            "320",
+            "560",
+            "720",
+            "800"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 20,
+          "q_id": "9674212900",
+          "question": "The coefficient of x¹² in the expansion of (x²+2x+2)⁸ is\n(x²+2x+2)⁸ విస్తరణలో x¹² యొక్క గుణకం",
+          "options": [
+            "1120",
+            "2240",
+            "2576",
+            "4152"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 21,
+          "q_id": "9674212901",
+          "question": "If (x²+1)/((x²+2)(x²+3)) = (Ax+B)/(x²+2) + (Cx+D)/(x²+3), then A+B+C+D =\n(x²+1)/((x²+2)(x²+3)) = (Ax+B)/(x²+2) + (Cx+D)/(x²+3) అయితే A+B+C+D =",
+          "options": [
+            "0",
+            "1",
+            "-1",
+            "6"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 22,
+          "q_id": "9674212902",
+          "question": "If 2sinθ + 3cosθ = 2 and θ ≠ (2n+1)π/2 then sinθ + cosθ =\n2sinθ + 3cosθ = 2 మరియు θ ≠ (2n+1)π/2 అయితే sinθ + cosθ =",
+          "options": [
+            "5/13",
+            "3/5",
+            "7/13",
+            "4/5"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 23,
+          "q_id": "9674212903",
+          "question": "If sinA = -24/25, cosB = 15/17, A does not belong to 4th quadrant and B does not belong to 1st quadrant then (A+B) lies in the quadrant\nsinA = -24/25, cosB = 15/17, A నాళవ పాదం లోనూ మరియు B ఒకటవ పాదంలోనూ లేకపోతే అప్పుడు (A+B) ఉండే పాదం",
+          "options": [
+            "1st quadrant",
+            "2nd quadrant",
+            "3rd quadrant",
+            "4th quadrant"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 24,
+          "q_id": "9674212904",
+          "question": "4cos(7θ/2)cos(3θ/2)sin5θ =\n4cos(7θ/2)cos(3θ/2)sin5θ =",
+          "options": [
+            "sin10θ + sin7θ - sin3θ",
+            "sin10θ + sin7θ - sin5θ",
+            "sin10θ + sin7θ + sin3θ",
+            "sin10θ + sin7θ + sin5θ"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 25,
+          "q_id": "9674212905",
+          "question": "If x ∈ (-π, π) then the number of solutions of the equation 2sinx·sin3x·sin5x + sin5x·cos4x = 0 is\nx ∈ (-π, π) అయితే 2sinx·sin3x·sin5x + sin5x·cos4x = 0 సమీకరణం యొక్క సాధనల సంఖ్య",
+          "options": [
+            "14",
+            "12",
+            "13",
+            "9"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 26,
+          "q_id": "9674212906",
+          "question": "The number of values of x satisfying the equation Tan⁻¹(x + √2/x) + Tan⁻¹(x - √2/x) = Tan⁻¹(x) is\nTan⁻¹(x + √2/x) + Tan⁻¹(x - √2/x) = Tan⁻¹(x) సమీకరణాన్ని తృప్తి పరిచే x యొక్క విలువల సంఖ్య",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 27,
+          "q_id": "9674212907",
+          "question": "coth²x - tanh²x =\ncoth²x - tanh²x =",
+          "options": [
+            "4cosech2x tanh2x",
+            "4sech2x coth2x",
+            "4sech2x tanh2x",
+            "4cosh2x (cosech2x)²"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 28,
+          "q_id": "9674212908",
+          "question": "If a=3, b=5, c=7 are the sides of a triangle ABC, then its circumradius is\na=3, b=5, c=7 లు ఒక త్రిభుజం ABC యొక్క భుజాలైతే, దాని పరివృత్త వ్యాసార్థం",
+          "options": [
+            "7/√3",
+            "15/2",
+            "15√3/4",
+            "√3/2"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 29,
+          "q_id": "9674212909",
+          "question": "Two ships leave a port at the same time. One of them moves in the direction of E50°N with a speed of 8 kmph and the other moves in the direction of S20°E with a speed of 12 kmph. Then the distance between the ships at the end of 2 hours is (in km)\nరెండు ఓడలు ఒక ఓడ రేవు నుండి ఒకే సమయంలో బయలు దేరాయి. వాటిలో ఒకటి E50°N దిశలో గంటకు 8 కి.మీ. ల వేగంతోనూ మరియు మరొకటి S20°E దిశలో గంటకు 12 కి.మీ.ల వేగంతోనూ ప్రయాణిస్తున్నాయి. అయితే 2 గంటలు పూర్తి అయ్యేటప్పటికి ఆ రెండు ఓడల మధ్య దూరం (కి.మీ. లలో)",
+          "options": [
+            "8√7",
+            "34",
+            "8√19",
+            "32"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 30,
+          "q_id": "9674212910",
+          "question": "In a triangle ABC, if BC = i - 2j + 2k and CA = 6i + 3j - 2k, then the perimeter of the triangle is\nఒక త్రిభుజం ABC లో BC = i - 2j + 2k మరియు CA = 6i + 3j - 2k అయితే ఆ త్రిభుజం యొక్క చుట్టు కొలత",
+          "options": [
+            "5(2+√3)",
+            "5(2+√2)",
+            "√10(3+√10)",
+            "10(2+√5)"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 31,
+          "q_id": "9674212911",
+          "question": "i+j+k, a₁i+b₁j+c₁k, a₂i+b₂j+c₂k, a₃i+b₃j+c₃k are the position vectors of the points A, B, C, D respectively. (2/3)(i+j+k) is the position vector of the centroid of the triangular face BCD of the tetrahedron ABCD. If αi+βj+γk is the position vector of the centroid of the tetrahedron, then 2α+β+γ =\ni+j+k, a₁i+b₁j+c₁k, a₂i+b₂j+c₂k, a₃i+b₃j+c₃k లు వరుసగా A, B, C, D బిందువుల స్థాన సదిశలు. చతుర్ముఖి ABCD యొక్క త్రికోణ ముఖం BCD యొక్క కేంద్ర భాసపు స్థాన సదిశ (2/3)(i+j+k). చతుర్ముఖి యొక్క కేంద్ర భాసపు స్థాన సదిశ αi+βj+γk అయితే 2α+β+γ =",
+          "options": [
+            "3",
+            "2",
+            "2/3",
+            "3/4"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 32,
+          "q_id": "9674212912",
+          "question": "If a = i-2j+2k and b = 9i+6j-18k are two vectors, then (Projection of b on a)/(Projection of a on b) =\na = i-2j+2k మరియు b = 9i+6j-18k లు రెండు సదిశలైతే, a పై b విక్షేపము / b పై a విక్షేపము =",
+          "options": [
+            "21",
+            "7",
+            "7/3",
+            "3"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 33,
+          "q_id": "9674212913",
+          "question": "Let a = i+2j+3k, b = 2i-3j+k and c = 3i+j-2k be three vectors. If r is a vector such that r·a = 0, r·b = -2 and r·c = 6 then r·(3i+j+k) =\na = i+2j+3k, b = 2i-3j+k మరియు c = 3i+j-2k లు మూడు సదిశలనుకుందాం. r అనేది r·a = 0, r·b = -2 మరియు r·c = 6 అయ్యేటట్లు గా ఉన్న సదిశ అయితే r·(3i+j+k) =",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 34,
+          "q_id": "9674212914",
+          "question": "Let a = i-j+k, b = i-2j-2k, c = 6i+3j-2k be three vectors. If d is a vector perpendicular to both a, b and |d×c| = 14, then |d·c| =\na = i-j+k, b = i-2j-2k, c = 6i+3j-2k లు మూడు సదిశలనుకుందాం. d అనేది a, b లు రెండింటికీ లంబంగా ఉండే ఒక సదిశ మరియు |d×c| = 14 అయితే |d·c| =",
+          "options": [
+            "35",
+            "70",
+            "140",
+            "105"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 35,
+          "q_id": "9674212915",
+          "question": "The mean deviation from the mean of the discrete data 2, 3, 5, 7, 11, 13, 17, 19, 22 is\nవిచ్ఛిన్న దత్తాంశం 2, 3, 5, 7, 11, 13, 17, 19, 22 కు అంక మధ్యమం నుండి మధ్యమ విచలనం",
+          "options": [
+            "8",
+            "7.5",
+            "5.5",
+            "6"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 36,
+          "q_id": "9674212916",
+          "question": "Out of the given 25 consecutive positive integers, three integers are drawn. If the least integer among given 25 integers is an odd number, then the probability that the sum of the three integers drawn is an even number is\nఇచ్చిన 25 వరస ధనపూర్ణ సంఖ్యల నుండి, మూడు పూర్ణ సంఖ్యలను తీసుకున్నారు. ఇచ్చిన 25 పూర్ణ సంఖ్యలలో కనిష్ఠ పూర్ణ సంఖ్య ఒక బేసి సంఖ్య అయితే, తీసుకున్న ఆ మూడు పూర్ణ సంఖ్యల మొత్తం ఒక సరిసంఖ్య అయ్యే సంభావ్యత",
+          "options": [
+            "289/575",
+            "286/575",
+            "288/575",
+            "287/575"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 37,
+          "q_id": "9674212917",
+          "question": "If three dice are thrown at a time, then the probability of getting the sum of the numbers on them as a prime number is\nమూడు పాచికలను ఒకేసారి దొర్లించినప్పుడు, వాటిపై వచ్చే సంఖ్యల మొత్తం ప్రధాన సంఖ్య కావడానికి సంభావ్యత",
+          "options": [
+            "3/8",
+            "73/216",
+            "4/27",
+            "5/54"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 38,
+          "q_id": "9674212918",
+          "question": "Three companies C1, C2, C3 produce car tyres. A car manufacturing company buys 40% of its requirement from C1, 35% from C2 and 25% from C3. The company knows that 2% of the tyres supplied by C1, 3% by C2 and 4% by C3 are defective. If a tyre chosen at random from the consignment received is found defective then the probability that it was supplied by C2 is\nC1, C2, C3 అనే 3 కంపెనీలు కారు టైర్లను ఉత్పత్తి చేస్తాయి. కార్లను తయారుచేసే ఒక కంపెని దానికి కావలసిన టైర్లలో C1 నుండి 40%, C2 నుండి 35% మరియు C3 నుండి 25% కొనుగోలు చేస్తుంది. C1 సరఫరా చేసిన వాటిలో 2%, C2 చేసిన టైర్లలో 3% మరియు C3 చేసిన వాటిలో 4% లోపభూయిష్టమైనవని కంపెనీ కి తెలుసు. వచ్చిన రవాణా సరుకు నుండి యాదృచ్చికంగా ఎన్నుకున్న ఒక టైరు లోపాన్ని కలిగి ఉంటే, అది C2 చే సరఫరా చేయబడినది కావడానికి సంభావ్యత",
+          "options": [
+            "7/19",
+            "12/19",
+            "10/57",
+            "26/57"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 39,
+          "q_id": "9674212919",
+          "question": "The probability distribution of a random variable X is given below. Then, the standard deviation of X is\nఒక యాదృచ్చిక చలరాశి X యొక్క సంభావ్యతా విభాజనం క్రింద ఇవ్వబడినది. అయితే X యొక్క క్రమ విచలనం\nX: 2, 3, 5, 7, 12 | P(X=xᵢ): 3k, k, k, 2k, k",
+          "options": [
+            "5",
+            "11",
+            "√11",
+            "√5"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 40,
+          "q_id": "9674212920",
+          "question": "If the mean and variance of a binomial distribution are 4/3 and 10/9 respectively, then P(X ≥ 6) =\nఒక ద్విపద విభాజనం యొక్క అంకమధ్యమం మరియు విస్తృతులు వరుసగా 4/3 మరియు 10/9 అయితే P(X ≥ 6) =",
+          "options": [
+            "41/6⁸",
+            "741/6⁸",
+            "1 - 741/6⁸",
+            "1 - 41/6⁸"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 41,
+          "q_id": "9674212921",
+          "question": "A straight line passing through a point (3,2) cuts X and Y-axes at the points A and B respectively. If a point P divides AB in the ratio 2:3, then the equation of the locus of point P is\n(3,2) అనే ఒక బిందువు గుండా పోయే ఒక సరళ రేఖ X మరియు Y-అక్షాలను వరుసగా A మరియు B బిందువుల వద్ద ఖండిస్తుంది. AB ని P అనే ఒక బిందువు 2:3 నిష్పత్తి లో విభజిస్తే బిందువు P యొక్క బిందుపథ సమీకరణం",
+          "options": [
+            "9/x + 4/y = 1",
+            "9x + 4y = 5xy",
+            "4x + 9y = 5xy",
+            "4/x + 9/y = 1"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 42,
+          "q_id": "9674212922",
+          "question": "By shifting the origin to the point (-1,2) through translation of axes, if ax²+2hxy+by²+2gx+2fy+c=0 is the transformed equation of 2x²-xy+y²-3x+4y-5=0, then 2(f+g+h) =\nసమాంతర అక్ష పరివర్తన ద్వారా మూల బిందువును (-1,2) బిందువు వద్దకు మార్చినప్పుడు ax²+2hxy+by²+2gx+2fy+c=0 అనేది 2x²-xy+y²-3x+4y-5=0 యొక్క రూపాంతర సమీకరణం అయితే 2(f+g+h) =",
+          "options": [
+            "a+b+c",
+            "a-5(b+c)",
+            "3(a+b+c)",
+            "c-5(a+b)"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 43,
+          "q_id": "9674212923",
+          "question": "If a line L passing through the point A(-2,4) makes an angle of 60° with the positive direction of X-axis in anti-clockwise direction and B(p,q) lying in the 3rd quadrant is a point on L at the distance of 6 units from the point A, then √(p²+q²-8q) =\nA(-2,4) బిందువు గుండా పోయే L అనే ఒక సరళ రేఖ X-అక్షపు ధన దిశతో ధన దిశలో చేసే కోణం 60° మరియు మూడవ పాదంలో ఉంటూ L పై ఉన్న ఒక బిందువు B(p,q) బిందువు A నుండి 6 యూనిట్ల దూరంలో ఉంటే, అప్పుడు √(p²+q²-8q) =",
+          "options": [
+            "6",
+            "7",
+            "8",
+            "9"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 44,
+          "q_id": "9674212924",
+          "question": "If the perpendicular drawn from the point (2,-3) to the straight line 4x-3y+8=0 meets it at M(a,b) and a³-b³ = k³, then k =\n4x-3y+8=0 సరళరేఖ కు (2,-3) బిందువు నుండి గీసిన లంబము ఆ రేఖను M(a,b) వద్ద ఖండిస్తుంది మరియు a³-b³ = k³, అయితే k =",
+          "options": [
+            "1",
+            "-1",
+            "2",
+            "-2"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 45,
+          "q_id": "9674212925",
+          "question": "Let Q be the image of a point P(1,2) with respect to the line x+y+1=0 and R be the image of Q with respect to the line x-y-1=0. If M and N are the midpoints of PQ and QR respectively, then MN =\nx+y+1=0 సరళ రేఖ దృష్ట్యా P(1,2) అనే ఒక బిందువు యొక్క ప్రతిబింబం Q అనుకుందాం మరియు x-y-1=0 సరళ రేఖ దృష్ట్యా Q యొక్క ప్రతిబింబం R అనుకుందాం. M, N లు వరుసగా PQ మరియు QR ల మధ్య బిందువు లైతే MN =",
+          "options": [
+            "√10",
+            "4",
+            "√22",
+            "5"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 46,
+          "q_id": "9674212926",
+          "question": "If the slopes of the lines represented by the equation 6x²+2hxy+4y²=0 are in the ratio 2:3, then the value of h such that both the lines make acute angles with the positive X-axis measured in positive direction is\n6x²+2hxy+4y²=0 సమీకరణం సూచించే రేఖల వాలులు 2:3 నిష్పత్తిలో ఉంటే, ఆ రెండు రేఖలు, ధన దిశలో కొలిచినప్పుడు ధన X-అక్షంతో లఘు కోణాలను చేసేటట్లుగా ఉండే h యొక్క విలువ",
+          "options": [
+            "5",
+            "5/2",
+            "-5",
+            "-5/2"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 47,
+          "q_id": "9674212927",
+          "question": "If (3,-2) is the centre of the circle S ≡ x²+y²+2gx+2fy-23=0 and A is a point on the circle S=0 such that its distance from a point P(-1,-5) is least, then A =\nS ≡ x²+y²+2gx+2fy-23=0 వృత్తం కేంద్రం (3,-2) మరియు A అనేది P(-1,-5) అనే ఒక బిందువు నుండి దానికి గల దూరం కనిష్ఠ మయ్యేటట్లు గా, వృత్తం S=0 పై గల ఒక బిందువు అయితే A =",
+          "options": [
+            "(3,-2)",
+            "(9/5, 28/5)",
+            "(3/5, -2/5)",
+            "(-9/5, -28/5)"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 48,
+          "q_id": "9674212928",
+          "question": "Two circles which touch both the coordinate axes intersect at the points A and B. If A=(1,2), then AB =\nనిరుపకాక్షాలు రెండింటిని స్పృశించే రెండు వృత్తాలు A మరియు B బిందువుల వద్ద ఖండించుకుంటాయి. A=(1,2) అయితే AB =",
+          "options": [
+            "5",
+            "13",
+            "2√2",
+            "√2"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 49,
+          "q_id": "9674212929",
+          "question": "The line 4x-3y+2=0 intersects the circle x²+y²-2x+6y+c=0 at two points A, B and AB=8. If (1,k) is a point on the given circle and k>0, then k =\n4x-3y+2=0 సరళరేఖ x²+y²-2x+6y+c=0 వృత్తాన్ని A, B అనే రెండు బిందువుల వద్ద ఖండిస్తుంది మరియు AB=8. దత్త వృత్తం పై (1,k) ఒక బిందువు మరియు k>0 అయితే k =",
+          "options": [
+            "8",
+            "4",
+            "2",
+            "1"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 50,
+          "q_id": "9674212930",
+          "question": "If 2x-3y+5=0 and 4x-5y+7=0 are the equations of the normals drawn to a circle and (2,5) is a point on the given circle, then the radius of the circle is\n2x-3y+5=0 మరియు 4x-5y+7=0 లు ఒక వృత్తానికి గీసిన అభిలంబ రేఖల సమీకరణాలు మరియు (2,5) దత్త వృత్తం పై ఒక బిందువు అయితే దత్త వృత్తం యొక్క వ్యాసార్థం",
+          "options": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 51,
+          "q_id": "9674212931",
+          "question": "If (α,β) is the centre of the circle which passes through the point (1,-1) and cuts the circles x²+y²+2x-3y-5=0, x²+y²-3x+2y+1=0 orthogonally, then α-5β =\n(1,-1) బిందువు గుండా పోతూ x²+y²+2x-3y-5=0, x²+y²-3x+2y+1=0 వృత్తాలను లంబచ్చేదనం చేసే వృత్తం యొక్క కేంద్రం (α,β) అయితే α-5β =",
+          "options": [
+            "-10",
+            "5",
+            "-11",
+            "10"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 52,
+          "q_id": "9674212932",
+          "question": "The centre of the circle touching the circles x²+y²-4x-6y-12=0, x²+y²+6x+18y+26=0 at their point of contact and passing through the point (1,-1) is\nx²+y²-4x-6y-12=0, x²+y²+6x+18y+26=0 వృత్తాల స్పర్శ బిందువు వద్ద వాటిని స్పృశిస్తూ మరియు (1,-1) బిందువు గుండా పోయే వృత్తం యొక్క కేంద్రం",
+          "options": [
+            "(1/3,-1)",
+            "(1/5, 6/5)",
+            "(1/2, 1)",
+            "(-1/4, -1/2)"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 53,
+          "q_id": "9674212933",
+          "question": "The number of normals that can be drawn through the point (2,0) to the parabola y²=7x is\ny²=7x పరావలయానికి (2,0) బిందువు గుండా గీయ గలిగే అభిలంబ రేఖల సంఖ్య",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "3"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 54,
+          "q_id": "9674212934",
+          "question": "If m₁ and m₂ are the slopes of the tangents drawn from the point (1,4) to the parabola y²=11x then 2(m₁²+m₂²) =\ny²=11x పరావలయానికి (1,4) బిందువు నుండి గీసిన స్పర్శరేఖల వాలులు m₁ మరియు m₂ అయితే 2(m₁²+m₂²) =",
+          "options": [
+            "24",
+            "22",
+            "21",
+            "18"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 55,
+          "q_id": "9674212935",
+          "question": "If the perpendicular distance from the focus of an ellipse x²/9 + y²/b² = 1 (b<3) to its corresponding directrix is 4/√5, then the slope of the tangent to this ellipse drawn at (3/√2, b/√2) is\nx²/9 + y²/b² = 1 (b<3) దీర్ఘ వృత్తం యొక్క నాభి నుండి దాని అనుబంధ నియత రేఖకు గల లంబ దూరం 4/√5 అయితే, (3/√2, b/√2) వద్ద ఈ దీర్ఘ వృత్తానికి గీయబడిన స్పర్శరేఖ వాలు",
+          "options": [
+            "-2/3",
+            "2/3",
+            "3/2",
+            "-3/2"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 56,
+          "q_id": "9674212936",
+          "question": "The length of the chord of the ellipse x²/4 + y² = 1 formed on the line y = x+1 is\ny = x+1 రేఖపై ఏర్పడిన x²/4 + y² = 1 దీర్ఘ వృత్తం యొక్క జ్యా పొడవు",
+          "options": [
+            "2√2",
+            "(4/5)√2",
+            "4√2",
+            "(8/5)√2"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 57,
+          "q_id": "9674212937",
+          "question": "Let P, Q, R, S be the points of intersection of the circle x²+y²=4 and the hyperbola xy=√3. If P=(α,β) and α>β>0, then the equation of the tangent drawn at P to the hyperbola is\nP, Q, R, S లు x²+y²=4 వృత్తమూ మరియు xy=√3 అతి పరావలయాల ఖండన బిందువులు. P=(α,β) మరియు α>β>0 అయితే, ఈ అతిపరావలయానికి P వద్ద గీసిన స్పర్శరేఖ సమీకరణం",
+          "options": [
+            "x + y = 2",
+            "x + √3y = 2√3",
+            "√3x + y = √3",
+            "x - y = 0"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 58,
+          "q_id": "9674212938",
+          "question": "The number of values of 'k' for which the points (-4,9,k), (-1,6,k), (0,7,10) form a right-angled isosceles triangle is\n(-4,9,k), (-1,6,k), (0,7,10) బిందువులు ఒక లంబకోణ సమ ద్విబాహు త్రిభుజాన్ని ఏర్పరచేటట్లుగా ఉండే 'k' విలువల సంఖ్య",
+          "options": [
+            "0",
+            "1",
+            "2",
+            "4"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 59,
+          "q_id": "9674212939",
+          "question": "A line makes angles 60°, 45°, θ with positive X, Y, Z-axes respectively. If θ is an acute angle, then tanθ =\nఒక రేఖ X, Y, Z-ధన అక్షాలతో వరుసగా 60°, 45°, θ కోణాలను చేస్తుంది. θ లఘు కోణమైతే tanθ =",
+          "options": [
+            "√3",
+            "1/√3",
+            "1",
+            "2"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 60,
+          "q_id": "9674212940",
+          "question": "If the foot of the perpendicular drawn from the point (2,0,-3) to the plane π is (1,-2,0) and the equation of the plane π is ax+by-3z+d=0 then a+b+d =\nπ తలానికి (2,0,-3) బిందువు నుండి గీసిన లంబ పాదం (1,-2,0) మరియు π తలం యొక్క సమీకరణం ax+by-3z+d=0 అయితే a+b+d =",
+          "options": [
+            "0",
+            "1",
+            "6",
+            "2"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 61,
+          "q_id": "9674212941",
+          "question": "If [t] represents the greatest integer ≤ t then the value of lim(x→3) (11-[2-x])/[x+10] is\n[t] అనేది t కంటే తక్కువ లేదా సమానమైన గరిష్ఠ పూర్ణ సంఖ్యను సూచిస్తే lim(x→3) (11-[2-x])/[x+10] యొక్క విలువ",
+          "options": [
+            "1",
+            "8",
+            "5",
+            "does not exist"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 62,
+          "q_id": "9674212942",
+          "question": "If the real valued function f(x) = {(cos3x-cosx)/(xsinx) if x<0; p if x=0; log(1+qsinx)/x if x>0} is continuous at x=0 then p+q =\nf(x) = {(cos3x-cosx)/(xsinx) అయితే x<0; p అయితే x=0; log(1+qsinx)/x అయితే x>0} అనే వాస్తవ మూల్య ప్రమేయం x=0 వద్ద అవిచ్ఛిన్నమైతే p+q =",
+          "options": [
+            "4",
+            "-4",
+            "8",
+            "-8"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 63,
+          "q_id": "9674212943",
+          "question": "If y = √(log(x²+1) + √(log(x²+1) + √(log(x²+1)+...∞)), |x|<1, then dy/dx =\ny = √(log(x²+1) + √(log(x²+1) + √(log(x²+1)+...∞)), |x|<1 అయితే dy/dx =",
+          "options": [
+            "(x²+1)/(2y-1)",
+            "2x/(2y-1)",
+            "1/((x²+1)(2y-1))",
+            "2x/((x²+1)(2y-1))"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 64,
+          "q_id": "9674212944",
+          "question": "If x = √(1-tany), then dy/dx =\nx = √(1-tany) అయితే dy/dx =",
+          "options": [
+            "2x/(x⁴+2x²+2)",
+            "-2x/(x⁴-2x²+2)",
+            "2x/(x⁴-2x²+2)",
+            "-2x/(x⁴+2x²+2)"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 65,
+          "q_id": "9674212945",
+          "question": "If y = Sec⁻¹x, then d²y/dx² =\ny = Sec⁻¹x అయితే d²y/dx² =",
+          "options": [
+            "(1-2x²)/(x|x|(x²-1)^(3/2))",
+            "(1-x²)/(x²(x²-1)^(3/2))",
+            "(1-x²)/(-x²(x²-1)^(3/2))",
+            "(1+2x²)/(x|x|(x²-1)^(3/2))"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 66,
+          "q_id": "9674212946",
+          "question": "If x = sin2θcos3θ, y = sin3θcos2θ, then dy/dx =\nx = sin2θcos3θ, y = sin3θcos2θ అయితే dy/dx =",
+          "options": [
+            "(2cos5θ + sin3θsin2θ)/(2cos5θ - cos3θcos2θ)",
+            "(2cos5θ - sin3θsin2θ)/(2cos5θ + cos3θcos2θ)",
+            "(2cos5θ + cos3θcos2θ)/(2cos5θ - sin3θsin2θ)",
+            "(2cos5θ - sin3θsin2θ)/(2cos5θ - cos3θcos2θ)"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 67,
+          "q_id": "9674212947",
+          "question": "If the tangent and the normal drawn to the curve xy²+x²y=12 at the point (1,3) meet the X-axis in T and N respectively, then TN =\nxy²+x²y=12 అనే వక్రానికి (1,3) బిందువు వద్ద గీసిన స్పర్శరేఖ మరియు అభిలంబ రేఖలు X-అక్షాన్ని వరుసగా T మరియు N ల వద్ద ఖండిస్తే, అప్పుడు TN =",
+          "options": [
+            "7/5",
+            "45/7",
+            "3√274/7",
+            "274/35"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 68,
+          "q_id": "9674212948",
+          "question": "A man of 5 feet height is walking away from a light fixed at a height of 15 feet at the rate of K miles/hour. If the rate of increase of his shadow is 11/5 feet/sec, then K = (Take 1 mile = 5280 feet)\n15 మీటర్ల ఎత్తున బిగించబడిన ఒక దీపం నుండి, దానికి దూరంగా, గంటకు K మైళ్ళ చొప్పున 5 అడుగుల ఎత్తుగల ఒక వ్యక్తి నడుస్తూ ఉన్నాడు. అతని నీడ సెకనుకు 11/5 అడుగుల చొప్పున పెరుగుతూ ఉంటే, K = (1 మైలు = 5280 అడుగులు గా తీసుకోండి)",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 69,
+          "q_id": "9674212949",
+          "question": "There is a possible error of 0.03 cm in a scale of length 1 foot with which the height of a closed right circular cylinder and the diameter of a sphere are measured as 3.5 feet each. If the radii of both cylinder and sphere are same, then the approximate error in the sum of the surface areas of both cylinder and sphere is (in square feet)\nఒక మూయబడిన లంబ వృత్తీయ స్తూపం యొక్క ఎత్తు మరియు ఒక గోళం యొక్క వ్యాసమును ఒక్కొక్కటి 3.5 అడుగులుగా కొలవడానికి ఉపయోగించిన అడుగు పొడవు గల స్కేలు లో 0.03 సెం.మీ. ల దోషం ఉందవచ్చు. ఆ స్తూపము మరియు గోళాల రెండింటి వ్యాసార్థాలు సమానంగా ఉంటే, స్తూపము మరియు గోళాల ఉపరితల వైశాల్యల మొత్తం లో ఉజ్జాయింపు దోషం (చదరపు అడుగులలో)",
+          "options": [
+            "0.385",
+            "0.0962",
+            "0.77",
+            "0.1925"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 70,
+          "q_id": "9674212950",
+          "question": "For a real number 'a', if a real valued function f(x) = 4x³+ax²+3x-2 is monotonic in its domain, then the range of 'a' is\nఒక వాస్తవ సంఖ్య 'a' కి f(x) = 4x³+ax²+3x-2 అనే ఒక వాస్తవ మూల్య ప్రమేయం దాని ప్రదేశంలో ఏకదిష్టమైతే, 'a' యొక్క వ్యాప్తి",
+          "options": [
+            "(-6,6)",
+            "Empty set (శూన్య సమితి)",
+            "(-2,2)",
+            "(2,4)"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 71,
+          "q_id": "9674212951",
+          "question": "If the point P(x₁,y₁) lying on the curve y=x²-x+1 is the closest point to the line y=x-3 then the perpendicular distance from P to the line 3x+4y-2=0 is\ny=x²-x+1 వక్రం పై ఉన్న P(x₁,y₁) బిందువు y=x-3 రేఖకు అత్యంత సామీప్య బిందువైతే, P నుండి 3x+4y-2=0 రేఖకు గల లంబదూరం",
+          "options": [
+            "16/5",
+            "4",
+            "1",
+            "7/5"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 72,
+          "q_id": "9674212952",
+          "question": "∫(3ˣ(xlog3-1)/x²)dx =\n∫(3ˣ(xlog3-1)/x²)dx =",
+          "options": [
+            "x.3ˣ + c",
+            "3ˣ/x² + c",
+            "x²3ˣ + c",
+            "3ˣ/x + c"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 73,
+          "q_id": "9674212953",
+          "question": "If 5π/4 < x < 7π/4, then ∫√((1-sin2x)/(1+sin2x))dx =\n5π/4 < x < 7π/4 అయితే ∫√((1-sin2x)/(1+sin2x))dx =",
+          "options": [
+            "-sec²(π/4-x) + c",
+            "-log|sec(π/4-x)| + c",
+            "sec²(π/4-x) + c",
+            "log|sec(π/4-x)| + c"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 74,
+          "q_id": "9674212954",
+          "question": "∫xTan⁻¹√((1+x²)/(1-x²))dx =\n∫xTan⁻¹√((1+x²)/(1-x²))dx =",
+          "options": [
+            "x²/4(π-Cos⁻¹x²) + 1/4√(1-x²) + c",
+            "x²/4(π-Cos⁻¹x²) + 1/4√(1-x⁴) + c",
+            "x²/4(π+Cos⁻¹x²) - 1/4√(1-x⁴) + c",
+            "x²/4(π+Cos⁻¹x²) - 1/4√(1-x²) + c"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 75,
+          "q_id": "9674212955",
+          "question": "∫1/(2cosx+sinx)²dx =\n∫1/(2cosx+sinx)²dx =",
+          "options": [
+            "1/(2+tanx) + c",
+            "-1/(2tanx+1) + c",
+            "cosx/(cosx+2sinx) + c",
+            "-cosx/(2cosx+sinx) + c"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 76,
+          "q_id": "9674212956",
+          "question": "∫₋₁¹ (log2-log(1+x))/√(1-x²) dx =\n∫₋₁¹ (log2-log(1+x))/√(1-x²) dx =",
+          "options": [
+            "π/8 log2",
+            "-π/2 log2",
+            "-π/4 log2",
+            "2π log2"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 77,
+          "q_id": "9674212957",
+          "question": "∫₀^(π/4) secx/(3cosx+4sinx) dx =\n∫₀^(π/4) secx/(3cosx+4sinx) dx =",
+          "options": [
+            "log(7/3)",
+            "1/4 log(7/3)",
+            "1/4 log7",
+            "log7"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 78,
+          "q_id": "9674212958",
+          "question": "∫₋₂⁴ |2-x²| dx =\n∫₋₂⁴ |2-x²| dx =",
+          "options": [
+            "8√2/3 - 3",
+            "16√2/3 + 12",
+            "16√2/3 - 3",
+            "8√2/3 + 12"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 79,
+          "q_id": "9674212959",
+          "question": "The general solution of the differential equation dy/dx + (secx·cosecx)y = cos²x is\ndy/dx + (secx·cosecx)y = cos²x అనే అవకలన సమీకరణం యొక్క సాధారణ సాధన",
+          "options": [
+            "ysec²x = sin²x + c",
+            "ysec²x = tanx + c",
+            "ytanx = sinxcosx + c",
+            "2ytanx = sin²x + c"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 80,
+          "q_id": "9674212960",
+          "question": "If the differential equation having y = Aeˣ + Bsinx as its general solution is f(x)d²y/dx² + g(x)dy/dx + h(x)y = 0, then f(x) + g(x) + h(x) =\nf(x)d²y/dx² + g(x)dy/dx + h(x)y = 0 అనేది y = Aeˣ + Bsinx ను దాని సాధారణ సాధనగా కలిగిన అవకలన సమీకరణమైతే f(x) + g(x) + h(x) =",
+          "options": [
+            "2cosx",
+            "4sinx",
+            "0",
+            "cosx - sinx"
+          ],
+          "correct": 3
+        }
+      ]
+    },
+    {
+      "subject": "Physics",
+      "questions": [
+        {
+          "q_no": 81,
+          "q_id": "9674212961",
+          "question": "The range of weak nuclear force is of the order of\nదుర్బల కేంద్రక బలం వ్యాప్తి యొక్క క్రమం",
+          "options": [
+            "10¹⁶ m",
+            "10⁻¹⁰ m",
+            "10¹⁰ m",
+            "10⁻¹⁶ m"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 82,
+          "q_id": "9674212962",
+          "question": "A piece of length 3.532 m is cut from a rod of length 43.4 m. The length of the remaining rod in metre is (up to correct significant figures)\n43.4 m పొడవుగల ఒక కడ్డీ నుండి 3.532 m పొడవుగల ఒక ముక్కను కత్తిరించగా మిగిలిన కడ్డీ యొక్క పొడవు మీటర్ లో (సరియైన సార్థక సంఖ్యల వరకు)",
+          "options": [
+            "39.9",
+            "39.8",
+            "39.868",
+            "39.87"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 83,
+          "q_id": "9674212963",
+          "question": "A person wearing a parachute jumps off a plane from a height of 2 km from the ground and falls freely for 20 m before his parachute opens. After his parachute opens if he continues to move uniformly with the velocity attained due to his freefall, the total time taken by the person to reach the ground is (Acceleration due to gravity = 10 ms⁻²)\nపారాచుట్ ధరించిన ఒక వ్యక్తి భూమికి 2 km ఎత్తులో ఉన్న ఒక విమానంనుండి దూకి, అతని పారాచుట్ తెరుచుకునే లోపు 20 m స్వేచ్చగా పడినాడు. పారాచుట్ తెరుచుకున్న తరువాత, అతను స్వేచ్చగా పతనం చెందుట వలన పొందిన వేగంతోనే స్థిరంగా చలనం కొనసాగిస్తే, ఆ వ్యక్తి భూమిని చేరుకొనుటకు పట్టు మొత్తం కాలం (గురుత్వ త్వరణం = 10 ms⁻²)",
+          "options": [
+            "99 s",
+            "100 s",
+            "101 s",
+            "102 s"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 84,
+          "q_id": "9674212964",
+          "question": "A ball projected at an angle of 45° with the horizontal crosses two points at equal heights separated by a distance at times 2 s and 8 s respectively. The horizontal distance between the two points is (Acceleration due to gravity = 10 ms⁻²)\nక్షితిజ సమాంతరంతో 45° కోణం చేస్తూ ప్రక్షిప్తం చేయబడిన ఒక బంతి, ఒకే ఎత్తు కలిగి కొంత దూరంతో వేరుచేయబడిన రెండు బిందువులను వరుసగా 2 s మరియు 8 s కాలాల వద్ద దాటిన, ఆ రెండు బిందువుల మధ్య క్షితిజ సమాంతర దూరం (గురుత్వ త్వరణం = 10 ms⁻²)",
+          "options": [
+            "300 m",
+            "400 m",
+            "500 m",
+            "600 m"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 85,
+          "q_id": "9674212965",
+          "question": "A truck of mass 8 ton is carrying a block of mass 2 ton. If a breaking force of 25 kN is applied on the truck, then the frictional force acting on the block is (Coefficient of static friction between the block and the truck is 0.3)\n8 టన్నుల ద్రవ్యరాశి గల ఒక ట్రక్, 2 టన్నుల ద్రవ్యరాశి గల ఒక దిమ్మెను మొయుచున్నది. బ్రేకుల వలన ట్రక్ మీద 25 kN బలం పనిచేయగా, దిమ్మెపై పనిచేయు ఘర్షణ బలం (దిమ్మెకు మరియు ట్రక్ కు మధ్య స్థైతిక ఘర్షణ గుణకం 0.3)",
+          "options": [
+            "6250 N",
+            "6000 N",
+            "5000 N",
+            "1000 N"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 86,
+          "q_id": "9674212966",
+          "question": "The work done in displacing a particle from y=a to y=2a by a force -K/y² acting along y-axis is\ny-అక్షం వెంబడి పనిచేయుచున్న -K/y² అను బలం ఒక కణమును y=a నుండి y=2a వరకు స్థానభ్రంశం చెందించుటకు చేయవలసిన పని",
+          "options": [
+            "-5K/8a",
+            "-14K/8a³",
+            "-K/a²",
+            "-K/2a"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 87,
+          "q_id": "9674212967",
+          "question": "Due to the presence of air resistance, if a body dropped from a height of 20 m reaches the ground with a speed of 18ms⁻¹, then the time taken by the body to reach the ground is nearly\nగాలి నిరోధం ఉన్నప్పుడు 20 m ఎత్తు నుండి విడువ బడిన ఒక వస్తువు భూమిని 18ms⁻¹ వడితో చేరిన, వస్తువు భూమిని చేరుటకు పట్టిన కాలం సుమారుగా",
+          "options": [
+            "1.8 s",
+            "2.2 s",
+            "2 s",
+            "2.5 s"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 88,
+          "q_id": "9674212968",
+          "question": "A balance is made using a uniform metre scale of mass 100 g and two plates each of mass 200 g fixed at the two ends of the scale and the balance is pivoted at 45 cm mark of the scale. The error when 300 g weight is placed in the plate at 0 cm to weigh vegetables placed in the plate at 100 cm is\nఒక త్రాసును 100 g ద్రవ్యరాశి కలిగి ఏకరీతిగా ఉన్న ఒక మీటరు స్కేలు చివరలలో, ఒక్కొక్కటి 200 g ద్రవ్యరాశి గల రెండు పలకలను అమర్చి తయారుచేసారు. స్కేలు మీద 45 cm గుర్తు వద్ద త్రాసు యొక్క కీలకాన్ని అమర్చి, 0 cm వద్ద ఉన్న పలకలో 300 g భారమును ఉంచి 100 cm వద్దగల పలకలో ఉంచబడిన కూరగాయలను తూచగా వచ్చిన దోషం",
+          "options": [
+            "36.4 g",
+            "63.6 g",
+            "200 g",
+            "100 g"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 89,
+          "q_id": "9674212969",
+          "question": "The ratio of radii of gyration of a thin circular ring and a circular disc of same radius about a tangential axis in their own planes is √12 : √K. The value of K is\nఒకే వ్యాసార్థం కలిగిన సన్నటి వృత్తాకార కంకణం మరియు వృత్తాకార బిళ్ళల భ్రమణ వ్యాసార్థాలు వాటి తలాలలో ఉండే స్పర్శరేఖల పరంగా √12 : √K నిష్పత్తిలో కలవు. అయిన K విలువ",
+          "options": [
+            "10",
+            "24",
+            "5",
+            "12"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 90,
+          "q_id": "9674212970",
+          "question": "At a given place, to increase the number of oscillations made by a simple pendulum in one minute from 72 to 90, the length of the pendulum is to be decreased by\nఒక ప్రదేశంలో, ఒక లఘు లోలకం ఒక నిమిషంలో చేయు డోలనాల సంఖ్యను 72 నుండి 90 కి పెంచవలెనన్నా, దాని పొడవులోని తగ్గదల",
+          "options": [
+            "64%",
+            "36%",
+            "50%",
+            "56%"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 91,
+          "q_id": "9674212971",
+          "question": "If the orbital speed of a body revolving in a circular path near the surface of the earth is 8 kms⁻¹, then the orbital speed of a body revolving around the earth in a circular orbit at height of 19,200 km from the surface of earth is (Radius of the earth = 6400 km)\nభూ ఉపరితలానికి దగ్గరగా వృత్తాకార మార్గంలో పరిభ్రమిస్తున్న ఒక వస్తువు కక్ష్య వడి 8 kms⁻¹ అయిన భూ ఉపరితలం నుండి 19,200 km ఎత్తున భూమి చుట్టూ వృత్తాకార కక్ష్యలో పరిభ్రమిస్తున్న ఒక వస్తువు కక్ష్య వడి (భూ వ్యాసార్థం = 6400 km)",
+          "options": [
+            "4 kms⁻¹",
+            "6 kms⁻¹",
+            "7.5 kms⁻¹",
+            "9 kms⁻¹"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 92,
+          "q_id": "9674212972",
+          "question": "The Young's modulus and Poisson's ratio of a material are respectively Y and σ. The force required to decrease the area of cross-section of a wire made of this material by ΔA is\nఒక పదార్థపు యంగ్ గుణకం మరియు పాయ్జాన్ నిష్పత్తి వరుసగా Y మరియు σ. ఈ పదార్థంతో తయారుచేయబడిన ఒక తీగ యొక్క మధ్యచ్చేద వైశాల్యమును ΔA తగ్గించుటకు అవసరమయ్యే బలం",
+          "options": [
+            "YΔA/4σ",
+            "2YΔA/σ",
+            "YΔA/2σ",
+            "YΔA/σ"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 93,
+          "q_id": "9674212973",
+          "question": "A thin film of water is formed between two straight parallel wires each of length 8 cm separated by distance of 0.6 cm. The work done to increase the distance between the wires to 0.8 cm is (Surface tension of water = 0.07 Nm⁻¹)\nఒక్కొక్కటి 8 cm పొడవు కలిగి 0.6 cm దూరముతో వేరు చేయబడిన రెండు తిన్నని సమాంతర తీగల మధ్య ఒక నీటి పొర ఏర్పడినది. తీగల మధ్య దూరాన్ని 0.8 cm కు పెంచుటకు చేయవలసిన పని (నీటి తలతన్యత = 0.07 Nm⁻¹)",
+          "options": [
+            "33.6 μJ",
+            "22.4 μJ",
+            "11.2 μJ",
+            "44.8 μJ"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 94,
+          "q_id": "9674212974",
+          "question": "A rain drop of diameter 1 mm falls with a terminal velocity of 0.7ms⁻¹ in air. If the coefficient of viscosity of air is 2×10⁻⁵ Pas, the viscous force on the rain drop is\n1 mm వ్యాసం గల ఒక వర్షపు బిందువు గాలిలో 0.7ms⁻¹ చరమ వేగంతో పడుచున్నది. గాలి స్నిగ్ధతా గుణకం 2×10⁻⁵ Pas అయిన, వర్షపు బిందువుపై పనిచేయు స్నిగ్ధతా బలం",
+          "options": [
+            "13.2×10⁻⁸ N",
+            "6.6×10⁻⁸ N",
+            "26.4×10⁻⁸ N",
+            "10.4×10⁻⁸ N"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 95,
+          "q_id": "9674212975",
+          "question": "The temperature at which the reading on Fahrenheit scale becomes 90% more than the reading on Celsius scale is\nఫారన్హీట్ మానంలోని రీడింగ్, సెల్సియస్ మానంలోని రీడింగ్ కంటే 90% అధికంగా ఉండే ఉష్ణోగ్రత",
+          "options": [
+            "280 °F",
+            "580 °F",
+            "608 °F",
+            "320 °F"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 96,
+          "q_id": "9674212976",
+          "question": "A rectangular ice box of total surface area of 1000 cm² initially contains 1.5 kg of ice at 0°C. If the thickness of the walls of the box is 2 mm and the temperature outside the box is 42°C, then the mass of the ice remaining in the box after 160 minutes is (Thermal conductivity of the material of the box = 10⁻² Wm⁻¹K⁻¹ and latent heat of the fusion of ice = 336×10³ Jkg⁻¹)\nమొత్తం ఉపరితల వైశాల్యం 1000 cm² గల ఒక దీర్ఘ చతుర్నాకారపు మంచుపెట్టెలో తొలుత 0°C వద్ద గల 1.5 kg మంచు కలదు. పెట్టె గోడల మందం 2 mm మరియు పెట్టె బయట ఉష్ణోగ్రత 42°C, అయిన 160 నిమిషాల తరువాత పెట్టెలో మిగిలి ఉన్న మంచు ద్రవ్యరాశి (పెట్టె పదార్థపు ఉష్ణ వాహకత్వం = 10⁻² Wm⁻¹K⁻¹ మరియు నీటి ద్రవీభవన గుప్తోష్ణం = 336×10³ Jkg⁻¹)",
+          "options": [
+            "0.6 kg",
+            "0.9 kg",
+            "0.8 kg",
+            "0.7 kg"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 97,
+          "q_id": "9674212977",
+          "question": "At constant pressure, equal amounts of heat are supplied to a monatomic gas and a diatomic gas separately. The ratio of the increases in internal energies of the two gases is\nస్థిర పీడనం వద్ద ఒక ఏక పరమాణుక మరియు ఒక ద్విపరమాణుక వాయువులకు విడివిడిగా సమానమైన ఉష్ణాలను సరఫరా చేశారు. రెండు వాయువుల అంతరిక శక్తులలో పెరుగుదలల నిష్పత్తి",
+          "options": [
+            "1:1",
+            "9:49",
+            "3:7",
+            "21:25"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 98,
+          "q_id": "9674212978",
+          "question": "If the rms speed of the molecules of a gas at a temperature of 77°C is 50ms⁻¹, then the rms speed of the same gas molecules at a temperature of 150.5°C is\n77°C ఉష్ణోగ్రత వద్ద ఒక వాయువు యొక్క అణువుల rms వడి 50ms⁻¹, అయిన 150.5°C ఉష్ణోగ్రత వద్ద అదే వాయువు యొక్క అణువుల rms వడి",
+          "options": [
+            "65 ms⁻¹",
+            "35 ms⁻¹",
+            "55 ms⁻¹",
+            "45 ms⁻¹"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 99,
+          "q_id": "9674212979",
+          "question": "Two tuning forks of frequencies 320 Hz and 323 Hz are vibrated together. The time interval between a maximum sound and its adjacent minimum sound heard by an observer is\n320 Hz మరియు 323 Hz పౌనఃపున్యాలు గల రెండు శ్రుతి దండాలు ఏకకాలంలో కంపింపబడినాయి. ఒక పరిశీలకుడు వినే గరిష్ఠ ధ్వని మరియు దాని సామీప్య కనిష్ఠ ధ్వని మధ్య కాలాంతరం",
+          "options": [
+            "1/6 s",
+            "1/3 s",
+            "1/12 s",
+            "1/9 s"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 100,
+          "q_id": "9674212980",
+          "question": "The frequency of sound heard by an observer moving towards a stationary source with certain speed is n₁ and if the observer moves away from the same source with same speed, the frequency of sound heard by the observer is n₂. If the speed of sound in air is 340ms⁻¹ and n₁:n₂ = 71:65, then speed of observer is\nనిశ్చలస్థితిలో ఉన్న ఒక జనకం వైపు కొంత వడితో ప్రయాణిస్తున్న ఒక పరిశీలకుడు వినే ధ్వని పౌనఃపున్యం n₁ మరియు అదే వడితో పరిశీలకుడు అదే జనకం నుండి దూరంగా వెళ్ళినప్పుడు వినే ధ్వని పౌనఃపున్యం n₂. గాలిలో ధ్వని వడి 340ms⁻¹ మరియు n₁:n₂ = 71:65 అయిన, పరిశీలకుడి వడి",
+          "options": [
+            "36 kmph",
+            "27 kmph",
+            "15 kmph",
+            "54 kmph"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 101,
+          "q_id": "9674212981",
+          "question": "A Cassegrain telescope uses two mirrors of radii of curvature 25 cm and 16 cm separated by a distance of 2.5 cm. The position of the final image of an object at infinity is\nఒక కాసెగ్రైన్ దూరదర్శనిలో 2.5 cm దూరంలో ఉంచబడిన, 25 cm మరియు 16 cm వక్రతా వ్యాసార్థాలు గల రెండు దర్పణాలను ఉపయోగించారు. అనంత దూరంలో ఉన్న ఒక వస్తువు తుది ప్రతిబింబం యొక్క స్థానం",
+          "options": [
+            "40 cm from convex mirror",
+            "4.44 cm from concave mirror",
+            "4.44 cm from convex mirror",
+            "40 cm from concave mirror"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 102,
+          "q_id": "9674212982",
+          "question": "A convex lens of radii of curvature 6 cm and 12 cm is immersed in a liquid of refractive index 1.3. If the refractive index of the material of the lens is 1.5, then the focal length of the lens when immersed in the liquid is\n6 cm మరియు 12 cm వక్రతా వ్యాసార్థాలు గల ఒక కుంభాకార కటకాన్ని, వక్రీభవన గుణకం 1.3 గల ఒక ద్రవంలో ముంచారు. కటక పదార్థపు వక్రీభవన గుణకం 1.5 అయిన, ద్రవంలో ముంచబడినప్పుడు కటక నాభ్యంతరం",
+          "options": [
+            "39 cm",
+            "13 cm",
+            "26 cm",
+            "52 cm"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 103,
+          "q_id": "9674212983",
+          "question": "When unpolarised light from air incidents on the surface of a medium of refractive index √3, then the reflected light is totally polarised. The angle of refraction is\n√3 వక్రీభవన గుణకం గల ఒక యానక తలంపై గాలి నుండి అధృవిత కాంతి పతనమైనప్పుడు, పరావర్తన కాంతి సంపూర్ణంగా ధృవితమైనది. అయిన వక్రీభవన కోణం",
+          "options": [
+            "30°",
+            "53°",
+            "60°",
+            "37°"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 104,
+          "q_id": "9674212984",
+          "question": "An alpha particle and a proton are accelerated from rest in a uniform electric field. The ratio of the times taken by proton and alpha particle to attain equal displacements is\nఏకరీతి విద్యుత్ క్షేత్రంలో ఒక ఆల్ఫా కణం మరియు ఒక ప్రోటాన్, నిశ్చలస్థితి నుండి త్వరణీకృతం చెందాయి. సమాన స్థానభ్రంశాలు పొందడానికి ప్రోటాన్ మరియు ఆల్ఫా కణం తీసుకున్న కాలాల నిష్పత్తి",
+          "options": [
+            "√2 : 1",
+            "1 : 2",
+            "1 : √2",
+            "2 : 1"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 105,
+          "q_id": "9674212985",
+          "question": "A parallel plate capacitor with air as dielectric has a capacitance of 4 μF. The space between the plates of the capacitor is completely filled with a material of dielectric constant 5 and charged to a potential of 100 V. The work done to completely remove the dielectric material after the capacitor is disconnected from the battery is\nగాలి రోధక యానకంగా గల ఒక సమాంతర పలకల కెపాసిటర్ యొక్క కెపాసిటెన్స్ 4 μF. కెపాసిటర్ పలకల మధ్య ఖాళీని 5 రోధక స్థిరాంకం గల పదార్థంతో పూర్తిగా నింపి, 100 V పొటెన్షియల్ కు ఆవేశితం చేశారు. కెపాసిటర్ను ఘటమాల నుండి వేరు చేసిన తరువాత రోధక పదార్థాన్ని పూర్తిగా తొలగించుటకు చేయవలసిన పని",
+          "options": [
+            "0.1 J",
+            "0.5 J",
+            "0.6 J",
+            "0.4 J"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 106,
+          "q_id": "9674212986",
+          "question": "The potential difference between the terminals of a cell is 20 V when a current of 2 A flows through the circuit. When the direction of current in the circuit is reversed, the potential difference between the terminals of the cell is 30 V. The internal resistance of the cell is\nఒక వలయంలో 2 A విద్యుత్ ప్రవహించినప్పుడు ఘటం కొనల మధ్య పొటెన్షియల్ భేదం 20 V. వలయం లోని విద్యుత్ ప్రవాహ దిశను వ్యతిరేకం చేసిన ఘటం కొనల మధ్య పొటెన్షియల్ భేదం 30 V అయిన, ఘటం యొక్క అంతర్నిరోధం",
+          "options": [
+            "1 Ω",
+            "1.5 Ω",
+            "2 Ω",
+            "2.5 Ω"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 107,
+          "q_id": "9674212987",
+          "question": "A straight uniform wire of resistance 36 Ω is bent in the form of a semi-circular loop. The effective resistance between the ends of the diameter of the semi-circular loop is\n36 Ω నిరోధం గల ఒక తిన్నని ఏకరీతి తీగ ఒక అర్ధవృత్తాకార లూప్ గా వంచబడినది. ఆ అర్ధవృత్తాకార లూప్ వ్యాసం చివరల మధ్య ప్రభావాత్మక నిరోధం",
+          "options": [
+            "56/9 Ω",
+            "36/7 Ω",
+            "99/7 Ω",
+            "77/9 Ω"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 108,
+          "q_id": "9674212988",
+          "question": "An alpha particle moving with certain speed towards east enters a uniform magnetic field directed vertically up. The alpha particle will then move in\nతూర్పు దిశలో కొంత వడితో ప్రయాణిస్తున్న ఒక ఆల్ఫా కణం, క్షితిజ లంబంగా పైకి ఉన్న ఒక ఏకరీతి అయస్కాంత క్షేత్రంలోనికి ప్రవేశించెను. అయిన ఆ ఆల్ఫా కణం",
+          "options": [
+            "vertical circular path with the same speed",
+            "horizontal circular path with the same speed",
+            "vertical circular path with increased speed",
+            "vertical circular path with decreased speed"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 109,
+          "q_id": "9674212989",
+          "question": "The ratios of the voltage sensitivities, resistances and areas of the coils of two moving coil galvanometers A and B are 4:3, 3:4 and 1:2 respectively. If the number of turns of the coil of galvanometer A is 200, then the number of turns of the coil of galvanometer B is (All other quantities remain same in both the cases)\nA మరియు B అను రెండు కదిలే తీగచుట్ట గాల్వానామీటర్ల వోల్టేజి సున్నితత్వాలు, నిరోధంలు మరియు వైశాల్యాలు వరుసగా 4:3, 3:4 మరియు 1:2 నిష్పత్తులలో కలవు. గాల్వానమీటర్ A యొక్క తీగచుట్ట సంఖ్య 200, అయిన గాల్వానమీటర్ B యొక్క తీగచుట్ట సంఖ్య (రెండు సందర్భాలలో ఇతర రాశులు అన్నీ సమానం)",
+          "options": [
+            "100",
+            "150",
+            "200",
+            "400"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 110,
+          "q_id": "9674212990",
+          "question": "A solenoid of 1000 turns per metre has a core of material with relative permeability 400. The windings of the solenoid are insulated from the core and a current of 2 A is passed through the solenoid. Then the value of the magnetic intensity inside the solenoid is\nమీటర్ కు 1000 చుట్లు గల ఒక సోలినాయిడ్, సాపేక్ష పెర్మియబిలిటీ 400 గల పదార్థాన్ని కోర్గా కలిగి ఉంది. సోలినాయిడ్ చుట్లలను కోర్ నుండి విద్యుత్ బంధితం చేసి సోలినాయిడ్ ద్వారా 2 A విద్యుత్ను ప్రవహింప చేసారు. అయితే సోలినాయిడ్ లోపల అయస్కాంత తీవ్రత విలువ",
+          "options": [
+            "2×10³ Am⁻¹",
+            "1.0 Am⁻¹",
+            "8×10⁵ Am⁻¹",
+            "794 Am⁻¹"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 111,
+          "q_id": "9674212991",
+          "question": "An emf of 2.8 mV is induced in a rectangular loop of area 150 cm² when the current in the loop changes from 3 A to 8 A in a time of 0.2 s. Then the self-inductance of the loop is\n150 cm² వైశాల్యం గల ఒక దీర్ఘచతుర్నాకార లూప్ లోని విద్యుత్ ప్రవాహం 3 A నుండి 8 A కు 0.2 s కాలంలో మారిన లూప్ లో ప్రేరిత emf 2.8 mV. అయిన లూప్ స్వయం ప్రేరకత్వం",
+          "options": [
+            "112 μH",
+            "56 μH",
+            "28 μH",
+            "84 μH"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 112,
+          "q_id": "9674212992",
+          "question": "A capacitor and a resistor of resistance 100√3 Ω are connected in series to an ac source of voltage 100sin(200t)V, where 't' is time in second. If the phase difference between the voltage and the current in the circuit is 30°, then the capacitance of the capacitor is\nఒక కెపాసిటర్ మరియు 100√3 Ω నిరోధం గల ఒక నిరోధకం శ్రేణిలో 100sin(200t)V వోల్టేజి గల ఒక ac జనకానికి కలపబడినాయి, ఇక్కడ 't' కాలం సెకందు లో. వలయంలోని వోల్టేజి మరియు విద్యుత్ ప్రవాహాల మధ్య దశా భేదం 30° అయిన, కెపాసిటర్ కెపాసిటెన్స్",
+          "options": [
+            "30 μF",
+            "50 μF",
+            "100 μF",
+            "150 μF"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 113,
+          "q_id": "9674212993",
+          "question": "The amplitude of the electric field associated with a light beam of intensity 15/π Wm⁻² is\n15/π Wm⁻² తీవ్రత గల కాంతిపుంజంకు సంబంధించిన విద్యుత్ క్షేత్ర కంపన పరిమితి",
+          "options": [
+            "120 NC⁻¹",
+            "15 NC⁻¹",
+            "60 NC⁻¹",
+            "30 NC⁻¹"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 114,
+          "q_id": "9674212994",
+          "question": "When photons incident on a photosensitive material of work function 1.5 eV, the maximum velocity of the emitted photoelectrons is 8×10⁵ ms⁻¹. The stopping potential of the photoelectrons is (Mass of the electron = 9×10⁻³¹ kg and charge of the electron = 1.6×10⁻¹⁹ C)\n1.5 eV పని ప్రమేయం కలిగిన ఒక ఫోటో సూక్ష్మ గ్రాహక పదార్థంపై ఫోటానులు పతనమైనప్పుడు వెలుపడిన ఫోటో ఎలక్ట్రాన్ల గరిష్ఠ వేగం 8×10⁵ ms⁻¹. అయిన ఫోటో ఎలక్ట్రాన్ల నిరోధక పొటెన్షియల్ (ఎలక్ట్రాన్ ద్రవ్యరాశి = 9×10⁻³¹ kg మరియు ఎలక్ట్రాన్ ఆవేశం = 1.6×10⁻¹⁹ C)",
+          "options": [
+            "1.8 V",
+            "1.5 V",
+            "2.1 V",
+            "2.4 V"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 115,
+          "q_id": "9674212995",
+          "question": "The potential energy of an electron in an orbit of hydrogen atom is -6.8 eV. The de Broglie wavelength of the electron in this orbit is (r₀ is Bohr radius)\nహైడ్రోజన్ పరమాణువులోని ఒక కక్ష్య లోని ఎలక్ట్రాన్ స్థితిజ శక్తి -6.8 eV. ఈ కక్ష్య లోని ఎలక్ట్రాన్ యొక్క డి బ్రాయ్ తరంగదైర్ఘ్యం (r₀ అనునది బోర్ వ్యాసార్థం)",
+          "options": [
+            "2πr₀",
+            "4πr₀",
+            "πr₀",
+            "3πr₀"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 116,
+          "q_id": "9674212996",
+          "question": "If a radioactive substance decays 10% in every 16 hours, then the percentage of the radioactive substance that remains after 2 days is\nప్రతి 16 గంటలకు ఒక రేడియోధార్మిక పదార్థం 10% క్షయం అయినట్లైతే, రెండు రోజుల తరువాత మిగిలే రేడియోధార్మిక పదార్థపు శాతం",
+          "options": [
+            "82.2",
+            "18.8",
+            "27.1",
+            "72.9"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 117,
+          "q_id": "9674212997",
+          "question": "If a nucleus P converts into a nucleus Q by the decay of one alpha particle and two β⁻ particles, then the nuclei P and Q are\nఒక ఆల్ఫా కణం మరియు రెండు β⁻ కణాల క్షయం వలన P అనే కేంద్రకం Q అనే కేంద్రకంగా మారిన P మరియు Q కేంద్రకాలు",
+          "options": [
+            "Isotopes",
+            "Isobars",
+            "Isotones",
+            "Isomers"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 118,
+          "q_id": "9674212998",
+          "question": "The graph between the input voltage (Vᵢ) and the output voltage (V₀) of a transistor connected in common emitter configuration is shown in the figure. The active, saturation and cutoff regions of the transistor are respectively\nఒక ఊమ్కుడి ఉధారక వినాసంలో కలుపబడిన ఒక ట్రాన్సిస్టర్ నివేశ వోల్టేజి (Vᵢ) మరియు నిర్గమ వోల్టేజి (V₀) ల మధ్య గ్రాఫ్ పటంలో చూపబడినది. ట్రాన్సిస్టర్ క్రియాశీల, సంతృప్త మరియు కటాఫ్ ప్రాంతములు వరుసగా",
+          "options": [
+            "I, II and III",
+            "II, III and I",
+            "I, III and II",
+            "III, I and II"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 119,
+          "q_id": "9674212999",
+          "question": "Which of the following logic gates is a universal gate?\nఈ క్రింది తర్క ద్వారాలలో సార్వత్రిక ద్వారం ఏది?",
+          "options": [
+            "AND",
+            "OR",
+            "NOT",
+            "NAND"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 120,
+          "q_id": "9674213000",
+          "question": "The layer of the atmosphere which efficiently reflects high frequency waves particularly at night is\nముఖ్యంగా రాత్రి సమయంలో అధిక పౌనఃపున్య తరంగాలను సమర్థవంతంగా పరావర్తనం చెందించు వాతావరణపు పొర",
+          "options": [
+            "Troposphere",
+            "Stratosphere",
+            "Mesosphere",
+            "Thermosphere"
+          ],
+          "correct": 4
+        }
+      ]
+    },
+    {
+      "subject": "Chemistry",
+      "questions": [
+        {
+          "q_no": 121,
+          "q_id": "9674213001",
+          "question": "In the atomic spectrum of hydrogen, the wavelengths of the spectral lines corresponding to electronic transitions (i) n=4 to n=2 and (ii) n=3 to n=1 are λ₁ and λ₂ Å respectively. The value of (λ₁-λ₂) (in cm) is (R_H = Rydberg constant)\nహైడ్రోజన్ వర్ణపటంలో (i) n=4 నుండి n=2 మరియు (ii) n=3 నుండి n=1 ఎలక్ట్రానిక్ పరివర్తనలకు సంబంధించిన వర్ణపట రేఖల తరంగదైర్ఘ్యాలు వరుసగా λ₁ మరియు λ₂ Å లు. (λ₁-λ₂) విలువ (cm లలో) (R_H = రిడ్బర్గ్ స్థిరాంకం)",
+          "options": [
+            "1/R_H [24/101]",
+            "R_H [24/101]",
+            "1/R_H [101/24]",
+            "R_H [101/24]"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 122,
+          "q_id": "9674213002",
+          "question": "Work functions of four metals M₁, M₂, M₃ and M₄ are 4.8, 4.3, 4.75 and 3.75 eV respectively. The metals which do not show photoelectric effect when light of wavelength 310 nm falls on the metals are\nనాలుగు లోహాలు M₁, M₂, M₃ మరియు M₄ ల పని ప్రమేయాలు వరుసగా 4.8, 4.3, 4.75 మరియు 3.75 eV. తరంగదైర్ఘ్యం 310 nm గల కాంతిని లోహాల పై పడేటట్లు చేసినప్పుడు కాంతి విద్యుత్ ఫలితాన్ని ప్రదర్శించని లోహాలు",
+          "options": [
+            "M₁, M₂ only",
+            "M₁, M₃ only",
+            "M₁, M₂, M₃ only",
+            "M₁, M₂, M₄ only"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 123,
+          "q_id": "9674213003",
+          "question": "In second period of the modern periodic table, two elements X and Y have higher first ionization enthalpy values than the preceding and succeeding elements. X and Y are respectively\nఆధునిక ఆవర్తన పట్టిక రెండవ పీరియడ్లో X, Y అను రెండు మూలకాలు వాటి ముందున్న మరియు తర్వాత ఉన్న మూలకాల కన్నా అధిక ప్రథమ అయొనైజేషన్ ఎంథాల్పీ విలువలను కలిగి ఉన్నవి. X మరియు Y లు వరుసగా",
+          "options": [
+            "B, C",
+            "Al, S",
+            "Be, N",
+            "Na, S"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 124,
+          "q_id": "9674213004",
+          "question": "Consider the following pairs of elements and identify the pairs of elements which have nearly same atomic radius: I. Y, La  II. Zr, Hf  III. Mo, W  IV. Cr, Mo\nక్రింది మూలకాల జంటలను పరిగణించండి. వీటిలో దాదాపు సమాన పరమాణు వ్యాసార్థం గల మూలకాల జంటలను గుర్తించుము: I. Y, La  II. Zr, Hf  III. Mo, W  IV. Cr, Mo",
+          "options": [
+            "I & II",
+            "II & III",
+            "III & IV",
+            "I & III"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 125,
+          "q_id": "9674213005",
+          "question": "If the sum of bond orders of O₂⁻ and O₂²⁻ is x, then bond order of O₂²⁺ will be\nO₂⁻ మరియు O₂²⁻ ల మొత్తం బంధక్రమం x అయినచో, O₂²⁺ బంధక్రమం",
+          "options": [
+            "1.20x",
+            "1.33x",
+            "1.50x",
+            "2.50x"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 126,
+          "q_id": "9674213006",
+          "question": "Identify the molecule/ion in which the ratio of σ to π bonds is 3:2\nఏ అణువు/అయాన్ లో σ, π బంధాల నిష్పత్తి 3:2 గా ఉంటుందో గుర్తించుము",
+          "options": [
+            "HCO₃⁻",
+            "CH₂(CN)₂",
+            "HClO₄",
+            "XeO₃"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 127,
+          "q_id": "9674213007",
+          "question": "At 298K, a flask 'A' of unknown volume (V) contains oxygen at 5 atm. Another flask 'B' of volume 2L contains helium at 3 atm. Two flasks are connected together by a small tube of zero volume. After the two gases are completely mixed, if the resulting mixture is found to have the mole fraction of oxygen as 0.2, the volume of flask 'A' (in L) is (Assume oxygen and helium as ideal gases)\n298K వద్ద ఘనపరిమాణం (V) తెలియని ఫ్లాస్కి 'A' లో ఆక్సిజన్ 5 atm ల వద్ద ఉన్నది. ఘనపరిమాణం 2L లు ఉన్న మరొక ఫ్లాస్కి 'B' లో హీలియం 3 atm ల వద్ద ఉన్నది. రెండు ఫ్లాస్కి లను శూన్య ఘనపరిమాణం గల సన్నని గొట్టం ద్వారా కలిపారు. రెండు వాయువులు పూర్తిగా కలియగా ఏర్పడిన ఫలిత మిశ్రమంలో ఆక్సిజన్ మోల్ భాగం 0.2 గా ఉన్నచో, ఫ్లాస్కి 'A' ఘనపరిమాణం (L లలో) (ఆక్సిజన్ మరియు హీలియం లు ఆదర్శ వాయువులని అనుకోనుము)",
+          "options": [
+            "0.1",
+            "0.3",
+            "0.2",
+            "0.4"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 128,
+          "q_id": "9674213008",
+          "question": "In which of the following, oxidation state of nitrogen is lowest?\nక్రింది వాటిలో దేనియందు నైట్రోజన్ ఆక్సీకరణ స్థితి కనిష్ఠం?",
+          "options": [
+            "NH₂OH",
+            "NH₄Cl",
+            "N₂H₄",
+            "HNO₂"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 129,
+          "q_id": "9674213009",
+          "question": "Which of the following processes are reversible? I. Vaporization of a liquid at its boiling point. II. Expansion of gas into vacuum. III. Transformation of a solid substance into liquid at its melting point. IV. Neutralization of an acid by a base.\nక్రింది ప్రక్రియలలో ఏవి ఉత్కృమణీయం? I. దాని మరుగు స్థానం వద్ద ద్రవం బాష్పీభవనం. II. శూన్యంలోకి వాయువు వ్యాకోచం. III. దాని ద్రవీభవన స్థానం వద్ద ఘన పదార్థం ద్రవంగా పరివర్తన చెందుట. IV. ఆమ్లాన్ని క్షారంతో తటస్థీకరణ.",
+          "options": [
+            "I & III",
+            "II & III",
+            "II & IV",
+            "I & IV"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 130,
+          "q_id": "9674213010",
+          "question": "At T(K) in a saturated solution of MgCO₃ and Ag₂CO₃, if the concentration of Mg²⁺ ion is 3.2×10⁻⁵ M, then the concentration of Ag⁺ ion in the solution will be [Given: Ksp(MgCO₃)=1.6×10⁻⁶ and Ksp(Ag₂CO₃)=8.0×10⁻¹² at T(K)]\nT(K) వద్ద MgCO₃ మరియు Ag₂CO₃ ల సంతృప్త ద్రావణంలో Mg²⁺ అయాన్ గాఢత 3.2×10⁻⁵ M అయినచో, ద్రావణంలో Ag⁺ అయాన్ గాఢత [ఇచ్చినది: T(K) వద్ద Ksp(MgCO₃)=1.6×10⁻⁶, Ksp(Ag₂CO₃)=8.0×10⁻¹²]",
+          "options": [
+            "√1.3×10⁻⁷ M",
+            "√1.5×10⁻⁶ M",
+            "√1.6×10⁻⁶ M",
+            "√1.6×10⁻⁵ M"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 131,
+          "q_id": "9674213011",
+          "question": "Temperature of maximum density of H₂O is y K and D₂O is x K. (x-y) (in K) is nearly\nఅత్యధిక సాంద్రత ఉండే ఉష్ణోగ్రత H₂O కు y K మరియు D₂O కు x K. (x-y) (K లలో) దాదాపుగా",
+          "options": [
+            "7.0",
+            "3.5",
+            "4.0",
+            "8.5"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 132,
+          "q_id": "9674213012",
+          "question": "How many of the following metals give oxides and nitrides when burnt in air? Be, Na, Mg, Ba, Sr, Li, K\nక్రింది వాటిలో ఎన్ని లోహాలు, గాలిలో మండినప్పుడు ఆక్సైడ్ మరియు నైట్రైడలను ఇస్తాయి?  Be, Na, Mg, Ba, Sr, Li, K",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 133,
+          "q_id": "9674213013",
+          "question": "Identify the incorrect order against the property given in brackets\nఎదురుగా బ్రాకెట్ లో ఇవ్వబడిన ధర్మానికి సంబంధించి సరికాని క్రమం ను గుర్తించుము",
+          "options": [
+            "BeCO₃ < MgCO₃ < CaCO₃ < SrCO₃ (Thermal stability)",
+            "BeSO₄ > MgSO₄ > CaSO₄ > SrSO₄ (Solubility in water)",
+            "Li₂CO₃ > Na₂CO₃ > K₂CO₃ > Rb₂CO₃ (Thermal stability)",
+            "BeCO₃ > MgCO₃ > CaCO₃ > SrCO₃ (Solubility in water)"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 134,
+          "q_id": "9674213014",
+          "question": "Diborane on hydrolysis gives a compound X. The correct statements about X are: I. It is a tribasic acid  II. It is a weak monobasic acid  III. It has a layer structure  IV. It is highly soluble in water\nడైబోరేన్ ను జల విశ్లేషణం చెందిస్తే X అను సమ్మేళనం ను ఇస్తుంది. X కు సంబంధించి సరైన వ్యాఖ్యలు: I. ఇది ఒక త్రిక్షారక ఆమ్లం  II. ఇది ఒక బలహీన ఏక క్షారక ఆమ్లం  III. దీనికి పొరల నిర్మాణం ఉంటుంది  IV. ఇది నీటిలో అధికంగా కరుగుతుంది",
+          "options": [
+            "I & III",
+            "II & III",
+            "II & IV",
+            "I & IV"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 135,
+          "q_id": "9674213015",
+          "question": "Choose the correct statements about allotropes of carbon: I. Graphite has layered structure  II. Buckminster fullerene is not aromatic in nature  III. The distance between two adjacent layers in graphite is 141.5 pm  IV. The hybridization of carbons in graphite and Buckminster fullerene is same\nకార్బన్ రూపాంతరాలకు సంబంధించి సరైన వ్యాఖ్యలను ఎన్నుకోండి: I. గ్రాఫైట్ కు పొరల నిర్మాణం ఉంటుంది  II. బక్మినిష్టర్ ఫుల్లరిన్ ఏరోమాటిక్ స్వభావాన్ని కలిగి ఉండదు  III. గ్రాఫైట్ లో రెండు పక్క పొరల మధ్య దూరం 141.5 pm  IV. గ్రాఫైట్ మరియు బక్మినిష్టర్ ఫుల్లరిన్ లలో కార్బన్ సంకరకరణం ఒక్కటే",
+          "options": [
+            "I & IV",
+            "I & II",
+            "II & III",
+            "III & IV"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 136,
+          "q_id": "9674213016",
+          "question": "Which of the following is a lung irritant that can lead to an acute respiratory disease in children?\nక్రింది వాటిలో ఏది ఊపిరితిత్తుల ప్రకోపానికి కారణమై చిన్న పిల్లలలో ప్రగాఢ శ్వాసకోశ వ్యాధిని కలిగిస్తుంది?",
+          "options": [
+            "SO₂",
+            "CO₂",
+            "CO",
+            "NO₂"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 137,
+          "q_id": "9674213017",
+          "question": "Arrange the following in decreasing order of their boiling points: (A) 2-Methylbutane  (B) 2,2-Dimethylpropane  (C) Pentane  (D) Hexane\nక్రింది వాటిని బాష్పీభవన స్థానాలు తగ్గే క్రమంలో అమర్చుము: (A) 2-మీథైల్ బ్యూటేన్  (B) 2,2-డెమీథైల్ ప్రొపేన్  (C) పెంటేన్  (D) హెక్సేన్",
+          "options": [
+            "D > C > A > B",
+            "B > A > C > D",
+            "D > A > C > B",
+            "B > C > A > D"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 138,
+          "q_id": "9674213018",
+          "question": "Which of the following is not an aromatic species?\nక్రింది వాటిలో ఏది ఆరోమాటిక్ జాతి కాదు?",
+          "options": [
+            "Cyclopentadienyl cation (⊕)",
+            "Cyclopentadienyl anion (⊖)",
+            "Cycloheptatrienyl cation (⊕)",
+            "Naphthalene"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 139,
+          "q_id": "9674213019",
+          "question": "In the estimation of nitrogen by Kjeldahl's method 0.933 g of an organic compound 'X' was analyzed. Ammonia evolved was absorbed in 60 mL of 0.1 M H₂SO₄. The unreacted acid requires 20 mL of 0.1 M NaOH for complete neutralization. The compound 'X' is\nజెల్డాల్ పద్ధతిలో నైట్రోజన్ ను నిర్ణయించడంలో 0.933 g ల కర్బన సమ్మేళనం 'X' విశ్లేషణ చేయబడింది. వెలువడిన అమ్మోనియా 60 mL ల 0.1 M H₂SO₄ లో శోషించుకొబడింది. చర్యనొందని ఆమ్లాన్ని పూర్తిగా తటస్థీకరించడానికి 20 mL ల 0.1 M NaOH అవసరమయినచో, సమ్మేళనం 'X'",
+          "options": [
+            "C₆H₅CH₂NH₂",
+            "C₆H₅NH₂",
+            "CH₃CH₂NH₂",
+            "CH₃-C(=O)-NH₂"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 140,
+          "q_id": "9674213020",
+          "question": "Which of the following is a least stable carbocation?\nక్రింది వాటిలో ఏ కార్బోకాటయాన్ అతి తక్కువ స్థిరత్వంను కలిగి ఉంటుంది?",
+          "options": [
+            "CH₃-CH₂⁺",
+            "CH₂=CH⁺",
+            "CH₂=CH-CH₂⁺",
+            "C₆H₅-CH₂⁺"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 141,
+          "q_id": "9674213021",
+          "question": "The incorrect statement about crystals with Schottky defect is\nషాట్కీ లోపంతో ఉన్న స్ఫటికాలకు సంబంధించి సరికాని వ్యాఖ్య",
+          "options": [
+            "It is due to missing of equal number of cations and anions from lattice points",
+            "On the whole crystal is electrically neutral",
+            "It is shown by ionic compounds in which cation and anion are of almost same size",
+            "Density of the crystal increases"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 142,
+          "q_id": "9674213022",
+          "question": "Two liquids 'A' and 'B' form an ideal solution. At 300 K, the vapour pressure of a solution containing 1 mole of 'A' and 3 moles of 'B' is 550 mm Hg. At the same temperature, if one more mole of 'B' is added to the solution, the vapour pressure of solution increases to 560 mm Hg. Then the ratio of vapour pressures of A and B in their pure state is\n'A' మరియు 'B' అను రెండు ద్రవాలు ఆదర్శ ద్రావణాన్ని ఏర్పరుస్తాయి. 300 K వద్ద 1 మోల్ 'A' మరియు 3 మోల్ 'B' ఉన్న ద్రావణం బాష్పీడనం 550 mm Hg. అదే ఉష్ణోగ్రత వద్ద మరొక మోల్ 'B' ద్రావణానికి చేర్చబడినప్పుడు, ద్రావణం యొక్క బాష్పీడనం 560 mm Hg కి పెరిగింది. అప్పుడు శుద్ధ స్థితిలో 'A' మరియు 'B' ల బాష్పీడనాల నిష్పత్తి",
+          "options": [
+            "1:3",
+            "3:1",
+            "2:3",
+            "3:2"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 143,
+          "q_id": "9674213023",
+          "question": "The molar conductivity of acetic acid solution at infinite dilution is 390 S cm² mol⁻¹. What is the molar conductivity of 0.01 M acetic acid solution (in S cm² mol⁻¹)? (Given: Ka(CH₃COOH) = 1.8×10⁻⁵, assume 1-α = 1)\nఅనంత విలీనం వద్ద ఎసిటిక్ ఆమ్ల ద్రావణం యొక్క మోలార్ వాహకత్వం 390 S cm² mol⁻¹. 0.01 M ఎసిటిక్ ఆమ్ల ద్రావణం మోలార్ వాహకత్వం (S cm² mol⁻¹ లలో) ఎంత? (ఇచ్చినది: Ka(CH₃COOH) = 1.8×10⁻⁵, 1-α = 1 అనుకోనుము)",
+          "options": [
+            "10.64",
+            "16.54",
+            "51.64",
+            "15.64"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 144,
+          "q_id": "9674213024",
+          "question": "The half-life of a zero order reaction A → products, is 0.5 hour. The initial concentration of A is 4 mol L⁻¹. How much time (in hr) does it take for its concentration to come from 2.0 mol L⁻¹ to 1.0 mol L⁻¹?\nA → ఉత్పన్నాలు అనే శూన్య క్రమాంక చర్య యొక్క అర్థాయువు 0.5 గంటలు. A ప్రారంభ గాఢత 4 mol L⁻¹. దాని గాఢత 2.0 mol L⁻¹ నుండి 1.0 mol L⁻¹ కు రావటానికి ఎంత కాలం (గంటలలో) పట్టుతుంది?",
+          "options": [
+            "1/4",
+            "1/8",
+            "1/2",
+            "1/6"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 145,
+          "q_id": "9674213025",
+          "question": "Match the following:\nList-1 (Type of colloid): A. Sol  B. Foam  C. Gel  D. Aerosol\nList-2 (Example): I. Cloud  II. Whipped cream  III. Paint  IV. Butter\nక్రింది వాటిని జతపరుచుము:\nజాబితా-1 (కొల్లాయిడ్ రకం): A. సాల్  B. ఫోమ్  C. జెల్  D. ఏయిరోసాల్\nజాబితా-2 (ఉదాహరణ): I. మేఘం  II. మడించిన క్రీమ్  III. పెయింట్  IV. వెన్న",
+          "options": [
+            "A-IV, B-II, C-III, D-I",
+            "A-III, B-I, C-IV, D-II",
+            "A-III, B-II, C-IV, D-I",
+            "A-IV, B-I, C-II, D-III"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 146,
+          "q_id": "9674213026",
+          "question": "Observe the following statements:\nStatement-I: The choice of reducing agent for the reduction of an oxide ore can be predicted by using Ellingham diagram, a plot of ΔG° Vs T.\nStatement-II: According to Ellingham diagram, metal oxide with higher ΔG° is more stable than the oxide with lower ΔG°.\nThe correct answer is\nక్రింది వ్యాఖ్యలను పరిగణించండి:\nవ్యాఖ్య-I: ఆక్సైడ్ ముడిఖనిజం యొక్క క్షయకరణానికి ఎంపిక చేసే క్షయకరిణిని ఎల్లింగ్ హామ్ పటం, ΔG° Vs T ను ఉపయోగించి ఊహించవచ్చును.\nవ్యాఖ్య-II: ఎల్లింగ్ హామ్ పటం ప్రకారం, అధిక ΔG° తో ఉన్న లోహ ఆక్సైడ్, తక్కువ ΔG° తో ఉన్న ఆక్సైడ్ కంటే అధిక స్థిరంగా ఉంటుంది.",
+          "options": [
+            "Both statements I and II are correct",
+            "Statement I is correct, but statement II is not correct",
+            "Statement I is not correct, but statement II is correct",
+            "Both statements I and II are not correct"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 147,
+          "q_id": "9674213027",
+          "question": "Which one of the orders is correctly matched with the property mentioned against it?\nక్రింది ఏ క్రమం, ఎదురుగా ఉన్న దాని ధర్మానికి సరిగ్గా జతచేయబడినది?",
+          "options": [
+            "H₂S < H₂O < H₂Se < H₂Te (Boiling point)",
+            "N₂O < NO < N₂O₃ < N₂O₄ < N₂O₅ (Acidic nature)",
+            "HI < HCl < HBr < HF (Acidic nature)",
+            "H₂O < H₂S < H₂Se < H₂Te (Bond angle)"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 148,
+          "q_id": "9674213028",
+          "question": "Noble gas 'X' is used as a diluent for oxygen in modern diving apparatus and noble gas 'Y' is used mainly to provide an inert atmosphere in high temperature metallurgical processes. 'Y' and 'X' are respectively?\nఆధునిక డైవింగ్ పరికరాల్లో, ఉత్కృష్ట వాయువు 'X' ను ఆక్సిజన్ తో విలీనకారిగా ఉపయోగిస్తారు మరియు ఉత్కృష్ట వాయువు 'Y' ను ప్రధానంగా అధిక ఉష్ణోగ్రత లోహ సంగ్రహణ ప్రక్రియలలో జడ రసాయనిక వాతావరణాన్ని కల్పించడానికి ఉపయోగిస్తారు. 'Y' మరియు 'X' లు వరుసగా",
+          "options": [
+            "He, Ar",
+            "Ar, He",
+            "He, Kr",
+            "Ar, Kr"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 149,
+          "q_id": "9674213029",
+          "question": "The dibasic oxoacid of phosphorus on disproportionation gives two products A and B. A and B are respectively\nఫాస్ఫరస్ యొక్క ద్విక్షారక ఆక్సోఆమ్లం అననుపాతం చెంది రెండు ఉత్పన్నాలు A మరియు B లను ఇస్తుంది. A మరియు B లు వరుసగా",
+          "options": [
+            "HPO₃, PH₃",
+            "H₃PO₂, H₂O",
+            "H₃PO₄, PH₃",
+            "H₄P₂O₆, H₃PO₂"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 150,
+          "q_id": "9674213030",
+          "question": "The number of moles of oxalate ions oxidized by one mole of permanganate ions in acidic medium is\nఆమ్ల యానకంలో ఒక మోల్ పర్మాంగనేట్ అయాన్లచే ఆక్సీకరింపబడు ఆక్సలేట్ అయాన్ల మోల్ల సంఖ్య",
+          "options": [
+            "2.5",
+            "5.0",
+            "1.5",
+            "2.0"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 151,
+          "q_id": "9674213031",
+          "question": "Total number of geometrical isomers possible for the complexes [NiCl₄]²⁻, [CoCl₂(NH₃)₄]⁺, [Co(NH₃)₃(NO₂)₃] and [Co(NH₃)₅Cl]²⁺ is\n[NiCl₄]²⁻, [CoCl₂(NH₃)₄]⁺, [Co(NH₃)₃(NO₂)₃] మరియు [Co(NH₃)₅Cl]²⁺ సంశ్లిష్టాలకు వీలయ్యే క్షేత్ర సదృశకాల మొత్తం సంఖ్య",
+          "options": [
+            "2",
+            "3",
+            "4",
+            "5"
+          ],
+          "correct": 3
+        },
+        {
+          "q_no": 152,
+          "q_id": "9674213032",
+          "question": "Match the following:\nList-1 (Type of polymer): A. Fibre  B. Elastomer  C. Thermosetting polymer  D. Thermoplastic polymer\nList-2 (Structure of the example): I. PVC structure  II. Nylon-6,6 structure  III. Neoprene structure  IV. Bakelite structure\nక్రింది వాటిని జతపరుచుము:\nజాబితా-1 (పాలిమర్ రకం): A. పోగు  B. ఎలాస్టోమర్  C. ఉష్ణదృఢ పాలిమర్  D. థర్మోప్లాస్టిక్ పాలిమర్",
+          "options": [
+            "A-II, B-IV, C-I, D-III",
+            "A-II, B-III, C-IV, D-I",
+            "A-III, B-I, C-IV, D-II",
+            "A-III, B-II, C-IV, D-I"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 153,
+          "q_id": "9674213033",
+          "question": "Maltose on hydrolysis gives two monosaccharide units. The incorrect statement about the monosaccharides formed is\nమాల్టోజ్ జల విశ్లేషణలో రెండు మోనోశాకరైడ్ యూనిట్లను ఇస్తుంది. ఏర్పడిన మోనోశాకరైడ్లకు సంబంధించి సరికాని వ్యాఖ్య",
+          "options": [
+            "Both are α-D-glucose units",
+            "One is α-D-glucose and second one is β-D-fructose",
+            "Both are reducing sugars",
+            "In maltose, they are joined through 1,4-glycosidic linkage"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 154,
+          "q_id": "9674213034",
+          "question": "Identify the pair of drugs which act as antihistamines\nయాంటి హిస్టమీన్లు (హిస్టమీన్ విరోధులు) గా పనిచేసే మందుల జంటను గుర్తించుము",
+          "options": [
+            "Dimetapp, Seldane",
+            "Iproniazid, Nardil",
+            "Veronal, Valium",
+            "Heroin, Codeine"
+          ],
+          "correct": 1
+        },
+        {
+          "q_no": 155,
+          "q_id": "9674213035",
+          "question": "Identify the product 'Y' in the given sequence of reactions: Cl-benzene + HNO₃/Conc.H₂SO₄ → X (Major) + NaOH, 443K/(ii)H⁺ → Y\nఇచ్చిన క్రమాను చర్యలలో ఉత్పన్నం 'Y' ను గుర్తించుము: Cl-బెంజీన్ + HNO₃/గాఢ H₂SO₄ → X (ప్రధాన) + NaOH, 443K/(ii)H⁺ → Y",
+          "options": [
+            "o-nitrophenol",
+            "p-nitrophenol",
+            "o,p-dinitrophenol",
+            "p-nitrobenzenesulfonic acid"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 156,
+          "q_id": "9674213036",
+          "question": "What is 'Z' in the given set of reactions? C₆H₅OCH₃ + HI → X + Y; X + Zn/Δ → benzene; Y + C₆H₆/Anhy.AlCl₃ → Z\nఇవ్వబడిన చర్యల సమితి నుండి 'Z' అనునది ఏది? (Anhy = అన్నార్థ)",
+          "options": [
+            "Ethylbenzene",
+            "Benzyl chloride",
+            "Chlorobenzene",
+            "Toluene"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 157,
+          "q_id": "9674213037",
+          "question": "Which of the following reactions is an example of Clemmensen reduction?\nక్రింది చర్యలలో ఏది క్లెమెన్సన్ క్షయకరణానికి ఒక ఉదాహరణ?",
+          "options": [
+            "R-COCl + H₂/Pd/BaSO₄ → R-CHO + HCl",
+            "R-CHO + NH₂-NH₂/(KOH/CH₂-CH₂/OH OH) → R-CH₃",
+            "R-CO-OC₂H₅ + DIBAL-H/H₂O → R-CHO + C₂H₅OH",
+            "R-CO-CH₃ + Zn-Hg/HCl → R-CH₂-CH₃"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 158,
+          "q_id": "9674213038",
+          "question": "Which of the following can undergo Hell-Volhard-Zelinsky reaction?\nక్రింది వాటిలో ఏది హెల్-వోల్హార్డ్-జెలెన్స్కి చర్యనొందుతుంది?",
+          "options": [
+            "Benzoic acid (C₆H₅-COOH)",
+            "Phenylacetic acid (C₆H₅-CH₂CO₂H)",
+            "Phenylacetaldehyde (C₆H₅-CH₂CHO)",
+            "Phenacyl ketone (C₆H₅-CH₂-CO-CH₃)"
+          ],
+          "correct": 2
+        },
+        {
+          "q_no": 159,
+          "q_id": "9674213039",
+          "question": "Which of the following has lowest pKa value?\nక్రింది వాటిలో ఏది కనిష్ఠ pKa విలువను కలిగి ఉంటుంది?",
+          "options": [
+            "o-nitrophenol",
+            "Benzoic acid",
+            "p-methoxybenzoic acid",
+            "p-nitrobenzoic acid"
+          ],
+          "correct": 4
+        },
+        {
+          "q_no": 160,
+          "q_id": "9674213040",
+          "question": "The correct statements about the products B and C in the given reactions are: CH₃CH₂OH + HCl/Anhy.ZnCl₂ → A + ethanolic AgCN → B (Minor) + C (Major). I. B and C are functional isomers  II. With H₂/Catalyst B gives 1° amine and C gives 2° amine  III. B on acid hydrolysis gives formic acid and C gives C₃H₆O₂  IV. C forms isocyanate with HgO\nక్రింది చర్యలలో ఉత్పన్నాలు B మరియు C లకు సంబంధించి సరైన వ్యాఖ్యలు: CH₃CH₂OH + HCl/అన్నార్థ ZnCl₂ → A + ఇథనాలిక్ AgCN → B (అల్ప) + C (అధిక). I. B మరియు C లు ప్రమేయ సదృశకాలు  II. H₂/ఉత్ప్రేరకం తో B, 1° ఎమైన్ ను C, 2° ఎమైన్ ను ఇస్తాయి  III. B ఆమ్ల జల విశ్లేషణలో ఫార్మిక్ ఆమ్లాన్ని మరియు C, C₃H₆O₂ ను ఇస్తాయి  IV. C, HgO తో ఇసోసయనేట్ ను ఏర్పరుస్తుంది",
+          "options": [
+            "I & III",
+            "II & III",
+            "I, II & IV",
+            "II, III & IV"
+          ],
+          "correct": 3
+        }
+      ]
+    }
+  ]
+}

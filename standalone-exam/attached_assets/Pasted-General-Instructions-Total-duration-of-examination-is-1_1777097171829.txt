@@ -1,0 +1,74 @@
+General Instructions:
+
+
+
+Total duration of examination is 180 minutes.
+పరీక్ష మొత్తం వ్యవధి 180 నిమిషాలు.
+
+The clock will be set at the server. The countdown timer in the top right corner of screen will display the remaining time available for you to complete the examination. When the timer reaches zero, the examination will end by itself. You will not be required to end or submit your examination.
+గడియారం సర్వర్ పై సెట్ చేయబడును. స్క్రీన్ కు పై భాగములో కుడి మూలలో (కార్నెర్ లో) కౌంట్ డౌన్ టైమర్ మీకు పరీక్ష పూర్తీ చేయడానికి అందుబాటులో ఉండే మిగితా సమయం సూచిస్తుంది. టైమర్ జీరో కు చేరుకున్నప్పుడు, పరీక్ష దానంతట అదే ముగుస్తుంది, ప్రత్యేకంగా సబ్మిట్ చేయ వళసిన అవసరం లేదు.
+
+The Question Palette displayed on the right side of screen will show the status of each question using one of the following symbols:
+1	You have not visited the question yet.
+2	You have not answered the question.
+3	You have answered the question.
+4	You have NOT answered the question, but have marked the question for review and this will NOT be considered for evaluation.
+5	You have answered the question, but marked it for review and this will be considered for evaluation.
+స్క్రీన్ కు కుడివైపు ఉన్న ప్రశ్న పాలెట్, ఈ దిగువ చిహ్నాలలో ఒకదానిని తో ప్రతి ప్రశ్న యొక్క స్ధితిని తెలుపుతుంది.
+1	మీరు ప్రశ్నను ఇంకా సందర్శించ లేదు.
+2	మీరు ప్రశ్నకు జవాబు ఇంకా ఇవ్వలేదు.
+3	మీరు ప్రశ్నకు జవాబు ఇచ్చారు.
+4	మీరు ప్రశ్నకు జవాబు ఇవ్వలేదు, కాని ప్రశ్నకు పునరాలోచన కోసం మార్క్ చేసారు. ఈ ప్రశ్నకు మీ జవాబు మూల్యాంకనం కోసం పరిగణలోనికి తీసుకోబడదు.
+5	మీరు ప్రశ్నకు జవాబు ఇచ్చారు, కాని పునరాలోచన కోసం మార్క్ చేసారు. ఈ ప్రశ్నకు మీ జవాబు మూల్యాంకనం కోసం పరిగణలోనికి తీసుకోబడును.
+The Marked for Review status for a question simply indicates that you would like to look at that question again. If a question is answered and Marked for Review then your answer for that question will be considered in the evaluation.
+ప్రశ్నకు పునరాలోచన కోసం మార్క్ చేసిన స్ధితి, కేవలం మీరు ప్రశ్నను మళ్ళీ చూస్తారని సూచిస్తుంది. ఒక వేళ జవాబు ఇచ్చిన తరువాత పునరాలోచన కోసం మార్క్ చేసిన, ఆ ప్రశ్నకు మీ జవాబు మూల్యాంకనం కోసం పరిగణలోనికి తీసుకోబడును.
+
+You can click on the ">" arrow which appears to the left of question palette to collapse the question palette thereby maximizing the question window. To view the question palette again, you can click on "< " arrow which appears on the right side of question window.
+ప్రశ్న విండో పరిమాణం పెంచటానికి (Maximize), మీరు “>” యారో పై క్లిక్ చేయండి, ప్రశ్న విండో పరిమాణం తగ్గించటానికి, “<” యారో పై క్లిక్ చేయండి.
+You can click on Scroll Down to navigate to the bottom and Scroll Up to navigate to the top of the question area, without scrolling.
+మీరు పై నుండి కిందకు వెళ్ళడానికి Scroll Down యారో పై క్లిక్ చేయండి, కింద నుండి పైకి వెళ్ళడానికి Scroll Up యారో పై క్లిక్ చేయండి.
+Navigating From One Question to Another Question:
+ఒక ప్రశ్న నుండి మరొక ప్రశ్నకు వెళ్ళడం (నావిగేషన్):
+To answer a question, do the following:
+Click on the question number in the Question Palette at the right of your screen to go to that numbered question directly. Note that using this option does NOT save your answer to the current question.
+Click on Save & Next to save your answer for the current question and then go to the next question.
+Click on Mark for Review & Next to save your answer for the current question, mark it for review, and then go to the next question.
+
+ప్రశ్నకు జవాబు ఇవ్వడానికి, ఈ క్రింది సూచనలను పాటించండి.
+ప్రత్యెక ప్రశ్నకు నేరుగా వెళ్ళడానికి స్క్రీన్ కు కుడివైపు ఉన్న ప్రశ్న పాలెట్ లో ప్రశ్న సంఖ్య పై క్లిక్ చేయండి. గమనిక: ఈ ఎంపిక ద్వారా ప్రస్తుత ప్రశ్న యొక్క జవాబు సేవ్ కాదు.
+ప్రస్తుత ప్రశ్న యొక్క జవాబును సేవ్ చేయడానికి, Save & Next బటన్ పై క్లిక్ చేయండి, ఆ తరువాత వేరే ప్రశ్నకు వెళ్ళండి.
+ప్రస్తుత ప్రశ్న యొక్క జవాబును సేవ్ చేసి పునరాలోచన చేయడానికి, Mark for Review & Next బటన్ పై క్లిక్ చేయండి, ఆ తరువాత వేరే ప్రశ్నకు వెళ్ళండి.
+Answering a Question :
+ప్రశ్నకు జవాబు ఇవ్వడం
+Procedure for answering a multiple choice type question:
+To answer a question, Click on the button against the chosen option among the given four options.
+To change your chosen answer, click on the button of another option.
+To deselect your chosen answer, click on the button of the chosen option again or click on the Clear Response button.
+To save your answer, you MUST click on the Save & Next button.
+To mark the question for review, click on the Mark for Review & Next button. If an answer is selected for a question that is Marked for Review, that answer will be considered in the evaluation.
+
+మల్టిపుల్ ఛాయస్ ప్రశ్నలకు జవాబు ఇవ్వడానికి పద్దతి:
+మీ జవాబు సెలెక్ట్ చేయడానికి, ఎంపికలలో ఒకదాని బటన్ పై క్లిక్ చేయండి.
+మీరు ఎంపిక చేసిన జవాబును మార్చడానికి, ఇంకొక ఎంపిక బటన్ పై క్లిక్ చేయండి.
+మీరు ఎంపిక చేసిన జవాబును తీసివేయడానికి, మళ్ళి ఎంపిక చేసిన బటన్ పై క్లిక్ చేయండి లేదా Clear Response బటన్ పై క్లిక్ చేయండి.
+మీ జవాబును సేవ్ చేయడానికి, మీరు Save & Next బటన్ పై క్లిక్ చేయాలి.
+ప్రశ్నను పునరాలోచన కోసం మార్క్ చేయడానికి, పునరాలోచన కోసం Mark for Review & Next బటన్ పై క్లిక్ చేయండి. పునరాలోచన కోసం మార్క్ చేసిన ప్రశ్నకు ఒక వేళ జవాబు ఎంపిక చేస్తే, ఆ జవాబు మూల్యాంకనం కోసం పరిగణలోనికి తీసుకోబడును.
+
+To change your answer to a question that has already been answered, first select that question for answering and then follow step 7(b) above.
+ఇప్పటికే జవాబు ఇచ్చిన ప్రశ్నకు మీ జవాబును మార్చాలనుకుంటే, మొదట ఆ ప్రశ్నను ఎంపిక చేసి , 7(b) లో సూచించిన పద్దతిని పాటించండి.
+
+Note that ONLY Questions for which answers are saved or marked for review after answering will be considered for evaluation.
+గమనిక: జవాబు ఇచ్చిన తరువాత, పునరాలోచన కోసం మార్క్ చేసిన ప్రశ్నలు లేదా జవాబులు సేవ్ చేసిన ప్రశ్నలు మాత్రమె మూల్యాంకనం కోసం పరిగణలోనికి తీసుకోబడును.
+Navigating through sections:
+ఒక సెక్షన్ నుండి మరొక సెక్షన్ కు వెళ్ళడం (నావిగేషన్):
+Various section names in this question paper are displayed on the top bar of the screen. Questions in a section can be viewed by clicking on the section name. The section name you are currently viewing is highlighted.
+ఈ ప్రశ్నపత్రంలోని సెక్షన్ పేర్లు స్క్రీన్ టాప్ బార్ పై ప్రదర్శించబడతాయి. సెక్షన్ పేరు పై క్లిక్ చేసి ఆ సెక్షన్ యొక్క ప్రశ్నలను వీక్షీంచవచ్చు. మీరు వీక్షీస్తున్న ప్రస్తుత సెక్షన్ హైలైట్ చేయబడి ఉండును.
+
+After clicking the Save & Next button on the last question for a section, you will automatically be taken to the first question of the next section.
+సెక్షన్ లోని ఆఖరు ప్రశ్నకు Save & Next బటన్ పై క్లిక్ చేసిన తరువాత, మీరు తరువాయి సెక్షన్ లోని మొదటి ప్రశ్నకు స్వయంచాలకంగా (ఆటోమేటిక్ గా) తీసుకువెళ్ళబడతారు.
+
+You can shuffle between sections (subjects) and questions anytime during the examination as per your convenience only during the time stipulated.
+మీకు కేటాయించిన సమయంలో మీ సౌలభ్యం ప్రకారం మీరు ఏ సెక్షన్లలోనైన మరియు ఏ ప్రశ్నలకైనా, పరీక్ష మధ్యలో షఫుల్ చేసుకోవచ్చు.
+
+Candidate can view the corresponding section summary a part of the legend that appears in every section above the question palette.
+ప్రతి సెక్షన్ లో ప్రశ్న పాలెట్ పై ప్రదర్శించే లెజెండ్ ద్వారా అభ్యర్ధి సంబంధిత సెక్షన్ సారాంశం చూడవచ్చు.

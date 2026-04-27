@@ -105,9 +105,9 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen w-full bg-slate-50 lg:flex lg:items-stretch">
+    <div className="min-h-screen w-full bg-[#eef2f7] lg:bg-slate-50 lg:flex lg:items-stretch">
       {/* Left side — branding (desktop) / top banner (mobile) */}
-      <aside className="relative overflow-hidden bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#0369a1] text-white lg:w-1/2 lg:min-h-screen lg:flex lg:flex-col lg:justify-between px-6 pt-10 pb-14 lg:p-12 xl:p-16">
+      <aside className="relative overflow-hidden bg-gradient-to-br from-[#0b1e4d] via-[#1e3a8a] to-[#0369a1] text-white px-6 pt-10 pb-16 lg:w-1/2 lg:min-h-screen lg:flex lg:flex-col lg:justify-between lg:p-12 xl:p-16">
         {/* Decorative background */}
         <div
           className="absolute inset-0 opacity-20 pointer-events-none"
@@ -175,9 +175,9 @@ export default function Login() {
       </aside>
 
       {/* Right side — form */}
-      <main className="lg:w-1/2 lg:min-h-screen flex flex-col">
-        <div className="flex-1 flex items-start lg:items-center justify-center px-4 lg:px-8 -mt-8 lg:mt-0 pb-10 lg:pb-0">
-          <div className="w-full max-w-md bg-white rounded-3xl lg:rounded-2xl shadow-xl lg:shadow-md border border-slate-100 px-5 py-6 lg:px-8 lg:py-10">
+      <main className="relative lg:w-1/2 lg:min-h-screen lg:flex lg:flex-col">
+        <div className="-mt-8 px-4 pb-6 lg:mt-0 lg:px-8 lg:pb-0 lg:flex-1 lg:flex lg:items-center lg:justify-center">
+          <div className="mx-auto w-full max-w-md bg-white rounded-3xl lg:rounded-2xl shadow-2xl shadow-slate-300/40 lg:shadow-md border border-slate-100 px-5 py-6 lg:px-8 lg:py-10">
             {/* Header (desktop) */}
             <div className="hidden lg:block mb-6">
               <h2 className="text-2xl font-bold text-slate-900">

@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import SphnHeader from "@/components/SphnHeader";
 import { useAuth } from "@/lib/useAuth";
+import { useProfile } from "@/lib/useProfile";
 
 type Step = "details" | "general" | "other";
 
@@ -49,16 +50,27 @@ export default function Instructions() {
   const [college, setCollege] = useState("Sphoorthy Engineering College");
   const [error, setError] = useState<string | null>(null);
 
-  // Auth gate via Firebase + prefill name from Google account
+  // Auth gate via Firebase + prefill from saved student profile
   const { loading: authLoading, user } = useAuth();
+  const { loading: profileLoading, profile } = useProfile();
   useEffect(() => {
-    if (authLoading) return;
+    if (authLoading || profileLoading) return;
     if (!user) {
       navigate("/");
       return;
     }
-    if (user.displayName && !studentName) setStudentName(user.displayName);
-  }, [authLoading, user, navigate, studentName]);
+    if (!profile) {
+      navigate("/complete-profile");
+      return;
+    }
+    if (!studentName) setStudentName(profile.name);
+    if (!rollNumber) setRollNumber(profile.roll_number);
+    if (!studentPhone) setStudentPhone(profile.phone);
+    if (!fatherName) setFatherName(profile.father_name);
+    if (!fatherPhone) setFatherPhone(profile.father_phone);
+    if (profile.college) setCollege(profile.college);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authLoading, profileLoading, user, profile, navigate]);
 
   useEffect(() => {
     (async () => {

@@ -9,6 +9,7 @@ import Instructions from "@/pages/Instructions";
 import Exam from "@/pages/Exam";
 import Result from "@/pages/Result";
 import Admin from "@/pages/Admin";
+import CompleteProfile from "@/pages/CompleteProfile";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -20,6 +21,7 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Login} />
+      <Route path="/complete-profile" component={CompleteProfile} />
       <Route path="/exams" component={ExamList} />
       <Route path="/instructions/:examId" component={Instructions} />
       <Route path="/exam" component={Exam} />

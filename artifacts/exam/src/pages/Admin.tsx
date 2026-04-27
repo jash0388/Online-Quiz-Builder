@@ -19,6 +19,7 @@ import eapcetQuestions from "@/data/eapcet-2025-shift2.json";
 import shift1Data from "@/data/eapcet-shift1.json";
 import { useAuth } from "@/lib/useAuth";
 import { signInWithGoogle, signOut } from "@/lib/firebase";
+import ImagePicker from "@/components/ImagePicker";
 
 interface AdminRow {
   email: string;
@@ -126,6 +127,11 @@ function AdminPanel({
   const [qCorrect, setQCorrect] = useState("A");
   const [qMarks, setQMarks] = useState(1);
   const [qSubject, setQSubject] = useState<string>("");
+  const [qImage, setQImage] = useState<string | null>(null);
+  const [qImgA, setQImgA] = useState<string | null>(null);
+  const [qImgB, setQImgB] = useState<string | null>(null);
+  const [qImgC, setQImgC] = useState<string | null>(null);
+  const [qImgD, setQImgD] = useState<string | null>(null);
 
   async function loadExams() {
     const { data } = await supabase
@@ -240,6 +246,20 @@ function AdminPanel({
       sort_order: questions.length + 1,
     };
     if (qSubject) payload.subject = qSubject;
+    if (qImage) payload.question_image = qImage;
+    const optionImageInputs = [qImgA, qImgB, qImgC, qImgD];
+    const optionImages: Record<string, string> = {};
+    let writeIdx = 0;
+    for (let srcIdx = 0; srcIdx < 4; srcIdx++) {
+      const text = [qA, qB, qC, qD][srcIdx];
+      if (text.trim().length === 0) continue;
+      const img = optionImageInputs[srcIdx];
+      if (img) optionImages[String(writeIdx)] = img;
+      writeIdx++;
+    }
+    if (Object.keys(optionImages).length > 0) {
+      payload.option_images = optionImages;
+    }
     const { error } = await supabase.from("exam_questions").insert(payload);
     setBusy(false);
     if (error) return alert(error.message);
@@ -248,6 +268,11 @@ function AdminPanel({
     setQB("");
     setQC("");
     setQD("");
+    setQImage(null);
+    setQImgA(null);
+    setQImgB(null);
+    setQImgC(null);
+    setQImgD(null);
     loadQuestions(selectedExam);
   }
 
@@ -785,23 +810,57 @@ function AdminPanel({
                           value={qBody}
                           onChange={(e) => setQBody(e.target.value)}
                         />
+                        <div className="mt-2">
+                          <ImagePicker
+                            label="Add question image"
+                            value={qImage}
+                            onChange={setQImage}
+                          />
+                          <p className="text-[11px] text-muted-foreground mt-1">
+                            Optional — diagrams, equations, figures (auto-resized).
+                          </p>
+                        </div>
                       </div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="space-y-1">
                           <Label>A</Label>
                           <Input value={qA} onChange={(e) => setQA(e.target.value)} />
+                          <ImagePicker
+                            label="image"
+                            value={qImgA}
+                            onChange={setQImgA}
+                            small
+                          />
                         </div>
-                        <div>
+                        <div className="space-y-1">
                           <Label>B</Label>
                           <Input value={qB} onChange={(e) => setQB(e.target.value)} />
+                          <ImagePicker
+                            label="image"
+                            value={qImgB}
+                            onChange={setQImgB}
+                            small
+                          />
                         </div>
-                        <div>
+                        <div className="space-y-1">
                           <Label>C</Label>
                           <Input value={qC} onChange={(e) => setQC(e.target.value)} />
+                          <ImagePicker
+                            label="image"
+                            value={qImgC}
+                            onChange={setQImgC}
+                            small
+                          />
                         </div>
-                        <div>
+                        <div className="space-y-1">
                           <Label>D</Label>
                           <Input value={qD} onChange={(e) => setQD(e.target.value)} />
+                          <ImagePicker
+                            label="image"
+                            value={qImgD}
+                            onChange={setQImgD}
+                            small
+                          />
                         </div>
                       </div>
                       <div className="grid grid-cols-3 gap-2">

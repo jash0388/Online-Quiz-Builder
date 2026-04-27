@@ -58,7 +58,7 @@ export default function Login() {
           return;
         }
         await signUpWithEmail(email, password, name.trim() || undefined);
-        navigate("/exams");
+        navigate("/complete-profile");
       } else {
         await sendResetEmail(email);
         setInfo("Password reset link sent. Check your email.");

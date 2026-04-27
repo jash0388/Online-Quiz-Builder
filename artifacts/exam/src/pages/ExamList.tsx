@@ -6,20 +6,26 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import SphnHeader from "@/components/SphnHeader";
 import { useAuth } from "@/lib/useAuth";
+import { useProfile } from "@/lib/useProfile";
 import { signOut } from "@/lib/firebase";
 
 export default function ExamList() {
   const [, navigate] = useLocation();
   const { loading: authLoading, user } = useAuth();
+  const { loading: profileLoading, profile } = useProfile();
   const [exams, setExams] = useState<Exam[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const username = user?.displayName ?? user?.email ?? null;
+  const username = profile?.name ?? user?.displayName ?? user?.email ?? null;
 
   useEffect(() => {
-    if (authLoading) return;
+    if (authLoading || profileLoading) return;
     if (!user) {
       navigate("/");
+      return;
+    }
+    if (!profile) {
+      navigate("/complete-profile");
       return;
     }
     (async () => {

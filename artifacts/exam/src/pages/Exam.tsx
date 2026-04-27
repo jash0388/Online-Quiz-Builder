@@ -30,6 +30,28 @@ function letterFor(idx: number) {
   return String.fromCharCode(65 + idx);
 }
 
+function formatSubmitError(err: unknown): string {
+  if (!err) return "Unknown error.";
+  if (err instanceof Error) return err.message;
+  if (typeof err === "string") return err;
+  if (typeof err === "object") {
+    const e = err as Record<string, unknown>;
+    const parts: string[] = [];
+    if (typeof e.message === "string" && e.message.trim()) parts.push(e.message.trim());
+    if (typeof e.details === "string" && e.details.trim()) parts.push(e.details.trim());
+    if (typeof e.hint === "string" && e.hint.trim()) parts.push("Hint: " + e.hint.trim());
+    if (typeof e.code === "string" && e.code.trim()) parts.push("(code " + e.code.trim() + ")");
+    if (parts.length > 0) return parts.join(" — ");
+    try {
+      const json = JSON.stringify(err);
+      if (json && json !== "{}") return json;
+    } catch {
+      // ignore
+    }
+  }
+  return String(err);
+}
+
 function createPRNG(seed: string) {
   let h = 0;
   for (let i = 0; i < seed.length; i++) {
@@ -348,7 +370,8 @@ export default function Exam() {
       setSubmitting(false);
       setShowSubmitDialog(false);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
+      const msg = formatSubmitError(err);
+      console.error("Exam submission failed:", err);
       setShowSubmitDialog(false);
       setTimeout(() => alert("Submission failed: " + msg), 50);
       submitGuard.current = false;
